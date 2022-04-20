@@ -1,0 +1,47 @@
+/* 프로젝트 전체에 사용되는 변수 정의 */
+/* 이 파일을 vue.config.js에 설정하여 사용 */
+
+/*************************************************
+//Breakpoints
+*************************************************/
+$breakpoint-mobile: 375px;
+$breakpoint-tablet: 768px;
+
+/*************************************************
+//Color
+*************************************************/
+$color-primary-100: #FFB648;
+$color-primary-dark: #FF8902;
+$color-primary-80: #FFCA7A;
+$color-primary-60: #FFDEAD;
+$color-primary-40: #FFF3E0;
+$color-primary-20: #F7F1E8;
+
+$color-black-100: #25282B;
+$color-black-dark: #000000;
+$color-black-80: #52575C;
+$color-black-60: #A0A4A8;
+$color-black-40: #CACCCF;
+$color-black-20: #DBDDE0;
+$color-black-10: #E8E8E8;
+$color-black-5: #F9F9FA;
+
+$color-secondary-100: #FFE680;
+$color-secondary-dark: #FFDC4C; 
+$color-secondary-50: #FFF0B3;
+$color-secondary-75: #FFF5CC; 
+$color-secondary-25: #FFFAE5;
+
+$color-white: #ffffff;
+
+$color-positive-100: #2AC769;
+$color-positive-dark: #1AB759;
+$color-positive-light: #1AB759;
+
+$color-negative-100: #FB4E4E;
+$color-negative-dark: #E93C3C;
+$color-negative-light: #FF6262;
+
+/*************************************************
+//Font
+*************************************************/

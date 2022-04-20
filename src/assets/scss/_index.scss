@@ -1,0 +1,6 @@
+/* 각 요소에 적용될 SCSS를 모아서 관리 */
+
+@import "./common.scss";
+
+@import "./component/MainComponent.scss";
+@import "./button.scss";

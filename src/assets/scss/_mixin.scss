@@ -1,0 +1,12 @@
+@import "./variables.scss";
+
+// 믹스인: CSS를 묶어서 재사용할 수 있는 모듈로 만들어 줌 
+// 미디어 쿼리에서 min-width와 max-width 변수 활용해 적용하고 미디어 쿼리 내부에는 믹스인이 사용될 때 넘겨받은 콘텐츠가 들어가도록 함 
+
+// breakpoints
+@mixin mobile {
+  @media (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
