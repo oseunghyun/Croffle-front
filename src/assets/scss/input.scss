@@ -1,0 +1,11 @@
+.input__box {
+  @include layout(column, flex-start, flex-start);
+  width: 100%;
+  gap: 10px;
+  input {
+    background-color: $color-secondary-50;
+    border-style: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+  }
+}

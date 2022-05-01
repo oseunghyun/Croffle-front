@@ -1,0 +1,35 @@
+@import "../_mixin.scss";
+
+#main-container {
+  @include layout(column, center, center);
+  @include bg-color($color-primary-20);
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 20px;
+  position: relative;
+  .main__logo {
+    position: absolute;
+    bottom: 50%;
+  }
+  .btn__wrapper {
+    position: absolute;
+    bottom: 25%;
+    @include layout(column, center, center);
+    gap: 10px;
+    button {
+      font-size: 16px;
+    }
+  }
+  .link__wrapper {
+    position: absolute;
+    bottom: 18%;
+    gap: 5px;
+    @include layout(row, center, center);
+    span {
+      color: $color-black-60;
+      line-height: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+}

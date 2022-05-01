@@ -1,0 +1,41 @@
+@import "./_mixin.scss";
+button {
+    border-style: none;
+    cursor: pointer;
+}
+.button {
+  border-radius: 10px;
+  padding: 13px 0px;
+  width: 100%;
+}
+
+.btn--primary {
+  @extend .button;
+  background-color: $color-primary-100;
+  color: $color-white;
+  a {
+      color: $color-white;
+  }
+}
+
+.btn--naver {
+  @extend .button;
+  background-color: $color-naver;
+    a {
+      @include layout(row, center, center);
+      color: $color-white;
+        gap: 10px;
+
+    }
+}
+
+.btn--transparent {
+  background-color: transparent;
+  color: $color-black-100;
+  font-weight: 600;
+}
+
+.btn--lg {
+  @extend .button;
+  height: 120px;
+}
