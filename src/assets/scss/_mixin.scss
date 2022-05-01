@@ -10,3 +10,15 @@
   }
 }
 
+@mixin layout($flex-direction, $align-itmes, $justify-content) {
+  display: flex;
+  width: 100%;
+  flex-direction: $flex-direction;
+  align-items: $align-itmes;
+  justify-content: $justify-content;
+}
+
+@mixin bg-color($bg-color) {
+  background-color: $bg-color;
+}
+
