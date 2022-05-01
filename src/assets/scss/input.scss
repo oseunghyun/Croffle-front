@@ -1,11 +1,19 @@
 .input__box {
   @include layout(column, flex-start, flex-start);
-  width: 100%;
   gap: 10px;
+  label {
+    color: $color-black-100;
+    font-weight: 600;
+  }
   input {
     background-color: $color-secondary-50;
     border-style: none;
     border-radius: 10px;
-    padding: 12px 20px;
+    padding: 14px 20px;
+    width: 100%;
+    // css에서 border가 바깥쪽에 생겨서 
+    box-sizing: border-box;
+    font-weight: 400;
+    color: $color-black-dark;
   }
 }
