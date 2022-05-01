@@ -17,6 +17,8 @@ const routes = [
 			component: () => import('../components/Signup/SignupComponent.vue'), },
       { path: '/signup/info',  
 			component: () => import('../components/Signup/SignupComponentStep2.vue'), },
+			{ path: '/signup/complete',  
+			component: () => import('../components/Signup/SignupCompleteComponent.vue'), },
 		]
 	}
 ]

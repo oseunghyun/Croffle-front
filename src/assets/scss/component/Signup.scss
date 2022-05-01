@@ -1,0 +1,51 @@
+@import "../_mixin.scss";
+
+.sign-up {
+  @include layout(column, flex-start, flex-start);
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 110px 20px;
+
+    .btn__wrapper {
+      position: relative;
+      top: 15%;
+      @include layout(column, center, center);
+      gap: 10px;
+      button {
+        font-size: 16px;
+      }
+      .personal {
+        background-color: $color-primary-100;
+      }
+      .business {
+        background-color: $color-secondary-50;
+      }
+    }
+    .input__box {
+      position: relative;
+      top:  10%;
+    }
+    .btn__signup {
+      position: relative;
+      top: 65%;
+    }
+    .btn__complete {
+      position: relative;
+      top: 55%;
+    }
+    // 회원가입 완료
+    .signup-complete__wrapper {
+      position: relative;
+      top: 25%;
+      @include layout(column, center, center);
+      img {
+        width: 100px;
+        margin-bottom: 30px;
+      }
+      span {
+        color: $color-black-80;
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+}
