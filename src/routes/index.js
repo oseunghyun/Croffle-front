@@ -8,6 +8,11 @@ const routes = [
 		path: '/',
 		component: () => import('@/views/LandingView.vue'),
 	},
+	// 메인 페이지 - 지도
+	{
+		path: '/main',
+		component: () => import('@/views/MainView.vue'),
+	},
   // 회원가입
   {
 		path: '/signup',
