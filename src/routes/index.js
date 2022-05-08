@@ -12,6 +12,12 @@ const routes = [
 	{
 		path: '/main',
 		component: () => import('@/views/MainView.vue'),
+		children: [
+			{ path: '/main/map',
+				component: () => import('../components/Main/MainComponent.vue')},
+			{ path: '/main/cafe',
+				component: () => import('../components/Cafe/CafeInfoComponent.vue')},
+		]
 	},
   // 회원가입
   {

@@ -19,6 +19,16 @@ button {
   }
 }
 
+.btn--border {
+  @extend .button;
+  background-color: transparent;
+  border: 1px solid $color-primary-dark;
+  color: $color-primary-dark;
+  a {
+    color: $color-primary-dark;
+  }
+}
+
 .btn--naver {
   @extend .button;
   background-color: $color-naver;
