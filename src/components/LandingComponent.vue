@@ -1,5 +1,5 @@
 <template>
-  <div id="main-container">
+  <div id="landing-container">
     <img :src="main_logo" class="main__logo">
     <div class="btn__wrapper">
       <button class="btn--primary">
