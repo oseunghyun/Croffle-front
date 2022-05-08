@@ -2,7 +2,7 @@
   <div>
     <main-header></main-header>
     <searchbar-component></searchbar-component>
-    <main-component></main-component>
+    <router-view></router-view>
   </div>
 
 </template>
@@ -10,10 +10,15 @@
 <script>
 import MainHeader from '@/components/MainHeader.vue';
 import SearchbarComponent from '../components/Main/SearchbarComponent.vue';
-import MainComponent from '@/components/Main/MainComponent.vue';
+
 
 export default {
-  components: { MainHeader, SearchbarComponent, MainComponent },
+  components: { MainHeader, SearchbarComponent },
+  data() {
+    return {
+      page: 'main'
+    }
+  },
 }
 </script>
 
