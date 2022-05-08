@@ -1,11 +1,11 @@
 @import "../_mixin.scss";
 
-#main-container {
-  @include layout(column, center, center);
+.main-container {
+  @include layout(column, center, flex-start);
   @include bg-color($color-primary-20);
   height: 100vh;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 15px;
   position: relative;
   .main__logo {
     position: absolute;
@@ -31,5 +31,18 @@
       text-align: center;
       font-size: 14px;
     }
+  }
+  p {
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: $color-secondary-100;
+    font-size: 12px;
+    font-weight: 200;
+    color: $color-black-100;
+    line-height: 20px;
   }
 }
