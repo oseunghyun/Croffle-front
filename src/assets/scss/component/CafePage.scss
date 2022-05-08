@@ -1,46 +1,77 @@
-#cafe-page {
-    @include layout(column, center, center);
-    box-sizing: border-box;
-    padding: 20px;
-    gap: 10px;
-    .cafe-info {
-      @include layout(column, center, center);
-      border: 1px solid $color-black-10;
-      border-radius: 5px;
-      box-sizing: border-box;
-      padding: 20px 10px;
-      .cafe__name {
-        font-size: 18px;
-        font-weight: 700;
-        color: $color-black-100;
-        margin-bottom: 10px;
-      }
-      .cafe__address {
-        font-size: 12px;
-        font-weight: 400;
-        color: $color-black-60
-      }
-    }
-    .cafe-info__detail {
-      @include layout(column, flex-start, center);
-      border: 1px solid $color-black-10;
-      border-radius: 5px;
-      box-sizing: border-box;
-      padding: 20px 20px;
-      gap: 24px;
-      .cafe-info__wrapper {
-        @include layout(column, flex-start, center);
-        gap: 12px;
-        label {
-          font-size: 16px;
-          font-weight: 700;
+.cafe-view {
+  box-sizing: border-box;
+  padding: 15px;
+  /* 카페 메뉴 */
+  #cafe-menu {
+    @include layout(column, flex-start, center);
+    gap: 20px;
+    padding: 20px 0px; 
+    .menu__list {
+          @include layout(column, flex-start, center);
+          gap: 30px;
+      .menu-info__wrapper {
+        @include layout(row, center, space-between);
+        .menus__name {
+          font-size: 14px;
+          font-weight: 400;
           color: $color-black-100;
         }
-        span {
-          font-size: 14px;
-          font-weight: 200;
-          color: $color-black-80;
+        .menus__price {
+          font-size: 12px;
+          font-weight: 400;
+          color: $color-primary-dark;
         }
       }
+    }
+  }
+  /* 버튼 */
+  button {
+    margin: 5px 0px;
+  }
+  /* 카페 정보 페이지 */
+  #cafe-page {
+      @include layout(column, center, center);
+      gap: 10px;
+      .cafe-info {
+        @include layout(column, center, center);
+        border: 1px solid $color-black-10;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 20px 10px;
+        .cafe__name {
+          font-size: 18px;
+          font-weight: 700;
+          color: $color-black-100;
+          margin-bottom: 10px;
+        }
+        .cafe__address {
+          font-size: 12px;
+          font-weight: 400;
+          color: $color-black-60
+        }
+      }
+      .cafe-info__detail {
+        @include layout(column, flex-start, center);
+        border: 1px solid $color-black-10;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 20px 20px;
+        gap: 24px;
+        .cafe-info__wrapper {
+          @include layout(column, flex-start, center);
+          gap: 12px;
+          label {
+            font-size: 16px;
+            font-weight: 700;
+            color: $color-black-100;
+          }
+          span {
+            font-size: 14px;
+            font-weight: 200;
+            color: $color-black-80;
+          }
+        }
+      }
+      
     }
   }

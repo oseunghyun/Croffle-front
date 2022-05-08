@@ -22,13 +22,15 @@
       이 가게에서 크로플을 파나요?<br>
       원정대를 위해 제보해주세요!
     </p>
-    <button class="btn--primary">제보하기 +</button>
-    <button class="btn--border">리뷰 작성하기 +</button>
+    <cafe-menu-component></cafe-menu-component>
+
   </div>
 </template>
 
 <script>
+import CafeMenuComponent from './CafeMenuComponent.vue';
 export default {
+  component: { CafeMenuComponent },
   data() {
     return {
       cafe: {
