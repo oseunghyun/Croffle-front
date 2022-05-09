@@ -4,6 +4,28 @@
   label {
     color: $color-black-100;
     font-weight: 600;
+    font-size: 14px;
+  }
+  select {
+    width: 100%;
+    border-style: none;
+    border: 1px solid $color-black-40;
+    border-radius: 10px;
+    padding: 14px 20px;
+    box-sizing: border-box;
+    font-weight: 400;
+    color: $color-black-dark;
+  }
+  textarea {
+    background-color: $color-secondary-50;
+    border-style: none;
+    border-radius: 10px;
+    padding: 14px 20px;
+    width: 100%;
+    // css에서 border가 바깥쪽에 생겨서 
+    box-sizing: border-box;
+    font-weight: 400;
+    color: $color-black-dark;
   }
   input {
     background-color: $color-secondary-50;
