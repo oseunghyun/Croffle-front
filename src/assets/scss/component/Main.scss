@@ -1,5 +1,6 @@
 @import "../_mixin.scss";
 
+
 .main-container {
   @include layout(column, center, flex-start);
   @include bg-color($color-primary-20);

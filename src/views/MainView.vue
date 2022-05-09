@@ -7,10 +7,11 @@
       <cafe-menu-component></cafe-menu-component>
       <button @click="isModalActive = true" class="btn--primary">제보하기 +</button>
       <button class="btn--border">리뷰 작성하기 +</button>
-      <modal-component v-if="isModalActive" >
-        <modal-content @close-modal="isModalActive = false"/>
+      <modal-component v-if="isModalActive">
+        <modal-content @close-modal="isModalActive = false" />
       </modal-component>
     </div>
+    
   </div>
     
 

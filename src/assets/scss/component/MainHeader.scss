@@ -1,6 +1,10 @@
 /* 메인 헤더 */
 #main-header {
   @include layout(column, center, center);
+  background-color: $color-white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
   img {
     width: 130px;
     margin-top: 60px;
