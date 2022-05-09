@@ -19,6 +19,22 @@ const routes = [
 				component: () => import('../components/Cafe/CafeInfoComponent.vue')},
 		]
 	},
+	// 제보하기 
+	{
+		path: '/report',
+		component: () => import('@/views/ReportingView.vue'),
+		children: [
+			{	path: '/report/add',
+			component: () => import('../components/Report/ReportAddComponent.vue'),
+			},
+			{	path: '/report/modify',
+			component: () => import('../components/Report/ReportModifyComponent.vue'),
+			},
+			{	path: '/report/complete',
+			component: () => import('../components/Report/ReportComplete.vue'),
+			}
+		]
+	},
   // 회원가입
   {
 		path: '/signup',
