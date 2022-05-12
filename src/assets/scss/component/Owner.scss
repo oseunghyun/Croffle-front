@@ -1,0 +1,210 @@
+#owner-main {
+  @include layout(column, center, flex-start);
+  box-sizing: border-box;
+  padding: 20px;
+  header {
+    margin: 70px 0 40px 0;
+    @include layout(column, center, center);
+    img {
+      width: 250px;
+    }
+  }
+  .sub-header {
+    @include layout(row, flex-start, left);
+    h2 {
+      color: $color-black-100;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 40px;
+      margin: 30px 0 0 0;
+    }
+    .cafe-name {
+      font-size: 14px;
+      color: $color-black-100;
+      font-weight: 400;
+    }
+    .cafe-owner {
+      font-size: 14px;
+      color: $color-primary-dark;
+      font-weight: 700;
+    }
+    img {
+      width: 150px;
+    }
+  }
+  .btn__wrapper {
+    @include layout(column, center, center);
+    width: 100%;
+    gap: 30px;
+    button {
+      box-shadow: 0px 2px 4px rgba(147, 147, 147, 0.25);
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+}
+
+/* 사장님 페이지 */
+.owner {
+  @include layout(column, flex-start, flex-start);
+  box-sizing: border-box;
+  padding: 20px;
+  height: 100vh;
+  .owner__header {
+    position: relative;
+    top: 15%;
+    h1 {
+      color: $color-primary-dark;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+    }
+    span {
+      color: $color-black-60;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+  button {
+    position: relative;
+    top: 30%;
+  }
+  .btn__wrapper {
+    @include layout(row, center, space-between);
+    position: relative;
+    top: 30%;
+    button {
+      width: 49%;
+      font-weight: 600;
+      padding: 13px 0px;
+    }
+  }
+  /* 카페 메뉴 */
+  #cafe-menu {
+    @include layout(column, flex-start, center);
+    gap: 20px;
+    padding: 20px 0px;
+    position: relative;
+    top: 30%;
+    .menu__list {
+      @include layout(column, flex-start, center);
+      gap: 30px;
+      .menu-info__wrapper {
+        @include layout(row, center, space-between);
+        .menus__name {
+          font-size: 14px;
+          font-weight: 400;
+          color: $color-black-100;
+        }
+        .menus__price {
+          font-size: 12px;
+          font-weight: 400;
+          color: $color-primary-dark;
+        }
+      }
+    }
+  }
+  /* 카페 정보 페이지 */
+  #cafe-page {
+    @include layout(column, center, center);
+    gap: 10px;
+    position: relative;
+    top: 30%;
+    .cafe-info {
+      @include layout(column, center, center);
+      border: 1px solid $color-black-10;
+      border-radius: 5px;
+      box-sizing: border-box;
+      padding: 20px 10px;
+      .cafe__name {
+        font-size: 18px;
+        font-weight: 700;
+        color: $color-black-100;
+        margin-bottom: 10px;
+      }
+      .cafe__address {
+        font-size: 12px;
+        font-weight: 400;
+        color: $color-black-60;
+      }
+    }
+    .cafe-info__detail {
+      @include layout(column, flex-start, center);
+      border: 1px solid $color-black-10;
+      border-radius: 5px;
+      box-sizing: border-box;
+      padding: 20px 20px;
+      gap: 24px;
+      .cafe-info__wrapper {
+        @include layout(column, flex-start, center);
+        gap: 12px;
+        label {
+          font-size: 16px;
+          font-weight: 700;
+          color: $color-black-100;
+        }
+        span {
+          font-size: 14px;
+          font-weight: 200;
+          color: $color-black-80;
+        }
+      }
+    }
+  }
+}
+
+/* 카페 정보 관리 폼 페이지 */
+.owner-form {
+  @extend .owner;
+  .page-title {
+    width: 100%;
+  }
+  form {
+    padding: 20px 0px;
+    gap: 24px;
+    @include layout(column, center, center);
+  }
+  button {
+    position: relative;
+    top: 0;
+    margin: 10px 0px;
+  }
+}
+
+/* 스탬프 찍어주기 */
+.owner-stamp {
+  @extend .owner;
+  form {
+    width: 100%;
+    position: relative;
+    top: 25%;
+  }
+  button {
+    position: relative;
+    top: 30%;
+  }
+  .owner__card {
+    position: relative;
+    top: 30%;
+    width: 100%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: $color-white;
+    box-shadow: 0px 2px 4px rgba(147, 147, 147, 0.25);
+    @include layout(column, flex-start, flex-start);
+    margin-bottom: 10px;
+    .owner__card-title {
+      color: $color-primary-dark;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .owner__card-text {
+      font-size: 24px;
+      color: $color-black-100;
+      .count {
+        color: $color-primary-dark;
+      }
+    }
+  }
+}
