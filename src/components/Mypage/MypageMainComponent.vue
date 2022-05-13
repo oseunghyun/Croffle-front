@@ -7,7 +7,9 @@
         ><span class="mypage-main__text-id"
           >{{ user.id }} <strong> 님&nbsp;&nbsp;</strong></span
         >
-        <button class="btn--sm btn--border">수정<img :src="ic_edit" /></button>
+        <button @click="editInfo" class="btn--sm btn--border">
+          수정<img :src="ic_edit" />
+        </button>
       </div>
       <p>크로플 원정을 떠나 보시겠어요?</p>
     </div>
@@ -28,6 +30,11 @@ export default {
         id: "hello",
       },
     };
+  },
+  methods: {
+    editInfo() {
+      this.$router.push("/mypage/changenickname");
+    },
   },
 };
 </script>

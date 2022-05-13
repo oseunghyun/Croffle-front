@@ -41,3 +41,54 @@
     }
   }
 }
+
+.mypage-nickname {
+  @include layout(column, flex-start, flex-start);
+  box-sizing: border-box;
+  padding: 20px;
+  height: 100vh;
+  header {
+    position: relative;
+    top: 15%;
+    h1 {
+      color: $color-primary-dark;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+    }
+    span {
+      color: $color-black-60;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+  form {
+    width: 100%;
+    position: relative;
+    top: 20%;
+    .input__box {
+      input {
+        width: 70%;
+      }
+      .btn__duplicate {
+        position: absolute;
+        right: 0;
+        top: 30px;
+        width: 28%;
+        font-size: 14px;
+        font-weight: 300;
+      }
+      .error-message {
+        position: absolute;
+        top: 84px;
+        font-size: 12px;
+        color: $color-negative-100;
+        font-weight: 400;
+      }
+    }
+  }
+}
+button {
+  position: relative;
+  top: 30%;
+}

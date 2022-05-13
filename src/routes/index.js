@@ -137,6 +137,17 @@ const routes = [
         path: "/mypage",
         component: () => import("../components/Mypage/MypageMainComponent.vue"),
       },
+      // 마이 페이지 - 닉네임 변경
+      {
+        path: "/mypage/changenickname",
+        component: () =>
+          import("../components/Mypage/ChangeNicknameComponent.vue"),
+      },
+      // 마이 페이지 - 닉네임 변경 완료
+      {
+        path: "/mypage/nicknamecomplete",
+        component: () => import("../components/CompleteComponent.vue"),
+      },
     ],
   },
 ];

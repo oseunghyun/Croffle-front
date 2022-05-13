@@ -1,11 +1,22 @@
 <template>
   <div>
-    <router-view></router-view>
+    <router-view @setMessage="setMessage" :message="message"></router-view>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      message: "",
+    };
+  },
+  methods: {
+    setMessage(message) {
+      this.message = message;
+    },
+  },
+};
 </script>
 
 <style></style>
