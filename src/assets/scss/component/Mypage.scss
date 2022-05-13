@@ -1,0 +1,43 @@
+.mypage-main {
+  @include layout(column, flex-start, flex-start);
+  box-sizing: border-box;
+  padding: 20px 0px 0px 0px;
+  height: auto;
+  box-shadow: 0px 2px 4px rgba(147, 147, 147, 0.25);
+  .page-title {
+    @extend .page-title;
+    width: 100%;
+  }
+  .mypage__wrapper {
+    @include layout(column, center, center);
+    .mypage__user-info {
+      width: 100%;
+      @include layout(row, center, center);
+      .mypage-main__text-croffler {
+        font-size: 16px;
+        font-weight: 700;
+        color: $color-primary-dark;
+      }
+      .mypage-main__text-id {
+        font-size: 14px;
+        font-weight: 500;
+        color: $color-black-100;
+      }
+    }
+    p {
+      font-size: 12px;
+      color: $color-black-80;
+      font-weight: 400;
+    }
+  }
+  .btn__wrapper {
+    width: 100%;
+    margin-top: 20px;
+    @include layout(row, center, center);
+    .btn__mypage {
+      width: 50%;
+      padding: 15px;
+      color: $color-primary-dark;
+    }
+  }
+}

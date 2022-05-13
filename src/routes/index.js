@@ -127,6 +127,18 @@ const routes = [
       },
     ],
   },
+  // 마이 페이지
+  {
+    path: "/mypage",
+    component: () => import("@/views/MypageView.vue"),
+    children: [
+      // 마이 페이지 메인
+      {
+        path: "/mypage",
+        component: () => import("../components/Mypage/MypageMainComponent.vue"),
+      },
+    ],
+  },
 ];
 
 export const router = createRouter({
