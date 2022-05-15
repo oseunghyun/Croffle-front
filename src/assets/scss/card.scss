@@ -20,4 +20,19 @@
       color: $color-black-60;
     }
   }
+
+  // 커뮤니티 게시판 글
+  .community__card {
+    @extend .card;
+    box-shadow: none;
+    border-bottom: 1px solid $color-black-10;
+    border-radius: 0;
+    .card__title {
+      @include font(14px, 500, $color-black-100);
+    }
+    .card__text {
+      @include font(12px, 300, $color-black-60);
+      @include layout(row, flex-start, space-between);
+    }
+  }
 }

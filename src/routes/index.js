@@ -9,22 +9,15 @@ const routes = [
   },
   // 메인 페이지 - 카페 전체 조회
   {
-    path: "/cafes",
+    path: "/main",
     component: () => import("@/views/MainView.vue"),
     children: [
       {
-        path: "/cafes",
+        path: "/main",
         component: () => import("../components/Main/MainComponent.vue"),
       },
-    ],
-  },
-  // 메인 페이지 - 카페 상세 조회
-  {
-    path: "/cafe",
-    component: () => import("@/views/MainView.vue"),
-    children: [
       {
-        path: "/cafe",
+        path: "/main/cafe",
         component: () => import("../components/Cafe/CafeInfoComponent.vue"),
       },
     ],
