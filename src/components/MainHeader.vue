@@ -4,11 +4,11 @@
     <nav>
       <button
         type="button"
-        @click="isBtnActive1"
+        @click="showHome"
         class="main-header__btn"
         :class="{ isActive: isActive1 }"
       >
-        <router-link to="/main">홈</router-link>
+        홈
       </button>
       <button
         type="button"
@@ -16,15 +16,15 @@
         class="main-header__btn"
         :class="{ isActive: isActive2 }"
       >
-        <router-link to="/main">추천</router-link>
+        추천
       </button>
       <button
         type="button"
-        @click="isBtnActive3"
+        @click="showCommunity"
         class="main-header__btn"
         :class="{ isActive: isActive3 }"
       >
-        <router-link to="/main">커뮤니티</router-link>
+        커뮤니티
       </button>
     </nav>
   </header>
@@ -42,20 +42,24 @@ export default {
     };
   },
   methods: {
-    isBtnActive1() {
+    showHome() {
       this.isActive1 = true;
       this.isActive2 = false;
       this.isActive3 = false;
+      let pageNum = 1;
+      this.$emit("showHome", pageNum);
     },
     isBtnActive2() {
       this.isActive2 = true;
       this.isActive1 = false;
       this.isActive3 = false;
     },
-    isBtnActive3() {
+    showCommunity() {
       this.isActive3 = true;
       this.isActive2 = false;
       this.isActive1 = false;
+      let pageNum = 3;
+      this.$emit("showCommunity", pageNum);
     },
   },
 };
