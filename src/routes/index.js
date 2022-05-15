@@ -127,6 +127,29 @@ const routes = [
       },
     ],
   },
+  // 마이 페이지
+  {
+    path: "/mypage",
+    component: () => import("@/views/MypageView.vue"),
+    children: [
+      // 마이 페이지 메인
+      {
+        path: "/mypage",
+        component: () => import("../components/Mypage/MypageMainComponent.vue"),
+      },
+      // 마이 페이지 - 닉네임 변경
+      {
+        path: "/mypage/changenickname",
+        component: () =>
+          import("../components/Mypage/ChangeNicknameComponent.vue"),
+      },
+      // 마이 페이지 - 닉네임 변경 완료
+      {
+        path: "/mypage/nicknamecomplete",
+        component: () => import("../components/CompleteComponent.vue"),
+      },
+    ],
+  },
 ];
 
 export const router = createRouter({

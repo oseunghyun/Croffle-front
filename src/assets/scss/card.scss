@@ -1,0 +1,23 @@
+.card__wrapper--column {
+  @include layout(column, center, center);
+  width: 100%;
+  gap: 12px;
+  .card {
+    @include layout(column, flex-start, flex-start);
+    gap: 10px;
+    width: 100%;
+    box-shadow: 0px 2px 4px rgba(147, 147, 147, 0.25);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 16px;
+    .card__title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .card__text {
+      font-size: 12px;
+      font-weight: 300;
+      color: $color-black-60;
+    }
+  }
+}
