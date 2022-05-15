@@ -14,8 +14,10 @@
       <p>크로플 원정을 떠나 보시겠어요?</p>
     </div>
     <div class="btn__wrapper">
-      <button class="btn--transparent btn__mypage">예정된 원정</button>
-      <button class="btn--transparent btn__mypage">내 쿠폰</button>
+      <button @click="showScrapedList" class="inActive">예정된 원정</button>
+      <button @click="showCouponList" class="btn--transparent inActive">
+        내 쿠폰
+      </button>
     </div>
   </div>
 </template>
@@ -34,6 +36,14 @@ export default {
   methods: {
     editInfo() {
       this.$router.push("/mypage/changenickname");
+    },
+    showScrapedList() {
+      let activeList = "1";
+      this.$emit("showList", activeList);
+    },
+    showCouponList() {
+      let activeList = "2";
+      this.$emit("showList", activeList);
     },
   },
 };

@@ -34,10 +34,16 @@
     width: 100%;
     margin-top: 20px;
     @include layout(row, center, center);
-    .btn__mypage {
+    .active {
       width: 50%;
       padding: 15px;
       color: $color-primary-dark;
+    }
+    .inActive {
+      @extend .btn--transparent;
+      width: 50%;
+      padding: 15px;
+      color: $color-black-60;
     }
   }
 }
@@ -91,4 +97,50 @@
 button {
   position: relative;
   top: 30%;
+}
+
+.mypage-scrap {
+  box-sizing: border-box;
+  padding: 36px 20px 0px 20px;
+  header {
+    @include layout(row, flex-start, flex-start);
+    gap: 5px;
+    margin-bottom: 16px;
+    h1 {
+      @include font(16px, 700, $color-black-100);
+      margin: 0;
+    }
+    span {
+      @include font(16px, 700, $color-primary-dark);
+    }
+  }
+}
+
+.mypage-membership {
+  box-sizing: border-box;
+  padding: 36px 20px 0px 20px;
+  header {
+    @include layout(row, flex-start, flex-start);
+    gap: 5px;
+    margin-bottom: 16px;
+    h1 {
+      @include font(16px, 700, $color-black-100);
+      margin: 0;
+    }
+    span {
+      @include font(16px, 700, $color-primary-dark);
+    }
+  }
+  .mypage-stamp {
+    margin-bottom: 80px;
+  }
+  .mypage-coupon {
+    .card__wrapper-column {
+      .card {
+        .card__title {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
