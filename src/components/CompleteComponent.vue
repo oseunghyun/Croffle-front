@@ -4,7 +4,7 @@
       <img :src="ic__complete" />
       <h3>{{ message }} 완료되었습니다.</h3>
 
-      <button @click="toHome" class="btn--primary">홈으로</button>
+      <button type="button" @click="toHome" class="btn--primary">홈으로</button>
     </div>
   </div>
 </template>

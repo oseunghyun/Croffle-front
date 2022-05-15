@@ -21,7 +21,9 @@
         <span class="count">{{ contentLength }}/255</span>
       </div>
     </form>
-    <button @click="submitForm" class="btn--disabled">완료</button>
+    <button type="button" @click="submitForm" class="btn--disabled">
+      완료
+    </button>
   </div>
 </template>
 

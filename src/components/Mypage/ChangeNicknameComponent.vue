@@ -12,12 +12,16 @@
           v-model="user.nickname"
           placeholder="닉네임을 입력해주세요."
         />
-        <button class="btn__duplicate btn--primary">중복 확인</button>
+        <button type="button" class="btn__duplicate btn--primary">
+          중복 확인
+        </button>
         <span class="count">{{ nicknameLength }}/15</span>
         <span class="error-message">{{ errorMessage }}</span>
       </div>
     </form>
-    <button @click="submitForm" class="btn--primary">닉네임 수정하기</button>
+    <button type="button" @click="submitForm" class="btn--primary">
+      닉네임 수정하기
+    </button>
   </div>
 </template>
 

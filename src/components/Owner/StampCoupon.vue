@@ -16,7 +16,9 @@
         ><strong class="count">{{ user.stamp_cnt }}</strong> / 10개</span
       >
     </div>
-    <button @click="stampCoupon" class="btn--primary">스탬프 적립하기</button>
+    <button type="button" @click="stampCoupon" class="btn--primary">
+      스탬프 적립하기
+    </button>
   </div>
 </template>
 

@@ -5,10 +5,10 @@
     <div class="cafe-view">
       <router-view></router-view>
       <cafe-menu-component></cafe-menu-component>
-      <button @click="isModalActive = true" class="btn--primary">
+      <button type="button" @click="isModalActive = true" class="btn--primary">
         제보하기 +
       </button>
-      <button @click="toWriteReview" class="btn--border">
+      <button type="button" @click="toWriteReview" class="btn--border">
         리뷰 작성하기 +
       </button>
       <modal-component v-if="isModalActive">

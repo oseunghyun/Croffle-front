@@ -11,7 +11,9 @@
         <span class="count">{{ phoneLength }}/15</span>
       </div>
     </form>
-    <button @click="checkMember" class="btn--primary">회원조회</button>
+    <button type="button" @click="checkMember" class="btn--primary">
+      회원조회
+    </button>
   </div>
 </template>
 

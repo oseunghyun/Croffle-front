@@ -7,15 +7,25 @@
         ><span class="mypage-main__text-id"
           >{{ user.id }} <strong> 님&nbsp;&nbsp;</strong></span
         >
-        <button @click="editInfo" class="btn--sm btn--border">
+        <button type="button" @click="editInfo" class="btn--sm btn--border">
           수정<img :src="ic_edit" />
         </button>
       </div>
       <p>크로플 원정을 떠나 보시겠어요?</p>
     </div>
     <div class="btn__wrapper">
-      <button @click="showScrapedList" class="inActive">예정된 원정</button>
-      <button @click="showCouponList" class="btn--transparent inActive">
+      <button
+        type="button"
+        @click="showScrapedList"
+        :class="['btn--transparent', isActive1 ? 'active' : 'inActive']"
+      >
+        예정된 원정
+      </button>
+      <button
+        type="button"
+        @click="showCouponList"
+        :class="['btn--transparent', isActive2 ? 'active' : 'inActive']"
+      >
         내 쿠폰
       </button>
     </div>
@@ -31,6 +41,8 @@ export default {
       user: {
         id: "hello",
       },
+      isActive1: true,
+      isActive2: false,
     };
   },
   methods: {
@@ -40,10 +52,14 @@ export default {
     showScrapedList() {
       let activeList = "1";
       this.$emit("showList", activeList);
+      this.isActive1 = true;
+      this.isActive2 = false;
     },
     showCouponList() {
       let activeList = "2";
       this.$emit("showList", activeList);
+      this.isActive1 = false;
+      this.isActive2 = true;
     },
   },
 };

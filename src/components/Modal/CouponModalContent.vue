@@ -1,7 +1,11 @@
 <template>
   <div class="content-mypage">
     <div class="btn__close">
-      <button class="btn--transparent" @click="$emit('close-modal')">
+      <button
+        type="button"
+        class="btn--transparent"
+        @click="$emit('close-modal')"
+      >
         <img :src="ic__close" />
       </button>
     </div>
@@ -14,7 +18,9 @@
       </div>
 
       <input placeholder="사장님 아이디를 입력하세요." />
-      <button class="btn--primary" @click="addReport">사용하기</button>
+      <button type="button" class="btn--primary" @click="addReport">
+        사용하기
+      </button>
     </div>
   </div>
 </template>

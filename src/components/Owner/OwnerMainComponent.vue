@@ -12,13 +12,13 @@
       <img :src="logo_img" />
     </div>
     <div class="btn__wrapper">
-      <button @click="toOwnerCafe" class="btn--border btn--lg">
+      <button type="button" @click="toOwnerCafe" class="btn--border btn--lg">
         매장 관리
       </button>
-      <button @click="toOwnerMenu" class="btn--border btn--lg">
+      <button type="button" @click="toOwnerMenu" class="btn--border btn--lg">
         메뉴 관리
       </button>
-      <button @click="toOwnerStamp" class="btn--border btn--lg">
+      <button type="button" @click="toOwnerStamp" class="btn--border btn--lg">
         스탬프 찍어주기
       </button>
     </div>

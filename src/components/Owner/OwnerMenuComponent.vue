@@ -6,8 +6,12 @@
     </header>
     <cafe-menu-component class="cafe-menu-component"></cafe-menu-component>
     <div class="btn__wrapper">
-      <button class="btn--primary" @click="modifyMenu">수정하기</button>
-      <button class="btn--border" @click="addMenu">추가하기</button>
+      <button type="button" class="btn--primary" @click="modifyMenu">
+        수정하기
+      </button>
+      <button type="button" class="btn--border" @click="addMenu">
+        추가하기
+      </button>
     </div>
   </div>
 </template>

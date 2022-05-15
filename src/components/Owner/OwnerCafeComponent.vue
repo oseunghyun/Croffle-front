@@ -5,7 +5,9 @@
       <span>매장 정보를 관리해주세요.</span>
     </header>
     <cafe-info-component></cafe-info-component>
-    <button @click="manageForm" class="btn--border">매장 관리하기</button>
+    <button type="button" @click="manageForm" class="btn--border">
+      매장 관리하기
+    </button>
   </div>
 </template>
 
