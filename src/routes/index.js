@@ -11,16 +11,6 @@ const routes = [
   {
     path: "/main",
     component: () => import("@/views/MainView.vue"),
-    children: [
-      {
-        path: "/main",
-        component: () => import("../components/Main/MainComponent.vue"),
-      },
-      {
-        path: "/main/cafe",
-        component: () => import("../components/Cafe/CafeInfoComponent.vue"),
-      },
-    ],
   },
   // 제보하기
   {

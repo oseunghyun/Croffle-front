@@ -9,9 +9,11 @@
     ></main-header>
     <!-- 검색 바 -->
     <searchbar-component v-if="pageNum == 1"></searchbar-component>
+    <main-component v-if="pageNum == 1" @toDetail="toDetail" :pageNum="pageNum">
+    </main-component>
     <!-- 1. 카페 상세 페이지 -->
-    <div class="cafe-view" v-if="pageNum == 1">
-      <router-view></router-view>
+    <div class="cafe-view" v-if="pageNum == 6">
+      <cafe-info-component></cafe-info-component>
       <cafe-menu-component></cafe-menu-component>
       <button type="button" @click="isModalActive = true" class="btn--primary">
         제보하기 +
@@ -53,6 +55,7 @@
 import MainHeader from "@/components/MainHeader.vue";
 import SearchbarComponent from "../components/Main/SearchbarComponent.vue";
 import CafeMenuComponent from "../components/Cafe/CafeMenuComponent.vue";
+import CafeInfoComponent from "../components/Cafe/CafeInfoComponent.vue";
 import ModalComponent from "../components/Modal/ModalComponent.vue";
 import ModalContent from "../components/Modal/ModalContent.vue";
 import CommunityFormComponent from "@/components/Community/CommunityFormComponent.vue";
@@ -60,12 +63,14 @@ import CommunityBoardComponent from "@/components/Community/CommunityBoardCompon
 import CommunityPostComponent from "@/components/Community/CommunityPostComponent.vue";
 import DelModalContent from "@/components/Modal/DelModalContent.vue";
 import RecommendBoardComponent from "@/components/Recommend/RecommendBoardComponent.vue";
+import MainComponent from "@/components/Main/MainComponent.vue";
 
 export default {
   components: {
     MainHeader,
     SearchbarComponent,
     CafeMenuComponent,
+    CafeInfoComponent,
     ModalComponent,
     ModalContent,
     CommunityFormComponent,
@@ -73,6 +78,7 @@ export default {
     CommunityPostComponent,
     DelModalContent,
     RecommendBoardComponent,
+    MainComponent,
   },
   data() {
     return {
@@ -102,6 +108,9 @@ export default {
       this.pageNum = pageNum;
     },
     showPost(pageNum) {
+      this.pageNum = pageNum;
+    },
+    toDetail(pageNum) {
       this.pageNum = pageNum;
     },
     modifyForm(pageNum) {
