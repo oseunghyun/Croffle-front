@@ -133,18 +133,6 @@ const routes = [
       },
     ],
   },
-  // 리뷰
-  {
-    path: "/review",
-    component: () => import("@/views/ReviewView.vue"),
-    children: [
-      // 리뷰 작성 폼
-      {
-        path: "/review",
-        component: () => import("../components/Cafe/ReviewFormComponent.vue"),
-      },
-    ],
-  },
 ];
 
 export const router = createRouter({

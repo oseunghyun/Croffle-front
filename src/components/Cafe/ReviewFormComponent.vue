@@ -54,6 +54,9 @@ export default {
     submitForm() {
       this.rate = this.isActive.filter((ia) => ia).length;
       console.log(this.rate);
+      // 카페 상세 페이지로 이동
+      let pageNum = 6;
+      this.$emit("submitForm", pageNum);
     },
   },
 };

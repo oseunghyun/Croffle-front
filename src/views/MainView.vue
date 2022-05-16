@@ -25,6 +25,12 @@
         <modal-content @close-modal="isModalActive = false" />
       </modal-component>
     </div>
+    <!-- 7. 리뷰 폼 -->
+    <review-form-component
+      @submitForm="submitForm"
+      :pageNum="pageNum"
+      v-if="pageNum == 7"
+    ></review-form-component>
     <!-- 2.추천 게시판 -->
     <recommend-board-component v-if="pageNum == 2"></recommend-board-component>
     <!-- 3. 커뮤니티 게시판 -->
@@ -64,6 +70,7 @@ import CommunityPostComponent from "@/components/Community/CommunityPostComponen
 import DelModalContent from "@/components/Modal/DelModalContent.vue";
 import RecommendBoardComponent from "@/components/Recommend/RecommendBoardComponent.vue";
 import MainComponent from "@/components/Main/MainComponent.vue";
+import ReviewFormComponent from "@/components/Cafe/ReviewFormComponent.vue";
 
 export default {
   components: {
@@ -79,6 +86,7 @@ export default {
     DelModalContent,
     RecommendBoardComponent,
     MainComponent,
+    ReviewFormComponent,
   },
   data() {
     return {
@@ -90,7 +98,7 @@ export default {
   },
   methods: {
     toWriteReview() {
-      this.$router.push("/review");
+      this.pageNum = 7;
     },
     showCommunity(pageNum) {
       this.pageNum = pageNum;
