@@ -1,0 +1,15 @@
+.recommend {
+  box-sizing: border-box;
+  padding: 0px 20px;
+  gap: 24px;
+  @include layout(column, center, center);
+  .select__wrapper {
+    @include layout(column, flex-end, center);
+    select {
+      border: 1px solid $color-black-40;
+      @include font(12px, 400, $color-black-60);
+      padding: 6px 12px;
+      border-radius: 5.5px;
+    }
+  }
+}

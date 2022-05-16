@@ -1,11 +1,15 @@
 <template>
   <div>
+    <!-- 메인 헤더 -->
     <main-header
       @showCommunity="showCommunity"
       @showHome="showHome"
+      @showRecommend="showRecommend"
       :pageNum="pageNum"
     ></main-header>
+    <!-- 검색 바 -->
     <searchbar-component v-if="pageNum == 1"></searchbar-component>
+    <!-- 1. 카페 상세 페이지 -->
     <div class="cafe-view" v-if="pageNum == 1">
       <router-view></router-view>
       <cafe-menu-component></cafe-menu-component>
@@ -19,6 +23,9 @@
         <modal-content @close-modal="isModalActive = false" />
       </modal-component>
     </div>
+    <!-- 2.추천 게시판 -->
+    <recommend-board-component v-if="pageNum == 2"></recommend-board-component>
+    <!-- 3. 커뮤니티 게시판 -->
     <community-board-component
       @showForm="showForm"
       @showPost="showPost"
@@ -52,6 +59,7 @@ import CommunityFormComponent from "@/components/Community/CommunityFormComponen
 import CommunityBoardComponent from "@/components/Community/CommunityBoardComponent.vue";
 import CommunityPostComponent from "@/components/Community/CommunityPostComponent.vue";
 import DelModalContent from "@/components/Modal/DelModalContent.vue";
+import RecommendBoardComponent from "@/components/Recommend/RecommendBoardComponent.vue";
 
 export default {
   components: {
@@ -64,6 +72,7 @@ export default {
     CommunityBoardComponent,
     CommunityPostComponent,
     DelModalContent,
+    RecommendBoardComponent,
   },
   data() {
     return {
@@ -81,6 +90,9 @@ export default {
       this.pageNum = pageNum;
     },
     showHome(pageNum) {
+      this.pageNum = pageNum;
+    },
+    showRecommend(pageNum) {
       this.pageNum = pageNum;
     },
     showForm(pageNum) {

@@ -12,7 +12,7 @@
       </button>
       <button
         type="button"
-        @click="isBtnActive2"
+        @click="showRecommend"
         class="main-header__btn"
         :class="{ isActive: isActive2 }"
       >
@@ -49,10 +49,12 @@ export default {
       let pageNum = 1;
       this.$emit("showHome", pageNum);
     },
-    isBtnActive2() {
+    showRecommend() {
       this.isActive2 = true;
       this.isActive1 = false;
       this.isActive3 = false;
+      let pageNum = 2;
+      this.$emit("showRecommend", pageNum);
     },
     showCommunity() {
       this.isActive3 = true;
