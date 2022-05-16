@@ -64,11 +64,9 @@ button {
 .btn--naver {
   @extend .button;
   background-color: $color-naver;
-  a {
-    @include layout(row, center, center);
-    color: $color-white;
-    gap: 10px;
-  }
+  @include layout(row, center, center);
+  color: $color-white;
+  gap: 10px;
 }
 
 .btn--transparent {

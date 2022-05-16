@@ -7,9 +7,7 @@
         검토 후 승인이 완료되면<br />
         정보를 수정할게요!
       </p>
-      <button type="button" class="btn--primary">
-        <router-link to="/main">홈으로</router-link>
-      </button>
+      <button type="button" class="btn--primary" @click="toMain">홈으로</button>
     </div>
   </div>
 </template>
@@ -21,6 +19,11 @@ export default {
     return {
       ic__complete,
     };
+  },
+  methods: {
+    toMain() {
+      this.$router.push("/main");
+    },
   },
 };
 </script>
