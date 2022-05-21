@@ -46,7 +46,7 @@ export default {
     },
     modifyForm() {
       let pageNum = 4;
-      this.$emit("modifyForm", pageNum);
+      this.$store.commit("changePage", pageNum);
     },
   },
 };

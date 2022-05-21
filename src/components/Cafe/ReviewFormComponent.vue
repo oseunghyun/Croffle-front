@@ -98,7 +98,7 @@ export default {
         console.log(data.rate);
         // 카페 상세 페이지로 이동
         let pageNum = 6;
-        this.$emit("submitForm", pageNum);
+        this.$store.commit("changePage", pageNum);
       } catch (error) {
         console.log(error.response.data.message);
       } finally {

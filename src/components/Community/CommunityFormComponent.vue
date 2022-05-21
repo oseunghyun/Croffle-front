@@ -54,7 +54,7 @@ export default {
   methods: {
     submitForm() {
       let pageNum = 3;
-      this.$emit("submitForm", pageNum);
+      this.$store.commit("changePage", pageNum);
     },
   },
 };

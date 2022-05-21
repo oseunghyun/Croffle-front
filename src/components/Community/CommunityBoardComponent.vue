@@ -40,11 +40,11 @@ export default {
   methods: {
     showForm() {
       let pageNum = 4;
-      this.$emit("showForm", pageNum);
+      this.$store.commit("changePage", pageNum);
     },
     showPost() {
       let pageNum = 5;
-      this.$emit("showPost", pageNum);
+      this.$store.commit("changePage", pageNum);
     },
   },
 };

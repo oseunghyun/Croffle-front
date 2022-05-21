@@ -1,8 +1,14 @@
 import { createStore } from "vuex";
 
 export const store = createStore({
-  state: {},
+  state: {
+    pageNum: 0,
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    changePage(state, pageNum) {
+      state.pageNum = pageNum;
+    },
+  },
   actions: {},
 });
