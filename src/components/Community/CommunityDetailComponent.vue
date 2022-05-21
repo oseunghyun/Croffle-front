@@ -19,12 +19,19 @@
         수정하기
       </button>
     </div>
+    <modal-component v-if="isDelModalActive">
+      <del-modal-content @close-modal="isDelModalActive = false" />
+    </modal-component>
   </div>
 </template>
 
 <script>
 import ic__arrow_left from "@/assets/ic/arrow_left.svg";
+import ModalComponent from "@/components/Modal/ModalComponent.vue";
+import DelModalContent from "@/components/Modal/DelModalContent.vue";
+
 export default {
+  components: { ModalComponent, DelModalContent },
   data() {
     return {
       board: {
@@ -41,12 +48,13 @@ export default {
   },
   methods: {
     showDelModal() {
-      let isDelModalActive = true;
-      this.$emit("showDelModal", isDelModalActive);
+      this.isDelModalActive = true;
     },
     modifyForm() {
       let pageNum = 4;
       this.$store.commit("changePage", pageNum);
+      // 게시글 수정 페이지
+      this.$router.push("/community/edit");
     },
   },
 };

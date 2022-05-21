@@ -49,10 +49,29 @@ const routes = [
     path: "/community",
     component: () => import("@/views/CommunityView.vue"),
     children: [
+      // 커뮤니티 게시판
       {
         path: "/community",
         component: () =>
           import("@/components/Community/CommunityBoardComponent.vue"),
+      },
+      // 커뮤니티 글 작성
+      {
+        path: "/community/post",
+        component: () =>
+          import("@/components/Community/CommunityFormComponent.vue"),
+      },
+      // 커뮤니티 글 상세 보기
+      {
+        path: "/community/detail",
+        component: () =>
+          import("@/components/Community/CommunityDetailComponent.vue"),
+      },
+      // 커뮤니티 글 수정
+      {
+        path: "/community/edit",
+        component: () =>
+          import("@/components/Community/CommunityEditComponent.vue"),
       },
     ],
   },
