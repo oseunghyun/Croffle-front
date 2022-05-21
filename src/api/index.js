@@ -9,8 +9,4 @@ function registerReview(reviewData) {
   return instance.post("review", reviewData);
 }
 
-// 메뉴 제보하기
-function reportMenu(reportMenuData) {
-  return instance.post("report/menu", reportMenuData);
-}
-export { registerReview, reportMenu };
+export { registerReview };
