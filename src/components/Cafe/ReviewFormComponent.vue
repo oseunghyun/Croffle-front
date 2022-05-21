@@ -17,31 +17,66 @@
       </div>
       <div class="input__box">
         <label for="content">내용</label>
-        <textarea maxlength="255" id="content" v-model="content" />
-        <span class="count">{{ contentLength }}/255</span>
+        <textarea
+          id="content"
+          @input="content = $event.target.value"
+          rows="5"
+          :disabled="formValid == false"
+        />
+        <span class="count">{{ contentByte }}/255bytes</span>
       </div>
     </form>
-    <button type="button" @click="submitForm" class="btn--disabled">
+    <button
+      type="button"
+      @click="submitForm"
+      :class="['btn--md', isValid ? 'btnPrimary' : 'btnDisabled']"
+      :disabled="isValid == false"
+      maxlength="255"
+    >
       완료
     </button>
   </div>
 </template>
 
 <script>
+import { registerReview } from "@/api/index";
+import { getByte } from "@/utils/validation";
 export default {
   data() {
     return {
       rate: 0,
-      content: "",
+      content: "", // varchar(255)
       isActive: [false, false, false, false, false],
     };
   },
   computed: {
-    contentLength() {
-      return this.content.length;
+    isValid() {
+      if (this.isActive[0] == true && this.content != "") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    contentByte() {
+      return getByte(this.content);
+    },
+    // // 바이트 계산
+    // getByte() {
+    //   return this.content
+    //     .split("")
+    //     .map((s) => s.charCodeAt(0))
+    //     .reduce((prev, c) => prev + (c === 10 ? 2 : c >> 7 ? 2 : 1), 0);
+    // },
+    formValid() {
+      if (getByte(this.content) > 255) {
+        return false;
+      } else {
+        return true;
+      }
     },
   },
   methods: {
+    // 별점
     plusRate(index) {
       // this.isActive.map(() => {
       //   return false;
@@ -51,12 +86,28 @@ export default {
         return idx <= index;
       });
     },
-    submitForm() {
-      this.rate = this.isActive.filter((ia) => ia).length;
-      console.log(this.rate);
-      // 카페 상세 페이지로 이동
-      let pageNum = 6;
-      this.$emit("submitForm", pageNum);
+
+    async submitForm() {
+      try {
+        console.log("리뷰하기 폼 제출");
+        const reviewData = {
+          rate: this.rate,
+          content: this.content,
+        };
+        const { data } = await registerReview(reviewData);
+        console.log(data.rate);
+        // 카페 상세 페이지로 이동
+        let pageNum = 6;
+        this.$emit("submitForm", pageNum);
+      } catch (error) {
+        console.log(error.response.data.message);
+      } finally {
+        this.initForm;
+      }
+    },
+    initForm() {
+      this.rate = "";
+      this.content = "";
     },
   },
 };
