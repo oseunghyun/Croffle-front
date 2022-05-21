@@ -1,0 +1,43 @@
+#searchbar {
+  width: 100%;
+  @include layout(column, flex-start, center);
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: $color-white;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0px 0px 2px 2px $color-black-10;
+  position: sticky;
+  z-index: 10;
+  top: 155px;
+  .searchbar__address {
+    @include layout(row, center, flex-start);
+    span {
+      font-size: 12px;
+      color: $color-black-100;
+      padding-left: 5px;
+    }
+    .address {
+      padding-left: 10px;
+      color: $color-primary-dark;
+      font-weight: 600;
+    }
+  }
+  .input__box {
+    @include layout(row, flex-start, center);
+    margin-top: 15px;
+    input {
+      position: relative;
+      width: 100%;
+      
+    }
+    button {
+      padding: 0;
+      width: 45px;
+      height: 45px;
+      border-radius: 50px;
+      background-color: $color-primary-dark;
+      position: absolute;
+      right: 5px;
+    }
+  }
+}

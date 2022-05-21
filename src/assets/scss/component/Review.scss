@@ -1,0 +1,26 @@
+.review-form {
+  box-sizing: border-box;
+  padding: 0px 15px;
+  form {
+    padding: 20px 0px;
+    gap: 24px;
+    @include layout(column, center, center);
+    .input__box {
+      .btn__wrapper-stars {
+        @include layout(row, center, space-between);
+        button {
+          background: transparent;
+          i {
+            color: $color-black-20;
+          }
+          .active {
+            color: $color-secondary-50;
+          }
+        }
+      }
+    }
+  }
+  button {
+    margin: 10px 0px;
+  }
+}

@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
-// 믹스인: CSS를 묶어서 재사용할 수 있는 모듈로 만들어 줌 
-// 미디어 쿼리에서 min-width와 max-width 변수 활용해 적용하고 미디어 쿼리 내부에는 믹스인이 사용될 때 넘겨받은 콘텐츠가 들어가도록 함 
+// 믹스인: CSS를 묶어서 재사용할 수 있는 모듈로 만들어 줌
+// 미디어 쿼리에서 min-width와 max-width 변수 활용해 적용하고 미디어 쿼리 내부에는 믹스인이 사용될 때 넘겨받은 콘텐츠가 들어가도록 함
 
 // breakpoints
 @mixin mobile {
@@ -10,3 +10,20 @@
   }
 }
 
+@mixin layout($flex-direction, $align-itmes, $justify-content) {
+  display: flex;
+  width: 100%;
+  flex-direction: $flex-direction;
+  align-items: $align-itmes;
+  justify-content: $justify-content;
+}
+
+@mixin bg-color($bg-color) {
+  background-color: $bg-color;
+}
+
+@mixin font($font-size, $font-weight, $color) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  color: $color;
+} ;

@@ -1,0 +1,61 @@
+// 회원가입 완료
+#report-component {
+  box-sizing: border-box;
+  padding: 0px 15px;
+  .complete__wrapper {
+    @include layout(column, center, center);
+
+    img {
+      width: 100px;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      color: $color-black-100;
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      margin: 0;
+    }
+
+    p {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 200;
+    }
+  }
+}
+
+// 완료 공통
+.complete-component {
+  box-sizing: border-box;
+  padding: 0px 15px;
+  height: 100vh;
+  .complete__wrapper {
+    @include layout(column, center, center);
+    height: 100vh;
+
+    img {
+      width: 100px;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      color: $color-black-100;
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      margin: 0;
+    }
+
+    p {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 200;
+    }
+    button {
+      position: relative;
+      top: 20%;
+    }
+  }
+}

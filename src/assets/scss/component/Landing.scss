@@ -1,0 +1,31 @@
+#landing-container {
+  @include layout(column, center, center);
+  @include bg-color($color-primary-20);
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 15px;
+  .main__logo {
+    position: relative;
+    bottom: 8%;
+  }
+  .btn__wrapper {
+    position: relative;
+    top: 10%;
+    @include layout(column, center, center);
+    gap: 10px;
+    button {
+      font-size: 16px;
+    }
+  }
+  .link__wrapper {
+    position: relative;
+    top: 15%;
+    gap: 5px;
+    @include layout(row, center, center);
+    span {
+      color: $color-black-60;
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+}
