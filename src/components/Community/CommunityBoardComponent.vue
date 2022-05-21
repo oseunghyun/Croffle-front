@@ -40,14 +40,10 @@ export default {
   methods: {
     // 커뮤니티 게시글 작성
     toPostPage() {
-      let pageNum = 4;
-      this.$store.commit("changePage", pageNum);
       this.$router.push("/community/form");
     },
     // 커뮤니티 게시글 조회
     toDetailPage() {
-      let pageNum = 5;
-      this.$store.commit("changePage", pageNum);
       this.$router.push("/community/detail");
     },
   },

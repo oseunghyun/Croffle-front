@@ -2,12 +2,12 @@ import { createStore } from "vuex";
 
 export const store = createStore({
   state: {
-    pageNum: 0,
+    headerActive: false,
   },
   getters: {},
   mutations: {
-    changePage(state, pageNum) {
-      state.pageNum = pageNum;
+    isHeaderActive(state, headerActive) {
+      state.headerActive = headerActive;
     },
   },
   actions: {},

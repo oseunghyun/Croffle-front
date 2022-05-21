@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 메인 헤더 -->
-    <main-header v-if="pageNum == 1 || 6"></main-header>
+    <main-header v-if="this.$store.state.headerActive"></main-header>
     <router-view></router-view>
   </div>
 </template>
@@ -15,9 +15,7 @@ export default {
     MainHeader,
   },
   data() {
-    return {
-      pageNum: 0,
-    };
+    return {};
   },
 };
 </script>

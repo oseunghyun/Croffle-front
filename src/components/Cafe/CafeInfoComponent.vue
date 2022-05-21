@@ -69,6 +69,7 @@ export default {
   data() {
     return {
       isModalActive: false,
+      isHeaderActive: true,
       cafe: {
         name: "카페이름",
         address: "카페주소",

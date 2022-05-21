@@ -33,9 +33,7 @@ export default {
   },
   methods: {
     toMain() {
-      let pageNum = "1";
-      this.$store.commit("changePage", pageNum);
-      this.$router.push("/main");
+      this.$router.push("/cafes");
     },
     toLogin() {
       this.$router.push("/login");
@@ -43,6 +41,10 @@ export default {
     toSignup() {
       this.$router.push("/signup");
     },
+  },
+  created() {
+    let headerActive = false;
+    this.$store.commit("isHeaderActive", headerActive);
   },
 };
 </script>

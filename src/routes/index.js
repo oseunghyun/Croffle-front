@@ -41,8 +41,7 @@ const routes = [
   // 추천
   {
     path: "/recommend",
-    component: () =>
-      import("@/components/Recommend/RecommendBoardComponent.vue"),
+    component: () => import("@/views/RecommendView.vue"),
   },
   // 커뮤니티
   {

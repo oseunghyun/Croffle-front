@@ -53,8 +53,7 @@ export default {
   },
   methods: {
     submitForm() {
-      let pageNum = 3;
-      this.$store.commit("changePage", pageNum);
+      console.log("폼 제출");
     },
   },
 };

@@ -5,7 +5,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  created() {
+    let headerActive = true;
+    this.$store.commit("isHeaderActive", headerActive);
+  },
+};
 </script>
 
 <style></style>

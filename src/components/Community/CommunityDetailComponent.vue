@@ -51,8 +51,6 @@ export default {
       this.isDelModalActive = true;
     },
     modifyForm() {
-      let pageNum = 4;
-      this.$store.commit("changePage", pageNum);
       // 게시글 수정 페이지
       this.$router.push("/community/edit");
     },

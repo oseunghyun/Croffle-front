@@ -20,8 +20,6 @@ export default {
   },
   methods: {
     toDetail() {
-      let pageNum = 6;
-      this.$store.commit("changePage", pageNum);
       this.$router.push("/cafe");
     },
   },
