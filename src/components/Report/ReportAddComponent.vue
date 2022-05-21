@@ -1,5 +1,8 @@
 <template>
   <div id="report-component">
+    <header class="page-title">
+      {{ header }}
+    </header>
     <form>
       <div class="input__box">
         <label>메뉴명</label>
@@ -16,7 +19,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      header: "메뉴 추가 제보하기",
+    };
+  },
+};
 </script>
 
 <style></style>

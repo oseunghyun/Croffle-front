@@ -49,6 +49,10 @@ export default {
       this.isModalActive = isModalActive;
     },
   },
+  created() {
+    let headerActive = false;
+    this.$store.commit("isHeaderActive", headerActive);
+  },
 };
 </script>
 

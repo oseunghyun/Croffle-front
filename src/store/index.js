@@ -1,8 +1,14 @@
 import { createStore } from "vuex";
 
 export const store = createStore({
-  state: {},
+  state: {
+    headerActive: false,
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    isHeaderActive(state, headerActive) {
+      state.headerActive = headerActive;
+    },
+  },
   actions: {},
 });

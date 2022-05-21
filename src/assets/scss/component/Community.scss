@@ -1,6 +1,4 @@
 .community {
-  box-sizing: border-box;
-  padding: 0px 20px;
   gap: 24px;
   @include layout(column, center, center);
   form {
@@ -10,21 +8,18 @@
   }
   button {
     position: relative;
-    top: 24px;
+    bottom: 0;
   }
 }
 
 // 커뮤니티 글 상세
 .community-post {
-  @extend .community;
-  padding: 40px 20px;
-  @include layout(column, flex-start, center);
   button {
     padding: 16px 0;
   }
   .post__wrapper {
     @include layout(column, flex-start, center);
-    gap: 12px;
+    gap: 6px;
     .post__category {
       @include font(16px, 400, $color-black-80);
     }
@@ -38,6 +33,7 @@
     .post__content {
       border-top: 1px solid $color-black-10;
       padding: 20px 0;
+      margin: 12px 0;
       @include font(14px, 400, $color-black-100);
       line-height: 24px;
       width: 100%;
@@ -46,7 +42,7 @@
   .btn__wrapper {
     @include layout(row, center, space-between);
     position: relative;
-    top: 20px;
+    bottom: 0;
     button {
       width: 49%;
       font-size: 14px;

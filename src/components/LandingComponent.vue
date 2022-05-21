@@ -1,6 +1,6 @@
 <template>
   <div id="landing-container">
-    <img :src="main_logo" class="main__logo" />
+    <img :src="main_logo" class="main__logo" @click="toMain" />
     <div class="btn__wrapper">
       <button type="button" class="btn--primary" @click="toMain">
         로그인 없이 크로플 원정 떠나기
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     toMain() {
-      this.$router.push("/main");
+      this.$router.push("/cafes");
     },
     toLogin() {
       this.$router.push("/login");

@@ -11,11 +11,7 @@
     </div>
     <h1>정말 삭제하시겠습니까?</h1>
     <div class="btn__wrapper">
-      <button
-        type="button"
-        class="btn--secondary"
-        @click="$emit('close-modal')"
-      >
+      <button type="button" class="btn--secondary" @click="deletePost">
         예
       </button>
       <button type="button" class="btn--negative" @click="$emit('close-modal')">
@@ -36,6 +32,12 @@ export default {
     return {
       ic__close,
     };
+  },
+  methods: {
+    deletePost() {
+      this.$emit("close-modal");
+      this.$router.push("/community");
+    },
   },
 };
 </script>
