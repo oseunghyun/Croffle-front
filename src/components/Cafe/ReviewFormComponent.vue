@@ -85,19 +85,20 @@ export default {
       this.isActive = this.isActive.map((ia, idx) => {
         return idx <= index;
       });
+      this.rate = this.isActive.filter((ia) => ia).length;
+      // console.log(this.rate);
     },
 
     async submitForm() {
       try {
         console.log("리뷰하기 폼 제출");
-        const reviewData = {
+        const reviewData = await registerReview({
           rate: this.rate,
           content: this.content,
-        };
-        const { data } = await registerReview(reviewData);
-        console.log(data.rate);
+        });
+        console.log(reviewData);
       } catch (error) {
-        console.log(error.response.data.message);
+        console.log(error.message);
       } finally {
         this.initForm;
       }
