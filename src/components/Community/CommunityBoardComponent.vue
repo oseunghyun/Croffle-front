@@ -4,7 +4,7 @@
     <p class="guide">크로플 원정대와 공유하고 싶은 내용이 있나요?</p>
     <div class="card__wrapper--column">
       <div v-for="i in postNum" :key="'start' + i" class="community__card">
-        <span @click="showPost" class="card__title">
+        <span @click="toDetailPage" class="card__title">
           {{ board.title }}
         </span>
         <div class="card__text">
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <button @click="showForm" type="button" class="btn--border">
+    <button @click="toPostPage" type="button" class="btn--border">
       게시글 작성 +
     </button>
   </div>
@@ -38,13 +38,13 @@ export default {
     };
   },
   methods: {
-    showForm() {
-      let pageNum = 4;
-      this.$emit("showForm", pageNum);
+    // 커뮤니티 게시글 작성
+    toPostPage() {
+      this.$router.push("/community/form");
     },
-    showPost() {
-      let pageNum = 5;
-      this.$emit("showPost", pageNum);
+    // 커뮤니티 게시글 조회
+    toDetailPage() {
+      this.$router.push("/community/detail");
     },
   },
 };

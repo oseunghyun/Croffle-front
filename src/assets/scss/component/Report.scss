@@ -1,12 +1,10 @@
 #report-component {
-    box-sizing: border-box;
-    padding: 0px 15px ;
-    form {
-      padding: 20px 0px;
-      gap: 24px;
-      @include layout(column, center, center);
-    }
-    button {
-      margin: 10px 0px;
-    }
+  form {
+    padding: 20px 0px;
+    gap: 24px;
+    @include layout(column, center, center);
+  }
+  button {
+    margin: 10px 0px;
+  }
 }

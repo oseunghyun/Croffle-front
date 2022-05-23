@@ -1,6 +1,6 @@
 <template>
   <header id="main-header">
-    <router-link to="/main"><img :src="main_logo" /></router-link>
+    <img :src="main_logo" @click="showHome" />
     <nav>
       <button
         type="button"
@@ -46,22 +46,19 @@ export default {
       this.isActive1 = true;
       this.isActive2 = false;
       this.isActive3 = false;
-      let pageNum = 1;
-      this.$emit("showHome", pageNum);
+      this.$router.push("/cafes");
     },
     showRecommend() {
       this.isActive2 = true;
       this.isActive1 = false;
       this.isActive3 = false;
-      let pageNum = 2;
-      this.$emit("showRecommend", pageNum);
+      this.$router.push("/recommend");
     },
     showCommunity() {
       this.isActive3 = true;
       this.isActive2 = false;
       this.isActive1 = false;
-      let pageNum = 3;
-      this.$emit("showCommunity", pageNum);
+      this.$router.push("/community");
     },
   },
 };

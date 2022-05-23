@@ -9,26 +9,68 @@ const routes = [
   },
   // 메인 페이지 - 카페 전체 조회
   {
-    path: "/main",
+    path: "/cafes",
     component: () => import("@/views/MainView.vue"),
   },
-  // 제보하기
+  // 카페 상세 /:id
   {
-    path: "/report",
-    component: () => import("@/views/ReportingView.vue"),
+    path: "/cafe",
+    component: () => import("@/views/CafeView.vue"),
     children: [
       {
-        path: "/report/add",
-        component: () => import("../components/Report/ReportAddComponent.vue"),
+        path: "/cafe",
+        component: () => import("@/components/Cafe/CafeInfoComponent.vue"),
       },
+      // 카페 상세 - 리뷰 작성
       {
-        path: "/report/modify",
+        path: "/cafe/review",
+        component: () => import("@/components/Cafe/ReviewFormComponent.vue"),
+      },
+      // 카페 상세 - 메뉴 추가 제보 하기
+      {
+        path: "/cafe/addreport",
+        component: () => import("@/components/Report/ReportAddComponent.vue"),
+      }, // 카페 상세 - 정보 오류 제보 하기
+      {
+        path: "/cafe/modifyreport",
         component: () =>
-          import("../components/Report/ReportModifyComponent.vue"),
+          import("@/components/Report/ReportModifyComponent.vue"),
       },
+    ],
+  },
+  // 추천
+  {
+    path: "/recommend",
+    component: () => import("@/views/RecommendView.vue"),
+  },
+  // 커뮤니티
+  {
+    path: "/community",
+    component: () => import("@/views/CommunityView.vue"),
+    children: [
+      // 커뮤니티 게시판
       {
-        path: "/report/complete",
-        component: () => import("../components/Report/ReportComplete.vue"),
+        path: "/community",
+        component: () =>
+          import("@/components/Community/CommunityBoardComponent.vue"),
+      },
+      // 커뮤니티 글 작성
+      {
+        path: "/community/post",
+        component: () =>
+          import("@/components/Community/CommunityFormComponent.vue"),
+      },
+      // 커뮤니티 글 상세 보기
+      {
+        path: "/community/detail",
+        component: () =>
+          import("@/components/Community/CommunityDetailComponent.vue"),
+      },
+      // 커뮤니티 글 수정
+      {
+        path: "/community/edit",
+        component: () =>
+          import("@/components/Community/CommunityEditComponent.vue"),
       },
     ],
   },
