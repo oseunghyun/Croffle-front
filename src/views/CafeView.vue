@@ -1,9 +1,13 @@
-<template>로그인</template>
+<template>
+  <div class="cafe-view">
+    <router-view></router-view>
+  </div>
+</template>
 
 <script>
 export default {
   created() {
-    let headerActive = false;
+    let headerActive = true;
     this.$store.commit("isHeaderActive", headerActive);
   },
 };

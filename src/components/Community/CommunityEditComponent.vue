@@ -54,7 +54,6 @@ export default {
   methods: {
     submitForm() {
       console.log("폼 제출");
-      this.$router.push("/community");
     },
   },
 };

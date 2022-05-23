@@ -1,17 +1,16 @@
 <template>
-<div>
+  <div>
     <router-view></router-view>
-</div>
-
+  </div>
 </template>
 
 <script>
-
 export default {
-
-}
+  created() {
+    let headerActive = false;
+    this.$store.commit("isHeaderActive", headerActive);
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

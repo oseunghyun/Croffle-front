@@ -16,6 +16,10 @@ export default {
       this.message = message;
     },
   },
+  created() {
+    let headerActive = false;
+    this.$store.commit("isHeaderActive", headerActive);
+  },
 };
 </script>
 

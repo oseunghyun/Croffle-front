@@ -1,5 +1,8 @@
 <template>
   <div id="report-component">
+    <header class="page-title">
+      {{ header }}
+    </header>
     <form>
       <div class="input__box">
         <label>수정하고 싶은 정보</label>
@@ -20,7 +23,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      header: "카페 정보 수정 제보",
+    };
+  },
+};
 </script>
 
 <style></style>

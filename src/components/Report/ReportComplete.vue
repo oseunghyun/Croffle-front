@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     toMain() {
-      this.$router.push("/main");
+      this.$router.push("/cafes");
     },
   },
 };
