@@ -32,9 +32,8 @@ const routes = [
         component: () => import("@/components/Report/ReportAddComponent.vue"),
       }, // 카페 상세 - 정보 오류 제보 하기
       {
-        path: "/cafe/modifyreport",
-        component: () =>
-          import("@/components/Report/ReportModifyComponent.vue"),
+        path: "/cafe/reportinfo",
+        component: () => import("@/components/Report/ReportInfoComponent.vue"),
       },
     ],
   },

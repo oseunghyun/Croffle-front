@@ -14,7 +14,7 @@
       <button type="button" class="btn--secondary" @click="addReport">
         크로플 메뉴 추가 제보
       </button>
-      <button type="button" class="btn--negative" @click="modifyReport">
+      <button type="button" class="btn--negative" @click="reportInfo">
         카페 정보 수정 제보
       </button>
     </div>
@@ -40,9 +40,9 @@ export default {
       this.$router.push("/cafe/addreport");
     },
     // 카페 정보 수정 이벤트
-    modifyReport() {
+    reportInfo() {
       this.$emit("close-modal");
-      this.$router.push("/cafe/modifyreport");
+      this.$router.push("/cafe/reportinfo");
     },
   },
 };
