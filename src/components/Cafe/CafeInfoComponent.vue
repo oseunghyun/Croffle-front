@@ -3,21 +3,21 @@
     <!-- 카페 정보 -->
     <div id="cafe-page">
       <div class="cafe-info">
-        <span class="cafe__name">{{ cafe.name }}</span>
-        <span class="cafe__address">{{ cafe.address }}</span>
+        <span class="cafe__name">{{ cafeInfo.name }}</span>
+        <span class="cafe__address">{{ cafeInfo.roadaddr }}</span>
       </div>
       <div class="cafe-info__detail">
         <div class="cafe-info__wrapper">
           <label>전화번호</label>
-          <span>{{ cafe.telephone }}</span>
+          <span>{{ cafeInfo.telephone }}</span>
         </div>
         <div class="cafe-info__wrapper">
           <label>운영시간</label>
-          <span>{{ cafe.hours }}</span>
+          <span>{{ cafeInfo.hours }}</span>
         </div>
         <div class="cafe-info__wrapper">
           <label>SNS</label>
-          <span>{{ cafe.site }}</span>
+          <span>{{ cafeInfo.site }}</span>
         </div>
       </div>
       <p class="guide">
@@ -33,13 +33,13 @@
         카페 정보 수정 제보를 해주세요!
       </p>
       <div class="menu__list">
-        <div class="menu-info__wrapper">
-          <span class="menus__name">{{ menus.name }}</span>
-          <span class="menus__price">{{ menus.price }}</span>
-        </div>
-        <div class="menu-info__wrapper">
-          <span class="menus__name">{{ menus.name }}</span>
-          <span class="menus__price">{{ menus.price }}</span>
+        <div
+          class="menu-info__wrapper"
+          v-for="menu in cafeInfo.menus"
+          :key="menu"
+        >
+          <span class="menus__name">{{ cafeInfo.menus.name }}</span>
+          <span class="menus__price">{{ cafeInfo.menus.price }}</span>
         </div>
       </div>
     </div>
@@ -66,21 +66,15 @@ export default {
     ModalComponent,
     ModalContent,
   },
+  props: {
+    cafeInfo: {
+      type: Object,
+    },
+  },
   data() {
     return {
       isModalActive: false,
       isHeaderActive: true,
-      cafe: {
-        name: "카페이름",
-        address: "카페주소",
-        telephone: "전화번호",
-        hours: "운영시간",
-        site: "sns",
-      },
-      menus: {
-        name: "메뉴이름",
-        price: "가격",
-      },
     };
   },
   methods: {

@@ -19,4 +19,9 @@ function reportInfo(reportInfoData) {
   return instance.post("report/info", reportInfoData);
 }
 
-export { registerReview, reportMenu, reportInfo };
+// 카페 상세정보 조회
+function fetchCafeInfo() {
+  return instance.get("cafe");
+}
+
+export { registerReview, reportMenu, reportInfo, fetchCafeInfo };
