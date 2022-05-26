@@ -18,8 +18,9 @@
           placeholder="정정하고 싶은 내용을 입력해주세요."
           @input="this.content = $event.target.value"
           rows="5"
+          maxlength="100"
         ></textarea>
-        <span class="count">{{ contentByte }}/100bytes</span>
+        <span class="count">{{ contentLength }}/100</span>
       </div>
     </form>
     <button
@@ -35,7 +36,6 @@
 
 <script>
 import { reportInfo } from "@/api/index";
-import { getByte } from "@/utils/validation";
 
 export default {
   data() {
@@ -54,8 +54,8 @@ export default {
         return false;
       }
     },
-    contentByte() {
-      return getByte(this.content);
+    contentLength() {
+      return this.content.length;
     },
   },
   methods: {
