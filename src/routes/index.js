@@ -61,13 +61,13 @@ const routes = [
       },
       // 커뮤니티 글 상세 보기
       {
-        path: "/community/detail",
+        path: "/community/detail/:id",
         component: () =>
           import("@/components/Community/CommunityDetailComponent.vue"),
       },
       // 커뮤니티 글 수정
       {
-        path: "/community/edit",
+        path: "/community/edit/:id",
         component: () =>
           import("@/components/Community/CommunityEditComponent.vue"),
       },

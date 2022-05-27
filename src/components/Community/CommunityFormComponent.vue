@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { createPost } from "@/api/index";
+import { createPost } from "@/api/board";
 
 export default {
   data() {
@@ -50,8 +50,6 @@ export default {
       title: "",
       content: "",
       boardCategory: "RECIPE",
-      createDate: "",
-      modifiedDate: "",
     };
   },
   computed: {
