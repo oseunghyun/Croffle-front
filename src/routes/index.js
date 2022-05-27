@@ -73,11 +73,11 @@ const routes = [
       },
     ],
   },
-  // 로그인
-  {
-    path: "/loginaccess",
-    component: () => import("@/views/LoginAccessView.vue"),
-  },
+  // // 로그인
+  // {
+  //   path: "/loginaccess",
+  //   component: () => import("@/views/LoginAccessView.vue"),
+  // },
   // 회원가입
   {
     path: "/signup",
