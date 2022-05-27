@@ -3,16 +3,24 @@
     <header class="page-title">커뮤니티</header>
     <p class="guide">크로플 원정대와 공유하고 싶은 내용이 있나요?</p>
     <div class="card__wrapper--column">
-      <div v-for="i in postNum" :key="'start' + i" class="community__card">
+      <div
+        v-for="postItem in postItems"
+        :key="postItem.id"
+        class="community__card"
+      >
         <span @click="toDetailPage" class="card__title">
-          {{ board.title }}
+          {{ postItem.title }}
         </span>
         <div class="card__text">
-          <span class="card__category"> &#91;{{ board.category }}&#93; </span>
+          <span class="card__category">
+            &#91;{{ postItem.boardCategory }}&#93;
+          </span>
           <div>
-            <span class="card__nick_name"> {{ board.nick_name }}&nbsp; </span>
+            <span class="card__nick_name">
+              {{ postItem.user_nickname }}&nbsp;
+            </span>
             <span class="card__create_date">
-              {{ board.create_date }}
+              {{ postItem.create_date }}
             </span>
           </div>
         </div>
@@ -25,26 +33,38 @@
 </template>
 
 <script>
+import { fetchPosts } from "@/api/board";
+
 export default {
   data() {
     return {
       postNum: 4,
-      board: {
-        title: "제목",
-        category: "자유",
-        nick_name: "씽씽",
-        create_date: "2022-02-01",
-      },
+      postItems: [],
     };
+  },
+  created() {
+    this.fetchPosts();
   },
   methods: {
     // 커뮤니티 게시글 작성
     toPostPage() {
-      this.$router.push("/community/form");
+      this.$router.push("/community/post");
     },
     // 커뮤니티 게시글 조회
     toDetailPage() {
-      this.$router.push("/community/detail");
+      this.$router.push("/community/detail/:id");
+    },
+    // 게시글 정보 조회
+    async fetchPosts() {
+      try {
+        console.log("게시글 정보 조회");
+        const { data } = await fetchPosts();
+        this.postItems = data.data;
+        // console.log(JSON.stringify(this.postItems));
+        console.log(this.postItems);
+      } catch (error) {
+        console.log(error.message);
+      }
     },
   },
 };

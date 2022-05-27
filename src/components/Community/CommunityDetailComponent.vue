@@ -29,14 +29,16 @@
 import ic__arrow_left from "@/assets/ic/arrow_left.svg";
 import ModalComponent from "@/components/Modal/ModalComponent.vue";
 import DelModalContent from "@/components/Modal/DelModalContent.vue";
+import { fetchPost } from "@/api/board";
 
 export default {
   components: { ModalComponent, DelModalContent },
   data() {
     return {
       board: {
+        id: "",
         title: "제목",
-        category: "자유",
+        boardCategory: "자유",
         nick_name: "씽씽",
         create_date: "2022-02-01",
         content:
@@ -44,6 +46,7 @@ export default {
       },
       ic__arrow_left,
       isDelModalActive: false,
+      postItem: [],
     };
   },
   methods: {
@@ -52,8 +55,18 @@ export default {
     },
     modifyForm() {
       // 게시글 수정 페이지
-      this.$router.push("/community/edit");
+      this.$router.push("/community/edit/:id");
     },
+  },
+  // 게시글 내용 조회
+  async created() {
+    const id = this.$route.params.id;
+    const { data } = await fetchPost(id);
+    this.board.title = data.title;
+    this.board.content = data.content;
+    this.board.boardCategory = data.category;
+    this.board.nick_name = data.nick_name;
+    this.board.create_date = data.create_date;
   },
 };
 </script>

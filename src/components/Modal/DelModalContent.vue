@@ -23,10 +23,15 @@
 
 <script>
 import ic__close from "@/assets/ic/close.svg";
+import { deletePost } from "@/api/board";
+
 export default {
   name: "DelModalContent",
   props: {
     msg: String,
+    postItem: {
+      type: Object,
+    },
   },
   data() {
     return {
@@ -34,7 +39,11 @@ export default {
     };
   },
   methods: {
-    deletePost() {
+    // 커뮤니티 게시글 삭제
+    async deletePost() {
+      await deletePost(this.postItem.id);
+      // 커뮤니티 게시판 동기화
+      // this.$emit("refresh");
       this.$emit("close-modal");
       this.$router.push("/community");
     },
