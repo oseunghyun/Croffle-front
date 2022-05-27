@@ -8,7 +8,19 @@ function createInstance() {
   });
   return setInterceptors(instance);
 }
-const instance = createInstance();
+
+// 회원 조회가 필요한 경우
+function createInstanceWithAuth(url) {
+  const instance = axios.create({
+    baseURL: `${process.env.VUE_APP_API_URL}${url}`,
+  });
+  return setInterceptors(instance);
+}
+
+// 공통
+export const instance = createInstance();
+// 커뮤니티 게시판 경로
+export const board = createInstanceWithAuth("board");
 
 // 리뷰 작성하기
 function registerReview(reviewData) {
@@ -36,16 +48,6 @@ function fetchCafeInfo() {
 //   return instance.get("cafe/recommend", { params });
 // }
 
-// 커뮤니티 게시글 작성
-function createPost(postData) {
-  return instance.post("board", postData);
-}
-
-// 커뮤니티 게시글 조회
-function fetchPosts() {
-  return instance.get("board");
-}
-
 // // 로그인
 // function loginUser() {
 //   return instance.get("oauth2/authorization/naver");
@@ -56,7 +58,5 @@ export {
   reportMenu,
   reportInfo,
   fetchCafeInfo,
-  createPost,
-  fetchPosts,
   // loginUser,
 };
