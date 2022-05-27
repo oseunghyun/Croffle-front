@@ -7,11 +7,20 @@
     <form>
       <div class="input__box">
         <label>회원 전화번호</label>
-        <input v-model="phoneNum" placeholder="회원 전화번호를 입력해주세요." />
+        <input
+          v-model="phoneNum"
+          placeholder="회원 전화번호를 입력해주세요."
+          maxlength="15"
+        />
         <span class="count">{{ phoneLength }}/15</span>
       </div>
     </form>
-    <button type="button" @click="checkMember" class="btn--primary">
+    <button
+      type="button"
+      @click="checkMember"
+      :class="['btn--md', isValid ? 'btnPrimary' : 'btnDisabled']"
+      :disabled="isValid == false"
+    >
       회원조회
     </button>
   </div>
@@ -24,7 +33,15 @@ export default {
       phoneNum: "",
     };
   },
+
   computed: {
+    isValid() {
+      if (this.phoneNum) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     phoneLength() {
       return this.phoneNum.length;
     },
