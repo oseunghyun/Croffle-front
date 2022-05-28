@@ -52,7 +52,8 @@ export default {
       this.isActive2 = true;
       this.isActive1 = false;
       this.isActive3 = false;
-      this.$router.push("/recommend");
+      // this.$router.push("/recommend");
+      this.$router.push({ path: "/recommend", query: { filter: "liked" } });
     },
     showCommunity() {
       this.isActive3 = true;
