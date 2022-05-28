@@ -42,11 +42,12 @@ function fetchCafeInfo() {
   return instance.get("cafe");
 }
 
-// // 카페 추천 기능
-// function recommendCafe() {
-//   const params = { filter: ["liked", "review"] };
-//   return instance.get("cafe/recommend", { params });
-// }
+// 카페 추천 기능
+function recommendCafe() {
+  // const params = { filter: ["liked", "review"] };
+  const params = { filter: ["liked", "review"] };
+  return instance.get("cafe/recommend", { params });
+}
 
 // // 로그인
 // function loginUser() {
@@ -58,5 +59,6 @@ export {
   reportMenu,
   reportInfo,
   fetchCafeInfo,
+  recommendCafe,
   // loginUser,
 };
