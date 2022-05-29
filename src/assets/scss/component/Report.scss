@@ -3,8 +3,22 @@
     padding: 20px 0px;
     gap: 24px;
     @include layout(column, center, center);
+    .search__box {
+      @include layout(row, center, space-between);
+      margin: 0;
+      input {
+        width: 75%;
+      }
+      button {
+        width: 23%;
+      }
+    }
   }
   button {
     margin: 10px 0px;
+  }
+  .text__cafe-title {
+    font-size: 16px;
+    color: $color-black-80;
   }
 }

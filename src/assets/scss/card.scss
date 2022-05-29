@@ -51,7 +51,7 @@
   }
   .card__addr {
     @include font(12px, 300, $color-black-60);
-    @include layout(row, flex-start, center);
+    @include layout(row, flex-start, flex-start);
   }
   .card__wrapper--row {
     @include layout(row, center, flex-end);

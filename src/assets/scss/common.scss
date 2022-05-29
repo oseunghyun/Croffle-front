@@ -130,3 +130,7 @@ header.page-header {
     url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf)
       format("opentype");
 }
+
+em {
+  color: $color-negative-100;
+}

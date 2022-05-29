@@ -11,6 +11,20 @@ const routes = [
   {
     path: "/cafes",
     component: () => import("@/views/MainView.vue"),
+    children: [
+      {
+        path: "/cafes",
+        component: () => import("@/components/Main/MainComponent.vue"),
+      },
+      {
+        path: "/cafes/report",
+        component: () => import("@/components/Report/ReportCafeComponent.vue"),
+      },
+      {
+        path: "/cafes/searchcafe",
+        component: () => import("@/components/Main/SearchCafeComponent.vue"),
+      },
+    ],
   },
   // 카페 상세 /:id
   {
