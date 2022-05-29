@@ -61,6 +61,12 @@ button {
   }
 }
 
+.btn--border--black {
+  background-color: transparent;
+  border: 1px solid $color-black-60;
+  color: $color-black-60;
+}
+
 .btn--naver {
   @extend .button;
   background-color: $color-naver;
@@ -87,6 +93,16 @@ button {
 .btn--sm {
   width: auto;
   padding: 2px 6px;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.btn--sm-2 {
+  width: auto;
+  padding: 5px 20px;
   font-size: 12px;
   font-weight: 400;
   border-radius: 20px;
