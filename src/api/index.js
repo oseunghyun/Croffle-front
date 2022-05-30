@@ -68,8 +68,8 @@ function reportInfo(reportInfoData) {
 }
 
 // 카페 상세정보 조회
-function fetchCafeInfo() {
-  return instance.get("cafe");
+function fetchCafeInfo(cafeId) {
+  return instance.get(`cafe/id/${cafeId}`);
 }
 
 // 카페 전체 조회
