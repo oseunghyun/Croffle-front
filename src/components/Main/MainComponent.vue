@@ -59,7 +59,7 @@ export default {
         // 카페 아이디 조회
         console.log(data.id);
         this.$emit("fetchInfo", data);
-        this.$router.push("/cafe");
+        this.$router.push("/cafe/:id");
       } catch (error) {
         console.log(error.message);
       }
