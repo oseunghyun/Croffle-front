@@ -1,14 +1,14 @@
 <template>
   <div>
     <searchbar-component></searchbar-component>
-    <div class="main-container">
-      <p class="guide">
+    <naver-maps width="100%" height="100vh" class="main-container--map">
+      <p class="guide" id="guide">
         원정대에게 알려주고 싶은 카페가 있나요?<br />
         카페를 찾아 크로플 원정대에 제보해주세요!
       </p>
-      <button @click="fetchInfo" class="btn--transparent" id="btn-detail">
+      <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail">
         <img :src="ic__speechBubble" />
-      </button>
+      </button> -->
       <button
         type="button"
         @click="toCafeReport"
@@ -17,7 +17,7 @@
       >
         제보하기 +
       </button>
-    </div>
+    </naver-maps>
   </div>
 </template>
 
@@ -25,10 +25,12 @@
 import ic__speechBubble from "@/assets/ic/speechBubble.svg";
 import { fetchCafeInfo } from "@/api/index";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
+import { NaverMaps } from "vue3-naver-maps";
 
 export default {
   components: {
     SearchbarComponent,
+    NaverMaps,
   },
   mounted() {
     const naver_id_login = new window.naver_id_login(

@@ -17,3 +17,27 @@
     top: 30%;
   }
 }
+
+.main-container--map {
+  @include layout(column, center, flex-start);
+  @include bg-color($color-primary-20);
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 15px;
+  position: absolute;
+  top: 0px;
+  #guide {
+    position: relative;
+    top: 33%;
+    z-index: 5;
+  }
+  #btn-detail {
+    position: relative;
+    top: 20%;
+  }
+  #btn-report {
+    position: relative;
+    top: 80%;
+    z-index: 30;
+  }
+}
