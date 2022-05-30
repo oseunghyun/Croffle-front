@@ -46,6 +46,12 @@ function registerReview(reviewData) {
   return instance.post("review", reviewData);
 }
 
+// /review/list?cafe_id=1
+// 리뷰 조회하기
+function fetchReview(cafeId) {
+  return instance.get(`review/list/${cafeId}`);
+}
+
 // 메뉴 제보하기
 function reportMenu(reportMenuData) {
   return instance.post("report/menu", reportMenuData);
@@ -91,5 +97,6 @@ export {
   searchCafe,
   recommendCafe,
   reportCafe,
+  fetchReview,
   // loginUser,
 };

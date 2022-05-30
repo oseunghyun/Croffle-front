@@ -28,25 +28,25 @@ const routes = [
   },
   // 카페 상세 /:id
   {
-    path: "/cafe",
+    path: "/cafe/:id",
     component: () => import("@/views/CafeView.vue"),
     children: [
       {
-        path: "/cafe",
+        path: "/cafe/:id",
         component: () => import("@/components/Cafe/CafeInfoComponent.vue"),
       },
       // 카페 상세 - 리뷰 작성
       {
-        path: "/cafe/review",
+        path: "/cafe/:id/review",
         component: () => import("@/components/Cafe/ReviewFormComponent.vue"),
       },
       // 카페 상세 - 메뉴 추가 제보 하기
       {
-        path: "/cafe/addreport",
+        path: "/cafe/:id/addreport",
         component: () => import("@/components/Report/ReportAddComponent.vue"),
       }, // 카페 상세 - 정보 오류 제보 하기
       {
-        path: "/cafe/reportinfo",
+        path: "/cafe/:id/reportinfo",
         component: () => import("@/components/Report/ReportInfoComponent.vue"),
       },
     ],

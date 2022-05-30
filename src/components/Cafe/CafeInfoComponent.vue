@@ -43,10 +43,37 @@
         </div>
       </div>
     </div>
-    <!-- 버튼 -->
+    <!-- 메뉴 제보 버튼 -->
     <button type="button" @click="isModalActive = true" class="btn--primary">
       제보하기 +
     </button>
+    <!-- 리뷰 조회 -->
+    <div class="review__wrapper">
+      <span
+        >리뷰&nbsp;&nbsp;<strong>{{ reviews.length }}</strong></span
+      >
+      <div v-for="(review, index) in reviews" :key="index" class="review__card">
+        <div class="card__info">
+          <div class="card__user">
+            <div class="text__nickname">
+              {{ review.nickname }}
+            </div>
+            <div class="text__date">{{ review.date }}</div>
+          </div>
+          <div class="rate__stars">
+            <i
+              v-for="i in reviews[index].rate"
+              :key="i"
+              class="fas fa-star fa-1x"
+            ></i>
+          </div>
+          <div class="text__content">
+            {{ review.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 카페 제보 버튼 -->
     <button type="button" @click="toReviewForm" class="btn--border">
       리뷰 작성하기 +
     </button>
@@ -60,8 +87,12 @@
 <script>
 import ModalComponent from "@/components/Modal/ModalComponent.vue";
 import ModalContent from "@/components/Modal/ModalContent.vue";
+import { fetchReview } from "@/api/index";
 
 export default {
+  created() {
+    console.log(this.$route.query.id);
+  },
   components: {
     ModalComponent,
     ModalContent,
@@ -75,11 +106,39 @@ export default {
     return {
       isModalActive: false,
       isHeaderActive: true,
+      reviews: [
+        {
+          nickname: "씽씽",
+          date: "2022.04.01",
+          content:
+            "냉동 생지 사다가 만드는게 아니라 사장님이 직접 만든 반죽으로 하심",
+          rate: 3,
+        },
+        {
+          nickname: "씽씽",
+          date: "2022.04.01",
+          content:
+            "냉동 생지 사다가 만드는게 아니라 사장님이 직접 만든 반죽으로 하심",
+          rate: 2,
+        },
+      ],
     };
   },
   methods: {
     toReviewForm() {
       this.$router.push("/cafe/review");
+    },
+    async fetchReview() {
+      console.log("리뷰 조회");
+      try {
+        const reviewData = await fetchReview();
+        this.reviews.nickname = reviewData.reviews.author;
+        this.reviews.date = reviewData.reviews.createdate;
+        this.reviews.content = reviewData.reviews.content;
+        this.reviews.rate = reviewData.reviews.rate;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
