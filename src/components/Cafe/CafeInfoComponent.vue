@@ -52,7 +52,7 @@
       <span
         >리뷰&nbsp;&nbsp;<strong>{{ reviews.length }}</strong></span
       >
-      <div v-for="review in reviews" :key="review" class="review__card">
+      <div v-for="(review, index) in reviews" :key="index" class="review__card">
         <div class="card__info">
           <div class="card__user">
             <div class="text__nickname">
@@ -61,7 +61,11 @@
             <div class="text__date">{{ review.date }}</div>
           </div>
           <div class="rate__stars">
-            <i v-for="star in stars" :key="star" class="fas fa-star fa-1x"></i>
+            <i
+              v-for="i in reviews[index].rate"
+              :key="i"
+              class="fas fa-star fa-1x"
+            ></i>
           </div>
           <div class="text__content">
             {{ review.content }}
@@ -83,8 +87,12 @@
 <script>
 import ModalComponent from "@/components/Modal/ModalComponent.vue";
 import ModalContent from "@/components/Modal/ModalContent.vue";
+import { fetchReview } from "@/api/index";
 
 export default {
+  created() {
+    console.log(this.$route.query.id);
+  },
   components: {
     ModalComponent,
     ModalContent,
@@ -104,20 +112,33 @@ export default {
           date: "2022.04.01",
           content:
             "냉동 생지 사다가 만드는게 아니라 사장님이 직접 만든 반죽으로 하심",
+          rate: 3,
         },
         {
           nickname: "씽씽",
           date: "2022.04.01",
           content:
             "냉동 생지 사다가 만드는게 아니라 사장님이 직접 만든 반죽으로 하심",
+          rate: 2,
         },
       ],
-      stars: 5,
     };
   },
   methods: {
     toReviewForm() {
       this.$router.push("/cafe/review");
+    },
+    async fetchReview() {
+      console.log("리뷰 조회");
+      try {
+        const reviewData = await fetchReview();
+        this.reviews.nickname = reviewData.reviews.author;
+        this.reviews.date = reviewData.reviews.createdate;
+        this.reviews.content = reviewData.reviews.content;
+        this.reviews.rate = reviewData.reviews.rate;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
