@@ -21,4 +21,15 @@ function fetchMembership(memberData) {
   return owner.get("coupon", memberData);
 }
 
-export { fetchOwnerMenu, createOwnerMenu, editOwnerMenu, fetchMembership };
+// 스탬프 찍어주기
+function createStamp(stampData) {
+  return owner.post("stamp", stampData);
+}
+
+export {
+  fetchOwnerMenu,
+  createOwnerMenu,
+  editOwnerMenu,
+  fetchMembership,
+  createStamp,
+};
