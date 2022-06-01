@@ -35,6 +35,9 @@ export const instance = createInstance();
 // 커뮤니티 게시판 경로
 export const board = createInstanceWithAuth("board");
 
+// 사장님 페이지 경로
+export const owner = createInstanceWithAuth("owner");
+
 export const search = createNaverInstance();
 
 function searchCafe(cafeData) {
