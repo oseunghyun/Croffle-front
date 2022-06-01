@@ -1,6 +1,11 @@
 /* 마이페이지 api 함수 */
 import { instance } from "./index";
 
+// 유저 마이페이지 조회
+function fetchMypage() {
+  return instance.get("user/me");
+}
+
 // 닉네임 수정하기
 function editNickname(postData) {
   return instance.put("nickname", postData);
@@ -16,4 +21,4 @@ function fetchCoupons() {
   return instance.get("coupons");
 }
 
-export { editNickname, fetchStamps, fetchCoupons };
+export { editNickname, fetchStamps, fetchCoupons, fetchMypage };
