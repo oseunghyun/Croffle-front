@@ -17,3 +17,40 @@
     top: 30%;
   }
 }
+
+.main-container--map {
+  @include layout(column, center, flex-start);
+  @include bg-color($color-primary-20);
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 15px;
+  position: absolute;
+  top: 0px;
+  .map__wrapper {
+    top: 0px;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    height: 100vh;
+    #guide {
+      position: relative;
+      top: 0%;
+      z-index: 5;
+    }
+    #btn-detail {
+      position: relative;
+      top: 20%;
+    }
+    #btn-report {
+      position: relative;
+      top: 50%;
+      z-index: 30;
+    }
+  }
+
+  // img {
+  //   position: absolute;
+  //   z-index: 50;
+  // }
+}
