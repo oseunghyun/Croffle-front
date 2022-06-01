@@ -1,6 +1,11 @@
 <template>
   <div>
-    <router-view @setMessage="setMessage" :message="message"></router-view>
+    <router-view
+      @fetchStamp="fetchStamp"
+      :stampInfo="stampInfo"
+      @setMessage="setMessage"
+      :message="message"
+    ></router-view>
   </div>
 </template>
 
@@ -9,11 +14,17 @@ export default {
   data() {
     return {
       message: "",
+      stampInfo: {
+        type: Object,
+      },
     };
   },
   methods: {
     setMessage(message) {
       this.message = message;
+    },
+    fetchStamp(stampInfo) {
+      this.stampInfo = stampInfo;
     },
   },
   created() {
