@@ -11,9 +11,9 @@ function createOwnerMenu() {
   return owner.post("menu");
 }
 
-// // 메뉴 수정
-// function editOwnerMenu() {
-//   return owner.put("menu");
-// }
+// 메뉴 수정
+function editOwnerMenu() {
+  return owner.put("menu");
+}
 
-export { fetchOwnerMenu, createOwnerMenu };
+export { fetchOwnerMenu, createOwnerMenu, editOwnerMenu };
