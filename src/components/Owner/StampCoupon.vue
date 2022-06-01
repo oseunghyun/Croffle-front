@@ -7,13 +7,13 @@
     <div class="owner__card">
       <span class="owner__card-title">고객정보</span><br />
       <span class="owner__card-text"
-        ><strong>{{ user.user_nickname }}</strong> 님</span
+        ><strong>{{ stampInfo.user_nickname }}</strong> 님</span
       >
     </div>
     <div class="owner__card">
       <span class="owner__card-title">보유 스탬프</span><br />
       <span class="owner__card-text"
-        ><strong class="count">{{ user.stamp_cnt }}</strong> / 10개</span
+        ><strong class="count">{{ stampInfo.stamp_cnt }}</strong> / 10개</span
       >
     </div>
     <button type="button" @click="stampCoupon" class="btn--primary">
@@ -31,6 +31,11 @@ export default {
         stamp_cnt: "2",
       },
     };
+  },
+  props: {
+    stampInfo: {
+      type: Object,
+    },
   },
   methods: {
     stampCoupon() {

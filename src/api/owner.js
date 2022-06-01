@@ -16,4 +16,9 @@ function editOwnerMenu() {
   return owner.put("menu");
 }
 
-export { fetchOwnerMenu, createOwnerMenu, editOwnerMenu };
+// 스탬프 찍어주기 - 회원 조회
+function fetchMembership(memberData) {
+  return owner.get("coupon", memberData);
+}
+
+export { fetchOwnerMenu, createOwnerMenu, editOwnerMenu, fetchMembership };
