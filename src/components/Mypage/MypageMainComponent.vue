@@ -5,7 +5,7 @@
       <div class="mypage__user-info">
         <span class="mypage-main__text-croffler">Croffler&nbsp;&nbsp; </span
         ><span class="mypage-main__text-id"
-          >{{ user.id }} <strong> 님&nbsp;&nbsp;</strong></span
+          >{{ myData.nickname }} <strong> 님&nbsp;&nbsp;</strong></span
         >
         <button type="button" @click="editInfo" class="btn--sm btn--border">
           수정<img :src="ic_edit" />
@@ -34,16 +34,19 @@
 
 <script>
 import ic_edit from "@/assets/ic/edit.svg";
+import { fetchMypage } from "@/api/mypage";
+
 export default {
   data() {
     return {
       ic_edit,
-      user: {
-        id: "hello",
-      },
+      myData: [],
       isActive1: true,
       isActive2: false,
     };
+  },
+  created() {
+    this.fetchMypage;
   },
   methods: {
     editInfo() {
@@ -60,6 +63,16 @@ export default {
       this.$emit("showList", activeList);
       this.isActive1 = false;
       this.isActive2 = true;
+    },
+    // 마이 페이지 유저 정보 조회
+    async fetchMypage() {
+      try {
+        const { myData } = await fetchMypage();
+        this.myData = myData.data;
+        console.log(myData);
+      } catch (error) {
+        console.log(error.message);
+      }
     },
   },
 };
