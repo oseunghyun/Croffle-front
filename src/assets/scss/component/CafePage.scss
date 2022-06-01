@@ -59,6 +59,13 @@
         font-weight: 400;
         color: $color-black-60;
       }
+      // 좋아요 버튼
+      .cafe__btn-like {
+        background-color: transparent;
+        font-size: 16px;
+        color: $color-black-100;
+        font-weight: 200;
+      }
     }
     .cafe-info__detail {
       @include layout(column, flex-start, center);
