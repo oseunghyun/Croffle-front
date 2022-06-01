@@ -118,7 +118,8 @@
 
 .mypage-membership {
   box-sizing: border-box;
-  padding: 36px 20px 0px 20px;
+  padding: 36px 20px;
+  height: 100vh;
   header {
     @include layout(row, flex-start, flex-start);
     gap: 5px;
