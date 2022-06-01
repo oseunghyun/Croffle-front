@@ -83,6 +83,16 @@ function recommendCafe() {
   return instance.get("cafe/recommend", { params });
 }
 
+// 스크랩 기능
+function likeCafe(cafeId) {
+  return instance.post("like", cafeId);
+}
+
+// 스크랩 취소
+function delLikeCafe(cafeId) {
+  return instance.post("like/del", cafeId);
+}
+
 // // 로그인
 // function loginUser() {
 //   return instance.get("oauth2/authorization/naver");
@@ -98,5 +108,7 @@ export {
   recommendCafe,
   reportCafe,
   fetchReview,
+  likeCafe,
+  delLikeCafe,
   // loginUser,
 };
