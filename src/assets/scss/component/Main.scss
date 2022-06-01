@@ -26,18 +26,31 @@
   padding: 15px;
   position: absolute;
   top: 0px;
-  #guide {
+  .map__wrapper {
+    top: 0px;
     position: relative;
-    top: 33%;
-    z-index: 5;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    height: 100vh;
+    #guide {
+      position: relative;
+      top: 0%;
+      z-index: 5;
+    }
+    #btn-detail {
+      position: relative;
+      top: 20%;
+    }
+    #btn-report {
+      position: relative;
+      top: 50%;
+      z-index: 30;
+    }
   }
-  #btn-detail {
-    position: relative;
-    top: 20%;
-  }
-  #btn-report {
-    position: relative;
-    top: 80%;
-    z-index: 30;
-  }
+
+  // img {
+  //   position: absolute;
+  //   z-index: 50;
+  // }
 }
