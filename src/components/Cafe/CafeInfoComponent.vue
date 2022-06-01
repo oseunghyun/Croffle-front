@@ -5,6 +5,9 @@
       <div class="cafe-info">
         <span class="cafe__name">{{ cafeInfo.name }}</span>
         <span class="cafe__address">{{ cafeInfo.roadaddr }}</span>
+        <button type="button" class="cafe__btn-like" @click="scrapCafe">
+          좋아요&nbsp;<i :class="['fa-heart', liked ? 'fas' : 'far']"></i>
+        </button>
       </div>
       <div class="cafe-info__detail">
         <div class="cafe-info__wrapper">
@@ -87,7 +90,7 @@
 <script>
 import ModalComponent from "@/components/Modal/ModalComponent.vue";
 import ModalContent from "@/components/Modal/ModalContent.vue";
-import { fetchReview } from "@/api/index";
+import { fetchReview, likeCafe, delLikeCafe } from "@/api/index";
 
 export default {
   created() {
@@ -122,6 +125,7 @@ export default {
           rate: 2,
         },
       ],
+      liked: true,
     };
   },
   methods: {
@@ -138,6 +142,34 @@ export default {
         this.reviews.rate = reviewData.reviews.rate;
       } catch (error) {
         console.log(error);
+      }
+    },
+    // 스크랩
+    async scrapCafe() {
+      console.log("스크랩하는 카페 id 출력");
+      this.liked = !this.liked;
+      // 좋아요 취소
+      if (this.liked == false) {
+        try {
+          console.log("스크랩 취소");
+          await likeCafe({
+            // 카페 아이디 값 넣어주기
+            cafe: this.id,
+          });
+        } catch (error) {
+          console.log(error.message);
+        }
+        // 좋아요 하기
+      } else {
+        try {
+          console.log("스크랩 하기");
+          await delLikeCafe({
+            // 카페 아이디 값 넣어주기
+            cafe: this.id,
+          });
+        } catch (error) {
+          console.log(error.message);
+        }
       }
     },
   },
