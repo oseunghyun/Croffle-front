@@ -33,7 +33,7 @@
 
 <script>
 import ic__speechBubble from "@/assets/ic/speechBubble.svg";
-import { fetchCafeInfo, fetchCafes } from "@/api/index";
+import { fetchCafes } from "@/api/index";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
 import { ref } from "vue";
 import { NaverMaps, NaverMarker } from "vue3-naver-maps";
@@ -102,19 +102,6 @@ export default {
     };
   },
   methods: {
-    // 카페 상세정보 조회
-    async fetchInfo() {
-      try {
-        console.log("카페 상세정보 조회");
-        const { data } = await fetchCafeInfo();
-        // 카페 아이디 조회
-        console.log(data.id);
-        this.$emit("fetchInfo", data);
-        this.$router.push("/cafe/:id");
-      } catch (error) {
-        console.log(error.message);
-      }
-    },
     // 카페 제보하기
     toCafeReport() {
       this.$router.push("/cafes/report");

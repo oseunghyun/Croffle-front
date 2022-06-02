@@ -5,7 +5,7 @@ import { setInterceptors } from "./common/interceptors";
 // 액시오스 초기화 함수
 function createInstance() {
   const instance = axios.create({
-    baseURL: process.env.VUE_APP_API_URL, // 안되면 '/'로 변경
+    baseURL: "/", // 안되면 '/'로 변경
   });
   return setInterceptors(instance);
 }
@@ -67,6 +67,12 @@ function fetchCafes() {
   return instance.get("cafes");
 }
 
+// 카페 상세정보 조회
+function fetchCafeInfo(cafeId) {
+  const params = { id: cafeId };
+  return instance.get("cafe", { params });
+}
+
 // 스크랩 기능
 function likeCafe(cafeId) {
   return instance.post("like", cafeId);
@@ -89,5 +95,6 @@ export {
   fetchReview,
   likeCafe,
   delLikeCafe,
+  fetchCafeInfo,
   // loginUser,
 };
