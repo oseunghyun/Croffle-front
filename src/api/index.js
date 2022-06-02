@@ -38,7 +38,14 @@ export const board = createInstanceWithAuth("board");
 // 사장님 페이지 경로
 export const owner = createInstanceWithAuth("owner");
 
+// 카페 제보 검색
 export const search = createNaverInstance();
+
+// 카페 관련 경로
+export const cafe = createInstance("cafe");
+
+// 제보 관련 경로
+export const report = createInstanceWithAuth("report");
 
 function searchCafe(cafeData) {
   return search.get(`/local.json?query=${encodeURI(cafeData)}&display=5`);
@@ -55,35 +62,9 @@ function fetchReview(cafeId) {
   return instance.get(`review/list/${cafeId}`);
 }
 
-// 메뉴 제보하기
-function reportMenu(reportMenuData) {
-  return instance.post("report/menu", reportMenuData);
-}
-
-// 카페 제보하기: 경로 수정하기
-function reportCafe(reportCafeData) {
-  return instance.post("report/cafe", reportCafeData);
-}
-
-// 정보 수정 요청 제보
-function reportInfo(reportInfoData) {
-  return instance.post("report/info", reportInfoData);
-}
-
-// 카페 상세정보 조회
-function fetchCafeInfo(cafeId) {
-  return instance.get(`cafe/id/${cafeId}`);
-}
-
 // 카페 전체 조회
 function fetchCafes() {
   return instance.get("cafes");
-}
-
-// 카페 추천 기능
-function recommendCafe() {
-  const params = { filter: ["liked", "review"] };
-  return instance.get("cafe/recommend", { params });
 }
 
 // 스크랩 기능
@@ -103,13 +84,8 @@ function delLikeCafe(cafeId) {
 
 export {
   registerReview,
-  reportMenu,
-  reportInfo,
-  fetchCafeInfo,
   fetchCafes,
   searchCafe,
-  recommendCafe,
-  reportCafe,
   fetchReview,
   likeCafe,
   delLikeCafe,

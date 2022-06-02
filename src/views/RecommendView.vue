@@ -31,7 +31,7 @@
 <script>
 import ic__rate from "@/assets/ic/review.svg";
 import ic__like from "@/assets/ic/heart.svg";
-import recommendCafe from "@/api/index";
+import recommendCafe from "@/api/cafe";
 
 export default {
   data() {
