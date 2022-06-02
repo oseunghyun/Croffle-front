@@ -5,7 +5,7 @@ import { setInterceptors } from "./common/interceptors";
 // 액시오스 초기화 함수
 function createInstance() {
   const instance = axios.create({
-    baseURL: "/", // 안되면 '/'로 변경
+    baseURL: process.env.VUE_APP_API_URL, // 안되면 '/'로 변경
   });
   return setInterceptors(instance);
 }
@@ -42,7 +42,7 @@ export const owner = createInstanceWithAuth("owner");
 export const search = createNaverInstance();
 
 // 카페 관련 경로
-export const cafe = createInstance("cafe");
+// export const cafe = createInstance("cafe");
 
 // 제보 관련 경로
 export const report = createInstanceWithAuth("report");
