@@ -90,23 +90,26 @@
 <script>
 import ModalComponent from "@/components/Modal/ModalComponent.vue";
 import ModalContent from "@/components/Modal/ModalContent.vue";
-import { fetchReview, likeCafe, delLikeCafe } from "@/api/index";
+import { fetchReview, likeCafe, delLikeCafe, fetchCafeInfo } from "@/api/index";
+// import { fetchCafeInfo } from "@/api/cafe";
 
 export default {
   created() {
-    console.log(this.$route.query.id);
+    // console.log(this.$route.query.id);
+    this.fetchCafeInfo();
   },
   components: {
     ModalComponent,
     ModalContent,
   },
-  props: {
-    cafeInfo: {
-      type: Object,
-    },
-  },
+  // props: {
+  //   cafeInfo: {
+  //     type: Object,
+  //   },
+  // },
   data() {
     return {
+      cafeId: "cafeId",
       isModalActive: false,
       isHeaderActive: true,
       reviews: [
@@ -126,12 +129,14 @@ export default {
         },
       ],
       liked: true,
+      cafeInfo: [],
     };
   },
   methods: {
-    toReviewForm() {
-      this.$router.push("/cafe/review");
-    },
+    // toReviewForm() {
+    //   this.$router.push("/cafe/review");
+    // },
+    // 리뷰 조회
     async fetchReview() {
       console.log("리뷰 조회");
       try {
@@ -170,6 +175,18 @@ export default {
         } catch (error) {
           console.log(error.message);
         }
+      }
+    },
+    // 카페 상세정보 조회
+    async fetchCafeInfo() {
+      try {
+        console.log("카페 상세정보 조회");
+        const { data } = await fetchCafeInfo({
+          cafeId: this.cafeId,
+        });
+        this.cafeInfo = data.data;
+      } catch (error) {
+        console.log(error.message);
       }
     },
   },
