@@ -6,6 +6,11 @@ function fetchOnwerCafe() {
   return owner.get("cafe");
 }
 
+// 매장 정보 수정
+function editOwnerCafe() {
+  return owner.put("cafe");
+}
+
 // 메뉴 조회
 function fetchOwnerMenu() {
   return owner.get("menu");
@@ -38,4 +43,5 @@ export {
   editOwnerMenu,
   fetchMembership,
   createStamp,
+  editOwnerCafe,
 };
