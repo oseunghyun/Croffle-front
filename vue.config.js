@@ -14,10 +14,10 @@ module.exports = defineConfig({
         target: "https://openapi.naver.com/",
         changeOrigin: true,
       },
-      "/": {
-        target: "http://34.64.32.174:8080/",
-        changeOrigin: true,
-      },
+      // "/": {
+      //   target: "http://34.64.32.174:8080/",
+      //   changeOrigin: true,
+      // },
     },
   },
 });

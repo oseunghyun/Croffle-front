@@ -69,6 +69,10 @@
     position: relative;
     top: 30%;
   }
+  .btn__manage {
+    position: relative;
+    top: 40%;
+  }
   .btn__wrapper {
     @include layout(row, center, space-between);
     position: relative;
