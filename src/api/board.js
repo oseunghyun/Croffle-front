@@ -4,12 +4,12 @@ import { board } from "./index";
 
 // 커뮤니티 게시글 작성
 function createPost(postData) {
-  return board.post("/", postData);
+  return board.post(postData);
 }
 
 // 커뮤니티 게시글 전체 조회
 function fetchPosts() {
-  return board.get("/");
+  return board.get();
 }
 
 // 커뮤니티 특정 게시글 조회
