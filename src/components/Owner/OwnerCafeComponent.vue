@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { fetchOnwerCafe } from "@/api/owner";
+import { fetchOwnerCafe } from "@/api/owner";
 export default {
   created() {
     this.fetchOwnerCafe();
@@ -52,7 +52,7 @@ export default {
     async fetchOwnerCafe() {
       try {
         console.log("사장님 - 매장 정보 조회");
-        const { ownerCafeData } = await fetchOnwerCafe();
+        const { ownerCafeData } = await fetchOwnerCafe();
         this.cafeInfo = ownerCafeData.body.cafe;
       } catch (error) {
         console.log(error.message);
