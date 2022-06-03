@@ -29,6 +29,10 @@
         내 쿠폰
       </button>
     </div>
+    <!-- 사장님 회원일 경우에만 보여주기 -->
+    <button @click="toOwner" class="btn__owner-service">
+      <i class="fas fa-user-check"></i> &nbsp;사장님 서비스
+    </button>
   </div>
 </template>
 
