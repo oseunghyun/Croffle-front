@@ -21,4 +21,9 @@ function fetchCoupons() {
   return instance.get("coupons");
 }
 
-export { editNickname, fetchStamps, fetchCoupons, fetchMypage };
+// 내가 한 스크랩 모아보기
+function fetchScrapList() {
+  return instance.get("likes");
+}
+
+export { editNickname, fetchStamps, fetchCoupons, fetchMypage, fetchScrapList };

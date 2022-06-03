@@ -71,6 +71,7 @@ export default {
     // 마이 페이지 유저 정보 조회
     async fetchMypage() {
       try {
+        console.log("마이페이지 유저 정보 조회");
         const { myData } = await fetchMypage();
         this.myData = myData.data;
         console.log(myData);
