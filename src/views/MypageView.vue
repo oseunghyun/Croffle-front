@@ -15,6 +15,10 @@
     <modal-component v-if="isModalActive">
       <coupon-modal-content @close-modal="isModalActive = false" />
     </modal-component>
+    <!-- 사장님 회원일 경우에만 보여주기 -->
+    <button @click="toOwner" class="btn__owner-service">
+      <i class="fas fa-user-check"></i> &nbsp;사장님 서비스
+    </button>
   </div>
 </template>
 
@@ -47,6 +51,9 @@ export default {
     },
     modalActive(isModalActive) {
       this.isModalActive = isModalActive;
+    },
+    toOwner() {
+      this.$router.push("/owner");
     },
   },
   created() {
