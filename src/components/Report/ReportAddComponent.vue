@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { reportMenu } from "@/api/index";
+import { reportMenu } from "@/api/report";
 
 export default {
   data() {

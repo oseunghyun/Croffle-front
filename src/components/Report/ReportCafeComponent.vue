@@ -72,7 +72,9 @@
 </template>
 
 <script>
-import { searchCafe, reportCafe } from "@/api/index";
+import { searchCafe } from "@/api/index";
+import { reportCafe } from "@/api/report";
+
 export default {
   created() {
     let headerActive = true;

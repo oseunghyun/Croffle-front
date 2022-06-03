@@ -2,7 +2,7 @@
 import { owner } from "@/api/index";
 
 // 매장 조회
-function fetchOnwerCafe() {
+function fetchOwnerCafe() {
   return owner.get("cafe");
 }
 
@@ -37,11 +37,11 @@ function createStamp(stampData) {
 }
 
 export {
-  fetchOnwerCafe,
   fetchOwnerMenu,
   createOwnerMenu,
   editOwnerMenu,
   fetchMembership,
   createStamp,
   editOwnerCafe,
+  fetchOwnerCafe,
 };

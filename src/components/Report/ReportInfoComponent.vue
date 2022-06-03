@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { reportInfo } from "@/api/index";
+import { reportInfo } from "@/api/report";
 
 export default {
   data() {

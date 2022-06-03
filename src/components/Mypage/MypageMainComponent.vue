@@ -46,7 +46,7 @@ export default {
     };
   },
   created() {
-    this.fetchMypage;
+    this.fetchMypage();
   },
   methods: {
     editInfo() {
