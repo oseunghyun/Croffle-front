@@ -42,7 +42,7 @@ export const owner = createInstanceWithAuth("owner");
 export const search = createNaverInstance();
 
 // 카페 관련 경로
-// export const cafe = createInstance("cafe");
+// export const cafe = createInstanceWithAuth("cafe");
 
 // 제보 관련 경로
 export const report = createInstanceWithAuth("report");
@@ -62,6 +62,7 @@ function fetchReview(cafeId) {
   return instance.get(`review/list/${cafeId}`);
 }
 
+/* 카페 */
 // 카페 전체 조회
 function fetchCafes() {
   return instance.get("cafes");
@@ -71,6 +72,12 @@ function fetchCafes() {
 function fetchCafeInfo(cafeId) {
   const params = { id: cafeId };
   return instance.get("cafe", { params });
+}
+
+// 카페 추천 기능
+function recommendCafe(filter) {
+  const params = { filter: filter };
+  return instance.get("cafe/recommend", { params });
 }
 
 // 스크랩 기능
@@ -96,5 +103,6 @@ export {
   likeCafe,
   delLikeCafe,
   fetchCafeInfo,
+  recommendCafe,
   // loginUser,
 };
