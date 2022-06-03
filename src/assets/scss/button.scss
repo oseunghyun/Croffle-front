@@ -123,3 +123,21 @@ button {
   color: $color-black-60;
   cursor: auto;
 }
+
+/* 마이페이지에서 사장님 서비스로 이동 버튼 */
+.btn__owner-service {
+  @extend .btn--secondary;
+  border-radius: 15px;
+  color: $color-black-80;
+  position: absolute;
+  width: 160px;
+  right: 50%;
+  bottom: 5%;
+  margin: 0 -45% 0 -45%;
+  z-index: 50;
+  position: fixed;
+  border: 2px solid $color-white;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  font-weight: 600;
+}
