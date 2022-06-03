@@ -37,6 +37,7 @@ import { fetchCafes } from "@/api/index";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
 import { ref } from "vue";
 import { NaverMaps, NaverMarker } from "vue3-naver-maps";
+import { saveAuthToCookie } from "@/utils/cookies";
 
 export default {
   components: {
@@ -63,12 +64,15 @@ export default {
     // 네이버 로그인
     const naver_id_login = new window.naver_id_login(
       "qczgKIdunrBy3nbGO9yM",
-      // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/main=34.64.45.86"
+      // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes=34.64.45.86"
+      // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes"
       "http://localhost:3000/cafes"
     );
-    console.log("access token", naver_id_login.getAccessToken());
+    const token = naver_id_login.getAccessToken();
+    console.log("access token", token);
     // 토큰값 스토어에 저장
-    this.$store.commit("setToken", naver_id_login.getAccessToken());
+    this.$store.commit("setToken", token);
+    saveAuthToCookie(token);
   },
   created() {
     let headerActive = true;
