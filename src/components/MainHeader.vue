@@ -1,6 +1,19 @@
 <template>
   <header id="main-header">
-    <img :src="main_logo" @click="showHome" />
+    <div class="main-header__wrapper">
+      <img :src="main_logo" @click="showHome" class="main-logo" />
+      <!-- 로그인 후 마이 페이지 버튼 등장 -->
+      <div v-if="isUserLogin" class="main-header__isLogin">
+        <button
+          type="button"
+          class="btn--transparent btn__mypage"
+          @click="toMypage"
+        >
+          My Page
+        </button>
+      </div>
+    </div>
+
     <nav>
       <button
         type="button"
@@ -32,13 +45,16 @@
 
 <script>
 import main_logo from "../assets/Image/logo_main.svg";
+import btn_my from "@/assets/ic/my.svg";
 export default {
+  created() {},
   data() {
     return {
       main_logo,
       isActive1: true,
       isActive2: false,
       isActive3: false,
+      btn_my,
     };
   },
   methods: {
@@ -60,6 +76,18 @@ export default {
       this.isActive2 = false;
       this.isActive1 = false;
       this.$router.push("/community");
+    },
+    toMypage() {
+      this.$router.push("/mypage");
+    },
+  },
+  computed: {
+    isUserLogin() {
+      if (this.$store.state.token) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };
