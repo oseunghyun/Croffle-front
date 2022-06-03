@@ -68,6 +68,9 @@ export default {
       this.isActive1 = false;
       this.isActive2 = true;
     },
+    toOwner() {
+      this.$router.push("/owner");
+    },
     // 마이 페이지 유저 정보 조회
     async fetchMypage() {
       try {

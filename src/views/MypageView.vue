@@ -48,9 +48,6 @@ export default {
     modalActive(isModalActive) {
       this.isModalActive = isModalActive;
     },
-    toOwner() {
-      this.$router.push("/owner");
-    },
   },
   created() {
     let headerActive = false;
