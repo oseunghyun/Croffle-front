@@ -1,9 +1,10 @@
 import { createStore } from "vuex";
+import { getAuthFromCookie } from "@/utils/cookies";
 
 export const store = createStore({
   state: {
     headerActive: false,
-    token: "",
+    token: getAuthFromCookie(),
   },
   getters: {
     // isLogin(state) {
