@@ -7,7 +7,7 @@ import naver from "vue3-naver-maps";
 
 const app = createApp(App);
 
-app.use(naver, { clientId: "jnpe3fnq71" });
+app.use(naver, { clientId: "jnpe3fnq71", subModules: "geocoder" });
 app.use(router);
 app.use(store);
 
