@@ -14,30 +14,32 @@
         :longitude="cafe.mapx"
         @onLoad="onLoadMarker($event)"
       >
+        <img :src="ic__marker" />
+        <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail"> -->
+        <!-- <img :src="ic__speechBubble" /> -->
+        <!-- </button> -->
       </naver-marker>
-      <div class="map__wrapper">
-        <p class="guide" id="guide">
-          원정대에게 알려주고 싶은 카페가 있나요?<br />
-          카페를 찾아 크로플 원정대에 제보해주세요!
-        </p>
-        <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail">
-        <img :src="ic__speechBubble" />
-      </button> -->
-        <button
-          type="button"
-          @click="toCafeReport"
-          class="btn--primary"
-          id="btn-report"
-        >
-          제보하기 +
-        </button>
-      </div>
     </naver-maps>
+    <div class="map__wrapper">
+      <p class="guide" id="guide">
+        원정대에게 알려주고 싶은 카페가 있나요?<br />
+        카페를 찾아 크로플 원정대에 제보해주세요!
+      </p>
+      <button
+        type="button"
+        @click="toCafeReport"
+        class="btn--primary"
+        id="btn-report"
+      >
+        제보하기 +
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
 import ic__speechBubble from "@/assets/ic/speechBubble.svg";
+import ic__marker from "@/assets/ic/marker.svg";
 import { fetchCafes } from "@/api/index";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
 import { ref } from "vue";
@@ -49,26 +51,27 @@ export default {
     SearchbarComponent,
     NaverMaps,
     NaverMarker,
+    // NaverInfoWindow,
   },
   setup: () => {
-    // const map = ref();
+    const map = ref();
     // const mapOptions = {
     //   latitude: 37.541, // 지도 중앙 위도
     //   longtitude: 126.986, // 지도 중앙 경도
     //   zoom: 16,
     // };
-
-    /* 마커 */
     const marker = ref();
+    // const infoWindow = ref();
+    // const isOpen = ref(true); // false: 안보임, true: 보임
+
+    // const onLoadInfoWindow = (infoWindowObject) => {
+    //   infoWindow.value = infoWindowObject;
+    // };
     const onLoadMarker = (markerObject) => {
       marker.value = markerObject;
     };
-
     // 도로명 주소를 위경도로 반환
     const onLoadMap = (cafes) => {
-      // console.log("test", window.naver.maps);
-      // console.log("test", window.naver.maps.UTMK_NAVER);
-
       console.log("cafes", cafes);
       cafes = cafes.map((cafe) => {
         window.naver.maps.Service.geocode(
@@ -92,7 +95,7 @@ export default {
       });
     };
 
-    return { onLoadMarker, marker, onLoadMap };
+    return { onLoadMarker, map, marker, onLoadMap };
   },
   mounted() {
     // 네이버 로그인
@@ -115,6 +118,7 @@ export default {
   data() {
     return {
       ic__speechBubble,
+      ic__marker,
       page: "main",
       cafes: [
         {
