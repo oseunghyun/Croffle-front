@@ -93,7 +93,7 @@ const routes = [
   //   path: "/loginaccess",
   //   component: () => import("@/views/LoginAccessView.vue"),
   // },
-  // 회원가입
+  // 회원가입 -> 필요없음 수정하기
   {
     path: "/signup",
     component: () => import("@/views/SignupView.vue"),
