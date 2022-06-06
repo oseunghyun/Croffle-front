@@ -90,8 +90,8 @@
 <script>
 import ModalComponent from "@/components/Modal/ModalComponent.vue";
 import ModalContent from "@/components/Modal/ModalContent.vue";
-import { fetchReview, likeCafe, delLikeCafe, fetchCafeInfo } from "@/api/index";
-// import { fetchCafeInfo } from "@/api/cafe";
+import { fetchReview, likeCafe, delLikeCafe } from "@/api/index";
+import { fetchCafeInfo } from "@/api/cafe";
 
 export default {
   created() {

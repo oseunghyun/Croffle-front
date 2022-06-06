@@ -6,6 +6,7 @@ import { setInterceptors } from "./common/interceptors";
 function createInstance() {
   const instance = axios.create({
     baseURL: process.env.VUE_APP_API_URL, // 안되면 '/'로 변경
+    // baseURL: `/api`,
   });
   return setInterceptors(instance);
 }
@@ -48,6 +49,7 @@ function createNaverGeoLocation() {
 function createInstanceWithAuth(url) {
   const instance = axios.create({
     baseURL: `${process.env.VUE_APP_API_URL}${url}`,
+    // baseURL: `/api${url}`,
   });
   return setInterceptors(instance);
 }
@@ -101,18 +103,6 @@ function fetchReview(cafeId) {
   return instance.get(`review/list/${cafeId}`);
 }
 
-/* 카페 */
-// 카페 전체 조회
-function fetchCafes() {
-  return instance.get("cafes");
-}
-
-// 카페 상세정보 조회
-function fetchCafeInfo(cafeId) {
-  const params = { id: cafeId };
-  return instance.get("cafe", { params });
-}
-
 // 카페 추천 기능
 function recommendCafe(filter) {
   // const params = { filter: filter };
@@ -136,12 +126,10 @@ function delLikeCafe(cafeId) {
 
 export {
   registerReview,
-  fetchCafes,
   searchCafe,
   fetchReview,
   likeCafe,
   delLikeCafe,
-  fetchCafeInfo,
   recommendCafe,
   fetchLocation,
   fetchIpAddr,

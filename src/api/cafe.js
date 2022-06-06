@@ -1,15 +1,16 @@
-// /* 카페 관련 서비스 api 함수 */
-// import { cafe } from "@/api/index";
+/* 카페 관련 서비스 api 함수 */
+import { instance } from "@/api/index";
 
-// // 카페 상세정보 조회
-// function fetchCafeInfo(cafeId) {
-//   return cafe.get(`id/${cafeId}`);
-// }
+/* 카페 */
+// 카페 전체 조회
+function fetchCafes() {
+  return instance.get("cafes");
+}
 
-// // 카페 추천 기능
-// function recommendCafe() {
-//   const params = { filter: ["liked", "review"] };
-//   return cafe.get("recommend", { params });
-// }
+// 카페 상세정보 조회
+function fetchCafeInfo(cafeId) {
+  const params = { id: cafeId };
+  return instance.get("cafe", { params });
+}
 
-// export { fetchCafeInfo, recommendCafe };
+export { fetchCafes, fetchCafeInfo };

@@ -48,7 +48,9 @@
 <script>
 import ic__speechBubble from "@/assets/ic/speechBubble.svg";
 import ic__marker from "@/assets/ic/marker.svg";
-import { fetchCafes, fetchIpAddr, fetchLocation } from "@/api/index";
+import { fetchIpAddr, fetchLocation } from "@/api/index";
+import { fetchCafes } from "@/api/cafe";
+
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
 import { ref } from "vue";
 import { NaverMaps, NaverMarker, NaverInfoWindow } from "vue3-naver-maps";
@@ -108,10 +110,11 @@ export default {
   mounted() {
     // 네이버 로그인
     const naver_id_login = new window.naver_id_login(
-      "qczgKIdunrBy3nbGO9yM",
+      "WDBUTDGAh6YGJ6Umihxr",
       // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes=34.64.45.86"
+      "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.45.86/cafes"
       // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes"
-      "http://localhost:3000/cafes"
+      // "http://localhost:3000/cafes"
     );
     const token = naver_id_login.getAccessToken();
     console.log("access token", token);
@@ -125,6 +128,7 @@ export default {
     // this.getIpClient();
     await this.getIpClient();
     await this.fetchLocation2();
+    this.fetchCafes();
   },
   data() {
     return {
