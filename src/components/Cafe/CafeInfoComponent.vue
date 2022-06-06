@@ -98,6 +98,10 @@ export default {
     // console.log(this.$route.query.id);
     this.fetchCafeInfo();
   },
+  mounted() {
+    console.log("route", this.$route);
+    console.log("mounted id:", this.$route.params.id);
+  },
   components: {
     ModalComponent,
     ModalContent,
@@ -182,7 +186,7 @@ export default {
       try {
         console.log("카페 상세정보 조회");
         const { data } = await fetchCafeInfo({
-          cafeId: this.cafeId,
+          cafeId: this.$route.params.id,
         });
         this.cafeInfo = data.data;
       } catch (error) {
