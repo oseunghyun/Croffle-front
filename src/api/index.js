@@ -24,8 +24,8 @@ function createNaverInstance() {
   const instance = axios.create({
     baseURL: `/v1/search`,
     headers: {
-      "X-Naver-Client-Id": "qczgKIdunrBy3nbGO9yM",
-      "X-Naver-Client-Secret": "cpfeOmGgLb",
+      "X-Naver-Client-Id": "WDBUTDGAh6YGJ6Umihxr",
+      "X-Naver-Client-Secret": "Vjn2nII5K3",
     },
   });
   return setInterceptors(instance);
