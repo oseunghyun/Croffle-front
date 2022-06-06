@@ -10,6 +10,7 @@ export const store = createStore({
   getters: {
     // isLogin(state) {
     // }
+    // 토큰 반환
     userToken(state) {
       return state.token;
     },
