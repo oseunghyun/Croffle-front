@@ -51,7 +51,7 @@ const routes = [
       },
     ],
   },
-  // 추천
+  // 추천 게시판
   {
     path: "/recommend",
     component: () => import("@/views/RecommendView.vue"),
