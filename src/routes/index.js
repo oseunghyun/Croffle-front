@@ -57,7 +57,7 @@ const routes = [
     component: () => import("@/views/RecommendView.vue"),
     props: true,
   },
-  // 커뮤니티
+  // 커뮤니티 
   {
     path: "/community",
     component: () => import("@/views/CommunityView.vue"),
