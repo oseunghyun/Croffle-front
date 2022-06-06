@@ -11,30 +11,43 @@ const routes = [
   {
     path: "/cafes",
     component: () => import("@/views/MainView.vue"),
+    children: [
+      {
+        path: "/cafes",
+        component: () => import("@/components/Main/MainComponent.vue"),
+      },
+      {
+        path: "/cafes/report",
+        component: () => import("@/components/Report/ReportCafeComponent.vue"),
+      },
+      {
+        path: "/cafes/searchcafe",
+        component: () => import("@/components/Main/SearchCafeComponent.vue"),
+      },
+    ],
   },
   // 카페 상세 /:id
   {
-    path: "/cafe",
+    path: "/cafe/:id",
     component: () => import("@/views/CafeView.vue"),
     children: [
       {
-        path: "/cafe",
+        path: "/cafe/:id",
         component: () => import("@/components/Cafe/CafeInfoComponent.vue"),
       },
       // 카페 상세 - 리뷰 작성
       {
-        path: "/cafe/review",
+        path: "/cafe/:id/review",
         component: () => import("@/components/Cafe/ReviewFormComponent.vue"),
       },
       // 카페 상세 - 메뉴 추가 제보 하기
       {
-        path: "/cafe/addreport",
+        path: "/cafe/:id/addreport",
         component: () => import("@/components/Report/ReportAddComponent.vue"),
       }, // 카페 상세 - 정보 오류 제보 하기
       {
-        path: "/cafe/modifyreport",
-        component: () =>
-          import("@/components/Report/ReportModifyComponent.vue"),
+        path: "/cafe/:id/reportinfo",
+        component: () => import("@/components/Report/ReportInfoComponent.vue"),
       },
     ],
   },
@@ -42,6 +55,7 @@ const routes = [
   {
     path: "/recommend",
     component: () => import("@/views/RecommendView.vue"),
+    props: true,
   },
   // 커뮤니티
   {
@@ -62,18 +76,23 @@ const routes = [
       },
       // 커뮤니티 글 상세 보기
       {
-        path: "/community/detail",
+        path: "/community/detail/:id",
         component: () =>
           import("@/components/Community/CommunityDetailComponent.vue"),
       },
       // 커뮤니티 글 수정
       {
-        path: "/community/edit",
+        path: "/community/edit/:id",
         component: () =>
           import("@/components/Community/CommunityEditComponent.vue"),
       },
     ],
   },
+  // // 로그인
+  // {
+  //   path: "/loginaccess",
+  //   component: () => import("@/views/LoginAccessView.vue"),
+  // },
   // 회원가입
   {
     path: "/signup",

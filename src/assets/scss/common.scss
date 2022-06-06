@@ -46,6 +46,20 @@ header.page-header {
   line-height: 20px;
 }
 
+.guide--z {
+  width: 100%;
+  margin: 0;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: $color-secondary-100;
+  font-size: 12px;
+  font-weight: 200;
+  color: $color-black-100;
+  line-height: 20px;
+}
+
 .container {
   box-sizing: border-box;
   padding: 20px;
@@ -129,4 +143,8 @@ header.page-header {
       format("woff"),
     url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf)
       format("opentype");
+}
+
+em {
+  color: $color-negative-100;
 }

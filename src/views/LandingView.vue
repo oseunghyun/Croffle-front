@@ -9,13 +9,14 @@
         <button type="button" class="btn--naver" @click="tologin">
           <img :src="logo_naver" />네이버 로그인
         </button>
+        <div id="naver_id_login" @click="tologin"></div>
       </div>
-      <div class="link__wrapper">
+      <!-- <div class="link__wrapper">
         <span>크로플 원정대가 처음이신가요?</span>
         <button type="button" class="btn--transparent" @click="toSignup">
           회원가입
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -25,6 +26,21 @@ import main_logo from "@/assets/Image/main_logo.svg";
 import logo_naver from "@/assets/Image/logo_naver.svg";
 
 export default {
+  mounted() {
+    const naver_id_login = new window.naver_id_login(
+      "WDBUTDGAh6YGJ6Umihxr",
+      // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes=34.64.45.86"
+      // 'http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes=34.64.45.86'
+      // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes"
+      "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.45.86/cafes"
+
+      // http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.45.86/cafes
+    );
+    const state = naver_id_login.getUniqState();
+    naver_id_login.setButton("white", 3, 45);
+    naver_id_login.setState(state);
+    naver_id_login.init_naver_id_login();
+  },
   data() {
     return {
       main_logo,
@@ -35,9 +51,7 @@ export default {
     toMain() {
       this.$router.push("/cafes");
     },
-    toLogin() {
-      this.$router.push("/login");
-    },
+    toLogin() {},
     toSignup() {
       this.$router.push("/signup");
     },

@@ -24,6 +24,16 @@
       }
     }
   }
+  /* 리뷰 조회 */
+  .review__wrapper {
+    @include layout(column, flex-start, center);
+    gap: 12px;
+    margin: 48px 0;
+    span {
+      @include font(14px, 400, $color-black-100);
+      margin-bottom: 10px;
+    }
+  }
   /* 버튼 */
   button {
     margin: 5px 0px;
@@ -48,6 +58,13 @@
         font-size: 12px;
         font-weight: 400;
         color: $color-black-60;
+      }
+      // 좋아요 버튼
+      .cafe__btn-like {
+        background-color: transparent;
+        font-size: 16px;
+        color: $color-black-100;
+        font-weight: 200;
       }
     }
     .cafe-info__detail {

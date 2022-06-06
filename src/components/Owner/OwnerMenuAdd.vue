@@ -6,52 +6,77 @@
         <label for="menu">메뉴명</label>
         <input
           id="menu"
-          v-model="menu.cnt"
+          v-model="menu_name"
           placeholder="메뉴명을 입력해주세요."
+          @input="this.menu_name = $event.target.value"
+          maxlength="40"
         />
-        <span class="count">{{ menuLength }}/15</span>
+        <span class="count">{{ menuLength }}/40</span>
       </div>
       <div class="input__box">
         <label for="price">가격 <span class="won">원</span></label>
         <input
           id="price"
-          v-model="price.cnt"
+          v-model="menu_price"
           placeholder="가격을 입력해주세요."
+          maxlength="20"
+          oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
         />
-        <span class="count">{{ priceLength }}/15</span>
+        <span class="count">{{ priceLength }}/20</span>
       </div>
     </form>
-    <button type="button" @click="submitForm" class="btn--disabled">
+    <button
+      type="button"
+      @click="createOwnerMenu"
+      :class="['btn--md', isValid ? 'btnPrimary' : 'btnDisabled']"
+      :disabled="isValid == false"
+    >
       완료
     </button>
   </div>
 </template>
 
 <script>
+import { createOwnerMenu } from "@/api/owner";
+
 export default {
   data: function () {
     return {
-      menu: {
-        cnt: "",
-      },
-      price: {
-        cnt: "",
-      },
+      menu_name: "",
+      menu_price: "",
     };
   },
   computed: {
     menuLength() {
-      return this.menu.cnt.length;
+      return this.menu_name.length;
     },
     priceLength() {
-      return this.price.cnt.length;
+      return this.menu_price.length;
+    },
+    isValid() {
+      if (this.menu_name && this.menu_price) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   methods: {
-    submitForm() {
-      let message = "추가가";
-      this.$emit("setMessage", message);
-      this.$router.push("/owner/complete");
+    // 메뉴 추가
+    async createOwnerMenu() {
+      try {
+        console.log("사장님 - 메뉴 추가 폼 제출");
+        await createOwnerMenu({
+          menu_name: this.menu_name,
+          menu_price: this.menu_price,
+        });
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        let message = "추가가";
+        this.$emit("setMessage", message);
+        this.$router.push("/owner/complete");
+      }
     },
   },
 };

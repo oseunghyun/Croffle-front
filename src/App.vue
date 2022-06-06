@@ -14,9 +14,6 @@ export default {
   components: {
     MainHeader,
   },
-  data() {
-    return {};
-  },
 };
 </script>
 

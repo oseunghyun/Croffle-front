@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 3000",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -13,6 +13,7 @@
     "sass-loader": "^10.2.1",
     "vue": "^3.2.13",
     "vue-router": "^4.0.14",
+    "vue3-naver-maps": "^2.0.0",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

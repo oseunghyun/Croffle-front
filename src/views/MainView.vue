@@ -1,28 +1,21 @@
 <template>
-  <div>
-    <!-- 검색 바 -->
-    <searchbar-component></searchbar-component>
-    <main-component> </main-component>
-  </div>
+  <router-view
+    @submitCafeInfo="submitCafeInfo"
+    :cafeInfo="cafeInfo"
+  ></router-view>
 </template>
 
 <script>
-import SearchbarComponent from "../components/Main/SearchbarComponent.vue";
-import MainComponent from "@/components/Main/MainComponent.vue";
-
 export default {
-  components: {
-    SearchbarComponent,
-    MainComponent,
-  },
   data() {
     return {
-      page: "main",
+      cafeInfo: [],
     };
   },
-  created() {
-    let headerActive = true;
-    this.$store.commit("isHeaderActive", headerActive);
+  methods: {
+    submitCafeInfo(cafeInfo) {
+      this.cafeInfo = cafeInfo;
+    },
   },
 };
 </script>

@@ -9,14 +9,15 @@
         <label for="nickname">닉네임</label>
         <input
           id="nickname"
-          v-model="user.nickname"
+          v-model="nickname"
           placeholder="닉네임을 입력해주세요."
+          maxlength="20"
         />
-        <button type="button" class="btn__duplicate btn--primary">
+        <!-- <button type="button" class="btn__duplicate btn--primary">
           중복 확인
-        </button>
-        <span class="count">{{ nicknameLength }}/15</span>
-        <span class="error-message">{{ errorMessage }}</span>
+        </button> -->
+        <span class="count">{{ nicknameLength }}/20</span>
+        <!-- <span class="error-message">{{ errorMessage }}</span> -->
       </div>
     </form>
     <button type="button" @click="submitForm" class="btn--primary">
@@ -26,25 +27,34 @@
 </template>
 
 <script>
+import { editNickname } from "@/api/mypage";
+
 export default {
   data() {
     return {
       errorMessage: "유효성검사 메세지",
-      user: {
-        nickname: "",
-      },
+      nickname: "",
     };
   },
   computed: {
     nicknameLength() {
-      return this.user.nickname.length;
+      return this.nickname.length;
     },
   },
   methods: {
-    submitForm() {
-      let message = "수정이";
-      this.$emit("setMessage", message);
-      this.$router.push("/mypage/nicknamecomplete");
+    async submitForm() {
+      try {
+        console.log("닉네임 수정 폼 제출");
+        const postData = await editNickname({
+          nickname: this.nickname,
+        });
+        console.log(postData);
+        let message = "수정이";
+        this.$emit("setMessage", message);
+        this.$router.push("/mypage/nicknamecomplete");
+      } catch (error) {
+        console.log(error.message);
+      }
     },
   },
 };

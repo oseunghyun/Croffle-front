@@ -10,8 +10,9 @@
           placeholder="메뉴명을 입력해주세요."
           type="text"
           @input="this.menus.name = $event.target.value"
+          maxlength="40"
         />
-        <span class="count">{{ menuByte }}/40bytes</span>
+        <span class="count">{{ menuLength }}/40</span>
       </div>
       <div class="input__box">
         <label>가격</label>
@@ -22,7 +23,7 @@
           maxlength="20"
           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
         />
-        <span class="count">{{ priceByte }}/20bytes</span>
+        <span class="count">{{ priceLength }}/20</span>
       </div>
     </form>
     <div class="guide">크로플 메뉴만 등록할 수 있어요!</div>
@@ -38,8 +39,7 @@
 </template>
 
 <script>
-import { reportMenu } from "@/api/index";
-import { getByte } from "@/utils/validation";
+import { reportMenu } from "@/api/report";
 
 export default {
   data() {
@@ -63,10 +63,10 @@ export default {
         return false;
       }
     },
-    menuByte() {
-      return getByte(this.menus.name);
+    menuLength() {
+      return this.menus.name.length;
     },
-    priceByte() {
+    priceLength() {
       {
         return this.menus.price.length;
       }

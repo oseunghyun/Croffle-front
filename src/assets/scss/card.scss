@@ -51,7 +51,7 @@
   }
   .card__addr {
     @include font(12px, 300, $color-black-60);
-    @include layout(row, flex-start, center);
+    @include layout(row, flex-start, flex-start);
   }
   .card__wrapper--row {
     @include layout(row, center, flex-end);
@@ -63,6 +63,35 @@
       span {
         @include font(12px, 300, $color-black-100);
       }
+    }
+  }
+}
+
+/* 리뷰 조회 */
+.review__card {
+  @include layout(column, flex-start, center);
+  gap: 10px;
+  .card__info {
+    @include layout(column, flex-start, center);
+    gap: 8px;
+    .card__user {
+      @include layout(row, flex-start, flex-start);
+      gap: 13px;
+      .text__nickname {
+        @include font(12px, 700, $color-black-100);
+      }
+      .text__date {
+        @include font(12px, 300, $color-black-60);
+      }
+    }
+    .text__content {
+      @include font(12px, 400, $color-black-80);
+      line-height: 22px;
+    }
+    .rate__stars {
+      color: $color-secondary-dark;
+      @include layout(row, center, flex-start);
+      gap: 5px;
     }
   }
 }

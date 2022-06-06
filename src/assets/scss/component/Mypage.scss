@@ -74,7 +74,7 @@
     top: 20%;
     .input__box {
       input {
-        width: 70%;
+        width: 100%;
       }
       .btn__duplicate {
         position: absolute;
@@ -118,7 +118,8 @@
 
 .mypage-membership {
   box-sizing: border-box;
-  padding: 36px 20px 0px 20px;
+  padding: 36px 20px;
+  height: 100vh;
   header {
     @include layout(row, flex-start, flex-start);
     gap: 5px;
@@ -133,6 +134,35 @@
   }
   .mypage-stamp {
     margin-bottom: 80px;
+    .card__wrapper--column {
+      .card {
+        // 스탬프 도장
+        position: relative;
+        height: 190px;
+        .stamp-list {
+          @include layout(row, center, flex-start);
+          flex-wrap: wrap;
+          width: 100%;
+          gap: 3px;
+          position: absolute;
+          top: 60px;
+          left: 3%;
+
+          // justify-content: center;
+          // 기본 비활성 스탬프
+          i {
+            width: 18%;
+            height: 60px;
+            color: $color-black-40;
+            text-align: center;
+          }
+          // 활성 스탬프
+          .stampActive {
+            color: $color-secondary-dark;
+          }
+        }
+      }
+    }
   }
   .mypage-coupon {
     .card__wrapper-column {

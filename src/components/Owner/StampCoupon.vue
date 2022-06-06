@@ -7,22 +7,24 @@
     <div class="owner__card">
       <span class="owner__card-title">고객정보</span><br />
       <span class="owner__card-text"
-        ><strong>{{ user.user_nickname }}</strong> 님</span
+        ><strong>{{ stampInfo.user_nickname }}</strong> 님</span
       >
     </div>
     <div class="owner__card">
       <span class="owner__card-title">보유 스탬프</span><br />
       <span class="owner__card-text"
-        ><strong class="count">{{ user.stamp_cnt }}</strong> / 10개</span
+        ><strong class="count">{{ stampInfo.stamp_cnt }}</strong> / 10개</span
       >
     </div>
-    <button type="button" @click="stampCoupon" class="btn--primary">
+    <button type="button" @click="createStamp" class="btn--primary">
       스탬프 적립하기
     </button>
   </div>
 </template>
 
 <script>
+import { createStamp } from "@/api/owner";
+
 export default {
   data() {
     return {
@@ -32,11 +34,27 @@ export default {
       },
     };
   },
+  props: {
+    stampInfo: {
+      type: Object,
+    },
+  },
   methods: {
-    stampCoupon() {
-      let message = "적립이";
-      this.$emit("setMessage", message);
-      this.$router.push("/owner/complete");
+    async createStamp() {
+      try {
+        console.log("스탬프 적립 완료");
+        const stampData = await createStamp({
+          cafe_id: this.cafe_id,
+          user_id: this.user_id,
+        });
+        console.log(stampData);
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        let message = "적립이";
+        this.$emit("setMessage", message);
+        this.$router.push("/owner/complete");
+      }
     },
   },
 };

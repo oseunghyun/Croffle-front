@@ -1,6 +1,32 @@
 @import "../_mixin.scss";
 
-.main-container {
+.map__wrapper {
+  @include layout(column, center, center);
+  // height: 100vh;
+  // box-sizing: border-box;
+  // padding: 15px;
+  // position: relative;
+  // width: 100%;
+  // top: 0px;
+  #btn-detail {
+    position: relative;
+    top: 20%;
+  }
+  #btn-report {
+    position: fixed;
+    top: 90%;
+    width: 90%;
+    z-index: 30;
+  }
+  #guide {
+    position: fixed;
+    top: 270px;
+    width: 90%;
+    z-index: 5;
+  }
+}
+
+.main-container--map {
   @include layout(column, center, flex-start);
   @include bg-color($color-primary-20);
   height: 100vh;
@@ -8,8 +34,22 @@
   padding: 15px;
   position: relative;
   top: 0px;
-  button {
+  .map__wrapper {
+    top: 0px;
     position: relative;
-    top: 20%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    height: 100vh;
+
+    #btn-detail {
+      position: relative;
+      top: 20%;
+    }
   }
+
+  // img {
+  //   position: absolute;
+  //   z-index: 50;
+  // }
 }
