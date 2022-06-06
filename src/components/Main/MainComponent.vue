@@ -13,12 +13,20 @@
         :latitude="cafe.mapy"
         :longitude="cafe.mapx"
         @onLoad="onLoadMarker($event)"
+        @click="openInfoWindow(cafe)"
       >
         <img :src="ic__marker" />
         <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail"> -->
         <!-- <img :src="ic__speechBubble" /> -->
         <!-- </button> -->
       </naver-marker>
+      <naver-info-window
+        :marker="marker"
+        :isOpen="isOpen"
+        @onLoad="onLoadInfoWindow($event)"
+      >
+        <div class="infowindow-style">click Marker!😎</div>
+      </naver-info-window>
     </naver-maps>
     <div class="map__wrapper">
       <p class="guide" id="guide">
@@ -40,10 +48,10 @@
 <script>
 import ic__speechBubble from "@/assets/ic/speechBubble.svg";
 import ic__marker from "@/assets/ic/marker.svg";
-import { fetchCafes } from "@/api/index";
+import { fetchCafes, fetchIpAddr, fetchLocation } from "@/api/index";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
 import { ref } from "vue";
-import { NaverMaps, NaverMarker } from "vue3-naver-maps";
+import { NaverMaps, NaverMarker, NaverInfoWindow } from "vue3-naver-maps";
 import { saveAuthToCookie } from "@/utils/cookies";
 
 export default {
@@ -51,7 +59,7 @@ export default {
     SearchbarComponent,
     NaverMaps,
     NaverMarker,
-    // NaverInfoWindow,
+    NaverInfoWindow,
   },
   setup: () => {
     const map = ref();
@@ -61,12 +69,12 @@ export default {
     //   zoom: 16,
     // };
     const marker = ref();
-    // const infoWindow = ref();
-    // const isOpen = ref(true); // false: 안보임, true: 보임
+    const infoWindow = ref();
+    const isOpen = ref(false); // false: 안보임, true: 보임
 
-    // const onLoadInfoWindow = (infoWindowObject) => {
-    //   infoWindow.value = infoWindowObject;
-    // };
+    const onLoadInfoWindow = (infoWindowObject) => {
+      infoWindow.value = infoWindowObject;
+    };
     const onLoadMarker = (markerObject) => {
       marker.value = markerObject;
     };
@@ -86,8 +94,8 @@ export default {
             }
             var result = response.result;
             console.log("도로명 주소->좌표 반환결과", result.items[0].point);
-            cafe.mapx = result.items[0].point.x;
-            cafe.mapy = result.items[0].point.y;
+            cafe.mapx = parseFloat(result.items[0].point.x);
+            cafe.mapy = parseFloat(result.items[0].point.y);
           }
         );
         console.log("카페 도로명 주소", cafe);
@@ -95,7 +103,7 @@ export default {
       });
     };
 
-    return { onLoadMarker, map, marker, onLoadMap };
+    return { onLoadMarker, map, marker, onLoadMap, isOpen, onLoadInfoWindow };
   },
   mounted() {
     // 네이버 로그인
@@ -111,15 +119,20 @@ export default {
     this.$store.commit("setToken", token);
     saveAuthToCookie(token);
   },
-  created() {
+  async created() {
     let headerActive = true;
     this.$store.commit("isHeaderActive", headerActive);
+    // this.getIpClient();
+    await this.getIpClient();
+    await this.fetchLocation2();
   },
   data() {
     return {
       ic__speechBubble,
       ic__marker,
       page: "main",
+      clientIp: "",
+      clientAddr: "",
       cafes: [
         {
           id: "0",
@@ -167,6 +180,58 @@ export default {
     },
     selectCafe(cafe) {
       this.$router.push(`cafe/${cafe.id}`);
+    },
+    // 클라이언트 ip 주소 fetch
+    async getIpClient() {
+      try {
+        const response = await fetchIpAddr();
+        console.log("클라이언드 ip 주소", response.data);
+        // this.clientIp = response.data;
+        this.clientIp = response.data.toString();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    // 현재 주소 fetch
+    async fetchLocation2() {
+      try {
+        // console.log("jh teset", await fetchLocation(this.clientIp));
+        // const { location } = await fetchLocation(this.clientIp);
+        console.log("jh clientIp", this.clientIp);
+        const test = await fetchLocation(this.clientIp);
+        console.log("jh test", test);
+        // console.log("현위치", location);
+        // this.clientAddr = location;
+      } catch (error) {
+        console.error(error.message);
+      }
+    },
+    openInfoWindow(cafe) {
+      console.log("jh cafe", this.marker, cafe);
+      this.marker = new window.naver.maps.Marker({
+        position: new window.naver.maps.LatLng(cafe.mapy, cafe.mapx),
+        map: window.naver.maps,
+      });
+      this.isOpen = !this.isOpen;
+
+      // console.log(
+      //   this.marker.getPosition(),
+      //   "\n",
+      //   test.getPosition(),
+      //   JSON.stringify(this.marker.getPosition()) !==
+      //     JSON.stringify(test?.getPosition())
+      // );
+      // this.isOpen = false;
+      // if (
+      //   JSON.stringify(this.marker.getPosition()) !==
+      //   JSON.stringify(test?.getPosition())
+      // ) {
+      //   this.marker = test;
+      //   this.isOpen = true;
+      //   return;
+      // }
+      // this.marker = test;
+      // // this.isOpen = !this.isOpen;
     },
   },
 };
