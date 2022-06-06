@@ -10,6 +10,10 @@ module.exports = defineConfig({
   },
   devServer: {
     proxy: {
+      "/api": {
+        target: "http://34.64.32.174:8080/",
+        changeOrigin: true,
+      },
       "/v1": {
         target: "https://openapi.naver.com/",
         changeOrigin: true,

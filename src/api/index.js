@@ -5,8 +5,8 @@ import { setInterceptors } from "./common/interceptors";
 // 액시오스 초기화 함수
 function createInstance() {
   const instance = axios.create({
-    baseURL: process.env.VUE_APP_API_URL, // 안되면 '/'로 변경
-    // baseURL: `/api`,
+    // baseURL: process.env.VUE_APP_API_URL, // 안되면 '/'로 변경
+    baseURL: `/api`,
   });
   return setInterceptors(instance);
 }
@@ -48,8 +48,8 @@ function createNaverGeoLocation() {
 // 회원 조회가 필요한 경우
 function createInstanceWithAuth(url) {
   const instance = axios.create({
-    baseURL: `${process.env.VUE_APP_API_URL}${url}`,
-    // baseURL: `/api${url}`,
+    // baseURL: `${process.env.VUE_APP_API_URL}${url}`,
+    baseURL: `/api${url}`,
   });
   return setInterceptors(instance);
 }
