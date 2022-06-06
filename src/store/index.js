@@ -9,6 +9,9 @@ export const store = createStore({
   getters: {
     // isLogin(state) {
     // }
+    userToken(state) {
+      return state.token;
+    },
   },
   mutations: {
     isHeaderActive(state, headerActive) {
