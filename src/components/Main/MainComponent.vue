@@ -1,42 +1,57 @@
 <template>
   <div>
     <searchbar-component></searchbar-component>
-    <naver-maps width="100%" height="100vh" class="main-container--map">
+    <naver-maps
+      width="100%"
+      height="100vh"
+      class="main-container--map"
+      @onLoad="onLoadMap(cafes)"
+    >
       <naver-marker
         v-for="cafe in cafes"
         :key="cafe.id"
-        :latitude="cafe.mapx"
-        :longitude="cafe.mapy"
+        :latitude="cafe.mapy"
+        :longitude="cafe.mapx"
+        @onLoad="onLoadMarker($event)"
+        @click="openInfoWindow(cafe)"
       >
+        <img :src="ic__marker" />
+        <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail"> -->
         <!-- <img :src="ic__speechBubble" /> -->
+        <!-- </button> -->
       </naver-marker>
-      <div class="map__wrapper">
-        <p class="guide" id="guide">
-          원정대에게 알려주고 싶은 카페가 있나요?<br />
-          카페를 찾아 크로플 원정대에 제보해주세요!
-        </p>
-        <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail">
-        <img :src="ic__speechBubble" />
-      </button> -->
-        <button
-          type="button"
-          @click="toCafeReport"
-          class="btn--primary"
-          id="btn-report"
-        >
-          제보하기 +
-        </button>
-      </div>
+      <naver-info-window
+        :marker="marker"
+        :isOpen="isOpen"
+        @onLoad="onLoadInfoWindow($event)"
+      >
+        <div class="infowindow-style">click Marker!😎</div>
+      </naver-info-window>
     </naver-maps>
+    <div class="map__wrapper">
+      <p class="guide" id="guide">
+        원정대에게 알려주고 싶은 카페가 있나요?<br />
+        카페를 찾아 크로플 원정대에 제보해주세요!
+      </p>
+      <button
+        type="button"
+        @click="toCafeReport"
+        class="btn--primary"
+        id="btn-report"
+      >
+        제보하기 +
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
 import ic__speechBubble from "@/assets/ic/speechBubble.svg";
-import { fetchCafes } from "@/api/index";
+import ic__marker from "@/assets/ic/marker.svg";
+import { fetchCafes, fetchIpAddr, fetchLocation } from "@/api/index";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
 import { ref } from "vue";
-import { NaverMaps, NaverMarker } from "vue3-naver-maps";
+import { NaverMaps, NaverMarker, NaverInfoWindow } from "vue3-naver-maps";
 import { saveAuthToCookie } from "@/utils/cookies";
 
 export default {
@@ -44,21 +59,51 @@ export default {
     SearchbarComponent,
     NaverMaps,
     NaverMarker,
+    NaverInfoWindow,
   },
   setup: () => {
-    // const map = ref();
+    const map = ref();
     // const mapOptions = {
     //   latitude: 37.541, // 지도 중앙 위도
     //   longtitude: 126.986, // 지도 중앙 경도
     //   zoom: 16,
     // };
-
     const marker = ref();
+    const infoWindow = ref();
+    const isOpen = ref(false); // false: 안보임, true: 보임
+
+    const onLoadInfoWindow = (infoWindowObject) => {
+      infoWindow.value = infoWindowObject;
+    };
     const onLoadMarker = (markerObject) => {
       marker.value = markerObject;
     };
+    // 도로명 주소를 위경도로 반환
+    const onLoadMap = (cafes) => {
+      console.log("cafes", cafes);
+      cafes = cafes.map((cafe) => {
+        window.naver.maps.Service.geocode(
+          {
+            address: cafe.roadaddr,
+            // mapx: cafe.mapx,
+            // mapy: cafe.mapy,
+          },
+          function (status, response) {
+            if (status !== window.naver.maps.Service.Status.OK) {
+              return alert("Something wrong!");
+            }
+            var result = response.result;
+            console.log("도로명 주소->좌표 반환결과", result.items[0].point);
+            cafe.mapx = parseFloat(result.items[0].point.x);
+            cafe.mapy = parseFloat(result.items[0].point.y);
+          }
+        );
+        console.log("카페 도로명 주소", cafe);
+        return cafe;
+      });
+    };
 
-    return { onLoadMarker, marker };
+    return { onLoadMarker, map, marker, onLoadMap, isOpen, onLoadInfoWindow };
   },
   mounted() {
     // 네이버 로그인
@@ -74,33 +119,44 @@ export default {
     this.$store.commit("setToken", token);
     saveAuthToCookie(token);
   },
-  created() {
+  async created() {
     let headerActive = true;
     this.$store.commit("isHeaderActive", headerActive);
+    // this.getIpClient();
+    await this.getIpClient();
+    await this.fetchLocation2();
   },
-  // props: {
-  //   cafe: [],
-  // },
   data() {
     return {
       ic__speechBubble,
+      ic__marker,
       page: "main",
+      clientIp: "",
+      clientAddr: "",
       cafes: [
         {
           id: "0",
           name: "",
-          roadaddr: "",
+          roadaddr: "서울 중구 세종대로 135",
           coords: "",
-          mapx: 37.542,
-          mapy: 26.986,
+          mapx: 0,
+          mapy: 0,
         },
         {
           id: "2",
           name: "",
-          roadaddr: "",
+          roadaddr: "서울 중구 세종대로22길 16",
           coords: "",
-          mapx: 49.542,
-          mapy: 26.986,
+          mapx: 0,
+          mapy: 0,
+        },
+        {
+          id: "3",
+          name: "",
+          roadaddr: "서울 중구 세종대로 110 서울특별시청 ",
+          coords: "",
+          mapx: 0,
+          mapy: 0,
         },
       ],
     };
@@ -117,14 +173,65 @@ export default {
         const { cafeData } = await fetchCafes();
         this.cafes.id = cafeData.data.id;
         this.cafes.name = cafeData.data.name;
-        // (this.roadaddr = cafeData.data.roadaddr),
-        // // 위도 경도 문자열로 받아와 -> , 기준으로 분리
-        // (this.coords = cafeData.data.coords.split(",")),
-        // (this.mapx = this.coords[0]),
-        // (this.mapy = this.coords[1]);
+        this.cafes.roadaddr = cafeData.data.roadaddr;
       } catch (error) {
         console.log(error);
       }
+    },
+    selectCafe(cafe) {
+      this.$router.push(`cafe/${cafe.id}`);
+    },
+    // 클라이언트 ip 주소 fetch
+    async getIpClient() {
+      try {
+        const response = await fetchIpAddr();
+        console.log("클라이언드 ip 주소", response.data);
+        // this.clientIp = response.data;
+        this.clientIp = response.data.toString();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    // 현재 주소 fetch
+    async fetchLocation2() {
+      try {
+        // console.log("jh teset", await fetchLocation(this.clientIp));
+        // const { location } = await fetchLocation(this.clientIp);
+        console.log("jh clientIp", this.clientIp);
+        const test = await fetchLocation(this.clientIp);
+        console.log("jh test", test);
+        // console.log("현위치", location);
+        // this.clientAddr = location;
+      } catch (error) {
+        console.error(error.message);
+      }
+    },
+    openInfoWindow(cafe) {
+      console.log("jh cafe", this.marker, cafe);
+      this.marker = new window.naver.maps.Marker({
+        position: new window.naver.maps.LatLng(cafe.mapy, cafe.mapx),
+        map: window.naver.maps,
+      });
+      this.isOpen = !this.isOpen;
+
+      // console.log(
+      //   this.marker.getPosition(),
+      //   "\n",
+      //   test.getPosition(),
+      //   JSON.stringify(this.marker.getPosition()) !==
+      //     JSON.stringify(test?.getPosition())
+      // );
+      // this.isOpen = false;
+      // if (
+      //   JSON.stringify(this.marker.getPosition()) !==
+      //   JSON.stringify(test?.getPosition())
+      // ) {
+      //   this.marker = test;
+      //   this.isOpen = true;
+      //   return;
+      // }
+      // this.marker = test;
+      // // this.isOpen = !this.isOpen;
     },
   },
 };
