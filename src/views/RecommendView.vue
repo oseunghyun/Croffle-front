@@ -3,7 +3,7 @@
     <header class="page-title">추천 크로플 카페</header>
     <div class="guide">좋아요, 평점이 높은 크로플 카페를 공유해요!</div>
     <div class="select__wrapper">
-      <select v-model="filter">
+      <select v-model="filter" @change="recommendCafe">
         <option value="liked">좋아요 순</option>
         <option value="review">평점순</option>
       </select>
@@ -52,7 +52,7 @@ export default {
   created() {
     let headerActive = true;
     this.$store.commit("isHeaderActive", headerActive);
-    this.recommendCafe();
+    // this.recommendCafe();
   },
   computed: {
     changeQuery() {
