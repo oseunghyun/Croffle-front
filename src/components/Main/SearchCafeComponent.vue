@@ -37,7 +37,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { searchCafe } from "@/api/index";
 
@@ -56,9 +55,16 @@ export default {
     async searchCafe() {
       try {
         const cafeData = await searchCafe(this.cafeData);
+        /* this.cafes [{title: ''},{title: ''}]*/
         this.cafes = cafeData.data.items;
-        // this.cafes.title = this.cafes.title.replace("<b>", "");
-        // this.cafes.title.replace("</b>", "");
+        this.cafes = this.cafes.map((cafe) => {
+          cafe.title = cafe.title.replaceAll("<b>", "").replaceAll("</b>", "");
+          return cafe;
+        });
+        // this.cafes.title = this.cafes.title
+        //   .replaceAll("<b>", "")
+        //   .replaceAll("</b>", "");
+        // this.cafes.title;
         // this.cafes.name = cafeData.data.items.title;
         // this.cafes.roadaddr = cafeData.data.items.roadAddress;
         console.log(cafeData.data.items[0]);
@@ -68,6 +74,17 @@ export default {
     },
     submitCafeInfo(index) {
       const cafeInfo = this.cafes[index];
+
+      // const test = new window.naver.maps();
+      // console.log("test", test);
+      // const tm128 = NaverMaps.maps.fromNaverToLatLng({
+      //   mapx: cafeInfo.mapx,
+      //   mapy: cafeInfo.mapy,
+      // });
+      // console.log(tm128);
+      // // const latLng = tm128.toLatLng(); //window.naver.maps.TransCoord.fromTM128ToLatLng(tm128);
+      // cafeInfo.mapx = tm128.x;
+      // cafeInfo.mapy = tm128.y;
       this.$emit("submitCafeInfo", cafeInfo);
       this.$router.push("/cafes/report");
     },
