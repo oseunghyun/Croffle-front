@@ -16,6 +16,7 @@ export const store = createStore({
     },
   },
   mutations: {
+        // 메인 크로플 서비스에만 헤더를 보여주기 위함
     isHeaderActive(state, headerActive) {
       state.headerActive = headerActive;
     },
