@@ -8,6 +8,7 @@ import naver from "vue3-naver-maps";
 const app = createApp(App);
 
 // vue3-naver-maps 라이브러리
+// 서브모듈: geocoder
 app.use(naver, { clientId: "jnpe3fnq71", subModules: "geocoder" });
 app.use(router);
 app.use(store);
