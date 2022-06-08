@@ -8,6 +8,7 @@ module.exports = defineConfig({
       },
     },
   },
+  // CORS 에러 해결을 위한 프록시 설정
   devServer: {
     proxy: {
       "/api": {
