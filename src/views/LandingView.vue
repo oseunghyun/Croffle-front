@@ -32,7 +32,7 @@ export default {
       // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes=34.64.45.86"
       // 'http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes=34.64.45.86'
       // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes"
-      "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.208.170/cafes"
+      "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.45.86/cafes"
 
       // http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.45.86/cafes
     );
