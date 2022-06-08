@@ -8,7 +8,7 @@ node {
 	}
 	stage('Test image'){
 		app.inside {
-                       sh 'rm -rf /var/www/croffle/dist;cd /home/ohsh1477/jenkins/Croffle-front;npm install;npm run build;mv dist /var/www/croffle;'
+                       sh 'rm -rf /var/www/croffle/dist;cd /jenkins/Croffle-front;npm install;npm run build;mv dist /var/www/croffle;'
                         }
         }
          stage('Push image') {
