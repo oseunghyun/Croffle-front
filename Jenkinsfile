@@ -8,8 +8,7 @@ node {
 	}
 	stage('Test image'){
 		app.inside {
-                       sh 'rm -rf /var/www/croffle/dist;cd /jenkins/Croffle-front;npm install;npm run build;mv dist /var/www/croffle;'
-                        }
+                       sh 'pwd'  }
         }
          stage('Push image') {
         	docker.withRegistry('https://registry.hub.docker.com', 'osh1477'){ 
