@@ -26,10 +26,6 @@ module.exports = defineConfig({
         target: "https://geolocation.apigw.ntruss.com",
         changeOrigin: true,
       },
-      // "/": {
-      //   target: "http://34.64.32.174:8080/",
-      //   changeOrigin: true,
-      // },
     },
   },
 });
