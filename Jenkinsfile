@@ -25,7 +25,7 @@ pipeline {
       nodejs 'node 16.14.0'
     }
     stages {
-        stage('Clone repository) {
+        stage('Clone repository') {
 	      steps {	      
 		      git 'https://github.com/ProjectDevelopment3/Croffle-front.git'
 		      }
