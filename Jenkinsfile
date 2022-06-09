@@ -43,21 +43,21 @@ pipeline {
 			}
 		}
 	}
-        stage('Push image') {
-		steps {
-			docker {
-				withRegistry('https://registry.hub.docker.com', 'osh1477'){ 
-					app {
-						push("${env.BUILD_NUMBER}")
-					}
-					app {
-						push("latest")
-					}	
+//         stage('Push image') {
+// 		steps {
+// 			docker {
+// 				withRegistry('https://registry.hub.docker.com', 'osh1477'){ 
+// 					app {
+// 						push("${env.BUILD_NUMBER}")
+// 					}
+// 					app {
+// 						push("latest")
+// 					}	
 				
-			    }
-		       }
-		    }
-		}
+// 			    }
+// 		       }
+// 		    }
+// 		}
 	    }
 	}
                                          
