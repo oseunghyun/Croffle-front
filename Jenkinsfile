@@ -33,7 +33,7 @@ pipeline {
 		steps {
 			      		sh "pwd" 
 			      		sh "rm -rf /var/www/croffle/dist"
-			      		dir ("/var/jenkins_home/workspace") {   
+			      		dir ("/var/jenkins_home/workspace/crof") {   
 		 			sh "npm install"
 					sh "ls -al" 
 						sh "scp -r dist ohsh1477@34.64.45.86:/var/www/Croffle"
