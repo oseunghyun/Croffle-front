@@ -31,7 +31,6 @@ pipeline {
 // 	 }
 	stage('Test image') {
 		steps {
-			app {
 				inside {
 			      		sh "pwd" 
 			      		sh "rm -rf /var/www/croffle/dist"
@@ -39,8 +38,8 @@ pipeline {
 		 			sh "npm install"
 					sh "ls -al" 
 						sh "scp -r dist ohsh1477@34.64.45.86:/var/www/Croffle"
-					}
-				}
+					
+				
 			}
 		}
 	}
