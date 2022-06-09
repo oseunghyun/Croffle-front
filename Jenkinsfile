@@ -38,24 +38,9 @@ pipeline {
 					sh "ls -al" 
 						sh "scp -r dist ohsh1477@34.64.45.86:/var/www/croffle"
 				
+				}
+			}
 		}
-	}
-}
-//         stage('Push image') {
-// 		steps {
-// 			docker {
-// 				withRegistry('https://registry.hub.docker.com', 'osh1477'){ 
-// 					app {
-// 						push("${env.BUILD_NUMBER}")
-// 					}
-// 					app {
-// 						push("latest")
-// 					}	
-				
-// 			    }
-// 		       }
-// 		    }
-// 		}
 	    }
 	}
                                          
