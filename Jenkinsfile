@@ -10,7 +10,7 @@ node {
 		app.inside {
                        sh 'ls'
 			sh'rm -rf /var/www/croffle/dist'
-			sh 'dir /var/jenkins_home/workspace'
+			sh 'dir /var/jenkins_home/workspace/crof'
 			node 'node --version';
 			node 'npm install'
 			node 'npm run build'
