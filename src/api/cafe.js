@@ -13,4 +13,10 @@ function fetchCafeInfo(cafeId) {
   return instance.get("cafe", { params });
 }
 
-export { fetchCafes, fetchCafeInfo };
+// 전체 검색 - 카페
+function searchCafeInfo(cafeName) {
+  const params = { name: cafeName };
+  return instance.get("cafe/search", { params });
+}
+
+export { fetchCafes, fetchCafeInfo, searchCafeInfo };

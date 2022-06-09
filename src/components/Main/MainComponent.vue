@@ -1,46 +1,60 @@
 <template>
   <div>
     <searchbar-component></searchbar-component>
-    <naver-maps
-      width="100%"
-      height="100vh"
-      class="main-container--map"
-      @onLoad="onLoadMap(cafes)"
-    >
-      <naver-marker
-        v-for="cafe in cafes"
-        :key="cafe.id"
-        :latitude="cafe.mapy"
-        :longitude="cafe.mapx"
-        @onLoad="onLoadMarker($event)"
-        @click="openInfoWindow(cafe)"
+    <div v-if="service == false" class="search">
+      <not-registered-cafe
+        v-if="registered == false"
+        @close-page="service = true"
       >
-        <img :src="ic__marker" />
-        <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail"> -->
-        <!-- <img :src="ic__speechBubble" /> -->
-        <!-- </button> -->
-      </naver-marker>
-      <naver-info-window
-        :marker="marker"
-        :isOpen="isOpen"
-        @onLoad="onLoadInfoWindow($event)"
+      </not-registered-cafe>
+      <cafe-list-component
+        v-if="registered == true"
+        @close-page="service = true"
+      ></cafe-list-component>
+    </div>
+
+    <div v-if="service == true">
+      <naver-maps
+        width="100%"
+        height="100vh"
+        class="main-container--map"
+        @onLoad="onLoadMap(cafes)"
       >
-        <div class="infowindow-style">click Marker!😎</div>
-      </naver-info-window>
-    </naver-maps>
-    <div class="map__wrapper">
-      <p class="guide" id="guide">
-        원정대에게 알려주고 싶은 카페가 있나요?<br />
-        카페를 찾아 크로플 원정대에 제보해주세요!
-      </p>
-      <button
-        type="button"
-        @click="toCafeReport"
-        class="btn--primary"
-        id="btn-report"
-      >
-        제보하기 +
-      </button>
+        <naver-marker
+          v-for="cafe in cafes"
+          :key="cafe.id"
+          :latitude="cafe.mapy"
+          :longitude="cafe.mapx"
+          @onLoad="onLoadMarker($event)"
+          @click="openInfoWindow(cafe)"
+        >
+          <img :src="ic__marker" />
+          <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail"> -->
+          <!-- <img :src="ic__speechBubble" /> -->
+          <!-- </button> -->
+        </naver-marker>
+        <naver-info-window
+          :marker="marker"
+          :isOpen="isOpen"
+          @onLoad="onLoadInfoWindow($event)"
+        >
+          <div class="infowindow-style">click Marker!😎</div>
+        </naver-info-window>
+      </naver-maps>
+      <div class="map__wrapper">
+        <p class="guide" id="guide">
+          원정대에게 알려주고 싶은 카페가 있나요?<br />
+          카페를 찾아 크로플 원정대에 제보해주세요!
+        </p>
+        <button
+          type="button"
+          @click="toCafeReport"
+          class="btn--primary"
+          id="btn-report"
+        >
+          제보하기 +
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -50,7 +64,8 @@ import ic__speechBubble from "@/assets/ic/speechBubble.svg";
 import ic__marker from "@/assets/ic/marker.svg";
 import { fetchIpAddr, fetchLocation } from "@/api/index";
 import { fetchCafes } from "@/api/cafe";
-
+import NotRegisteredCafe from "@/components/Main/NotRegisteredCafe.vue";
+import CafeListComponent from "@/components/Main/CafeListComponent.vue";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
 import { ref } from "vue";
 import { NaverMaps, NaverMarker, NaverInfoWindow } from "vue3-naver-maps";
@@ -62,6 +77,8 @@ export default {
     NaverMaps,
     NaverMarker,
     NaverInfoWindow,
+    NotRegisteredCafe,
+    CafeListComponent,
   },
   setup: () => {
     const map = ref();
@@ -137,6 +154,8 @@ export default {
       page: "main",
       clientIp: "",
       clientAddr: "",
+      // registered: true,
+      service: true,
       cafes: [
         {
           id: "0",
@@ -165,6 +184,13 @@ export default {
       ],
     };
   },
+  props: {
+    registered: {
+      type: Boolean,
+      default: true,
+    },
+  },
+
   methods: {
     // 카페 제보하기
     toCafeReport() {

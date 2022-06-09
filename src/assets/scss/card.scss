@@ -36,6 +36,22 @@
       @include layout(row, flex-start, space-between);
     }
   }
+  // 카페 검색 리스트
+  .cafe__card {
+    @include layout(column, flex-start, center);
+    gap: 10px;
+    width: 100%;
+    border-bottom: 1px solid $color-black-10;
+    padding-bottom: 10px;
+    .text__name {
+      font-size: 14px;
+      color: $color-black-dark;
+    }
+    .text__addr {
+      font-size: 14px;
+      color: $color-black-80;
+    }
+  }
 }
 
 // 추천 게시판 글
