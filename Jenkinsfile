@@ -31,16 +31,13 @@ pipeline {
 // 	 }
 	stage('Test image') {
 		steps {
-				inside {
 			      		sh "pwd" 
 			      		sh "rm -rf /var/www/croffle/dist"
 			      		dir ("/var/jenkins_home/workspace") {   
 		 			sh "npm install"
 					sh "ls -al" 
 						sh "scp -r dist ohsh1477@34.64.45.86:/var/www/Croffle"
-					
 				
-			}
 		}
 	}
 }
