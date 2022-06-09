@@ -25,7 +25,7 @@ node {
                 	app.push("latest")
                 }
         }       
-// }
+ }
 
 // pipeline {
 //     agent any
@@ -52,4 +52,4 @@ node {
 // 		}
 // 	    }
 // 	}
-                                         
+ 
