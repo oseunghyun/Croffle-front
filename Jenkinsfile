@@ -21,7 +21,6 @@
 pipeline {
     agent any
     tools {
-      git 'git'
       nodejs 'node 16.14.0'
     }
     stages {
@@ -31,20 +30,26 @@ pipeline {
 		      }
 	      }
       	stage('Build image') {
-		steps {	
-	      		app = docker.build("osh1477/test")
+		step {	
+			app {
+				docker {
+					build ("osh1477/test")
+				}
+			}
       		}
 	}
 	stage('Test image') {
 		steps {
-			 app.inside {
-			      sh "pwd" 
-			      sh "rm -rf /var/www/croffle/dist"
-			      dir ("/var/jenkins_home/workspace") {   
+			app {
+				inside {
+			      		sh "pwd" 
+			      		sh "rm -rf /var/www/croffle/dist"
+			      		dir ("/var/jenkins_home/workspace") {   
 		 			sh "npm install"
 					sh "ls -al"
 					}
 				}
+			}
 		}
 	}
         stage('Push image') {
