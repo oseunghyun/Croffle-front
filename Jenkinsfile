@@ -32,7 +32,9 @@ pipeline {
       	stage('Build image') {
 		steps {	
 			app {
-				docker.build ("osh1477/test")
+				docker {
+					build ("osh1477/test")
+				}
 				
 			}
       		}
@@ -50,7 +52,6 @@ pipeline {
 				}
 			}
 		}
-	}
         stage('Push image') {
 		steps {
 			docker {
@@ -60,8 +61,9 @@ pipeline {
 					}
 					app {
 						push("latest")
-					}
+					}	
 				}
+			    }
 		       }
 		    }
 		}
