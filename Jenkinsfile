@@ -43,6 +43,7 @@ pipeline {
 			}
 		}
 	}
+}
 //         stage('Push image') {
 // 		steps {
 // 			docker {
