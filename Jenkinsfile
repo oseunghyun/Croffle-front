@@ -30,7 +30,7 @@ pipeline {
 		      }
 	      }
       	stage('Build image') {
-		step {	
+		steps {	
 			app {
 				docker {
 					build ("osh1477/test")
@@ -54,12 +54,18 @@ pipeline {
 	}
         stage('Push image') {
 		steps {
-			docker.withRegistry('https://registry.hub.docker.com', 'osh1477'){ 
- 			app.push("${env.BUILD_NUMBER}")
-                 	app.push("latest")
-               }
-            }
-        }
-    }
-}
+			docker {
+				withRegistry('https://registry.hub.docker.com', 'osh1477'){ 
+					app {
+						push("${env.BUILD_NUMBER}")
+					}
+					app {
+						push("latest")
+					}
+				}
+		       }
+		    }
+		}
+	    }
+	}
                                          
