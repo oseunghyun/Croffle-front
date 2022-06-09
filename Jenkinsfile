@@ -29,16 +29,6 @@ pipeline {
 		      git 'https://github.com/ProjectDevelopment3/Croffle-front.git'
 		      }
 	 }
-      	stage('Build image') {
-		steps {	
-			app = {
-				docker {
-					build ("osh1477/test")
-				}
-				
-			}
-      		}
-	}
 	stage('Test image') {
 		steps {
 			app {
