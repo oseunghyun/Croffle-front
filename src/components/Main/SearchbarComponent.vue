@@ -38,11 +38,12 @@ export default {
   },
   methods: {
     async searchCafe() {
+      const service = false;
+      this.$emit("showResult", service);
       try {
         console.log("등록된 카페 여부 검색");
         const { cafeData } = await searchCafeInfo(this.name);
-        // const service = true;
-        // this.$emit("showResult", service);
+
         // this.cafeInfo = cafeData.data;
         if (this.cafeInfo == "") {
           const registered = false;

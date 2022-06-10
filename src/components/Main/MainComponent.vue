@@ -1,6 +1,9 @@
 <template>
   <div>
-    <searchbar-component></searchbar-component>
+    <searchbar-component
+      @showResult="showResult"
+      :service="service"
+    ></searchbar-component>
     <div v-if="service == false" class="search">
       <not-registered-cafe
         v-if="registered == false"
@@ -192,6 +195,9 @@ export default {
   },
 
   methods: {
+    showResult(service) {
+      this.service = service;
+    },
     // 카페 제보하기
     toCafeReport() {
       this.$router.push("/cafes/report");
