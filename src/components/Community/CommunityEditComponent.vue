@@ -4,7 +4,7 @@
     <form>
       <div class="input__box">
         <label>게시글 카테고리</label>
-        <select v-model="boardCategory">
+        <select v-model="category">
           <option value="RECIPE">레시피 공유 글</option>
           <option value="FREE">자유 글</option>
         </select>
@@ -47,8 +47,12 @@ export default {
     return {
       title: "",
       content: "",
-      boardCategory: "RECIPE",
+      category: "RECIPE",
     };
+  },
+  // 수정할 게시글 내용 불러오기
+  created() {
+    this.fetchPost();
   },
   computed: {
     isValid() {
@@ -81,10 +85,8 @@ export default {
         console.log(error.message);
       }
     },
-    // 수정할 게시글 내용 불러오기
-    async created() {
-      const id = this.$route.params.id;
-      const { data } = await fetchPost(id);
+    async fetchPost() {
+      const { data } = await fetchPost(this.$route.params.id);
       this.title = data.title;
       this.content = data.content;
     },

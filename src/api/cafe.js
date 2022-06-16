@@ -14,8 +14,7 @@ function fetchCafeInfo(cafeId) {
 
 // 전체 검색 - 카페
 function searchCafeInfo(cafeName) {
-  const params = { name: cafeName };
-  return instance.get("cafe/search", { params });
+  return instance.get(`cafe/search?name=${cafeName}`);
 }
 
 export { fetchCafes, fetchCafeInfo, searchCafeInfo };

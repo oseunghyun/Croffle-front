@@ -7,13 +7,13 @@ function fetchOwnerCafe() {
 }
 
 // 매장 정보 수정
-function editOwnerCafe() {
-  return instanceWithAuth.put("/owner/cafe");
+function editOwnerCafe(id) {
+  return instanceWithAuth.put(`/owner/menu/${id}`);
 }
 
 // 메뉴 조회
-function fetchOwnerMenu() {
-  return instanceWithAuth.get("/owner/menu");
+function fetchOwnerMenu(menuId) {
+  return instanceWithAuth.get(`/owner/menu/${menuId}`);
 }
 
 // 메뉴 추가
@@ -22,11 +22,11 @@ function createOwnerMenu() {
 }
 
 // 메뉴 수정
-function editOwnerMenu() {
-  return instanceWithAuth.put("/owner/menu");
+function editOwnerMenu(menuId) {
+  return instanceWithAuth.put(`/owner/menu/${menuId}`);
 }
 
-// 스탬프 찍어주기 - 회원 조회
+// 쿠폰 찍어주기 - 회원 조회
 function fetchMembership(memberData) {
   return instanceWithAuth.get("/owner/coupon", memberData);
 }
