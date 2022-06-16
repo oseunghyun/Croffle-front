@@ -1,3 +1,7 @@
+.verify-header {
+  border-bottom: 1px solid $color-black-10;
+}
+
 #owner-main {
   @include layout(column, center, flex-start);
   box-sizing: border-box;
@@ -9,6 +13,7 @@
       width: 250px;
     }
   }
+
   .sub-header {
     @include layout(row, flex-start, left);
     h2 {

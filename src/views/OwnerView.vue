@@ -5,6 +5,8 @@
       :stampInfo="stampInfo"
       @setMessage="setMessage"
       :message="message"
+      @fetchInfo="fetchInfo"
+      :cafeInfo="cafeInfo"
     ></router-view>
   </div>
 </template>
@@ -13,6 +15,7 @@
 export default {
   data() {
     return {
+      cafeInfo: [],
       message: "",
       stampInfo: {
         type: Object,
@@ -20,6 +23,9 @@ export default {
     };
   },
   methods: {
+    fetchInfo(data) {
+      this.cafeInfo = data;
+    },
     setMessage(message) {
       this.message = message;
     },
