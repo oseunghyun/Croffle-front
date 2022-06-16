@@ -1,26 +1,34 @@
 <template>
-  <div class="recommend">
-    <header class="page-title">추천 크로플 카페</header>
-    <div class="guide">좋아요, 평점이 높은 크로플 카페를 공유해요!</div>
-    <div class="select__wrapper">
-      <select v-model="filter" @change="recommendCafe(this.filter)">
-        <option value="liked">좋아요 순</option>
-        <option value="review">평점순</option>
-      </select>
-    </div>
+  <div class="container">
+    <div class="recommend">
+      <header class="page-title">인기 카페</header>
+      <div class="guide">좋아요, 평점이 높은 크로플 카페를 공유해요!</div>
+      <div class="select__wrapper">
+        <select v-model="filter" @change="recommendCafe(this.filter)">
+          <option value="liked">좋아요 순</option>
+          <option value="review">평점순</option>
+        </select>
+      </div>
 
-    <div class="card__wrapper--column">
-      <div v-for="cafe in cafeData" :key="cafe" class="recommend__card">
-        <div>
-          <span @click="showDetail" class="card__name">{{ cafe.name }}</span>
-          <span class="card__addr">{{ cafe.roadaddr }}</span>
-        </div>
-        <div class="card__wrapper--row">
-          <div class="card__ic">
-            <img :src="ic__like" /><span>{{ cafe.like_count }} </span>
+      <div class="card__wrapper--column">
+        <div v-for="cafe in cafeData" :key="cafe" class="recommend__card">
+          <div>
+            <span @click="showDetail" class="card__name">{{ cafe.name }}</span>
+            <span class="card__addr">{{ cafe.roadaddr }}</span>
           </div>
-          <div class="card__ic">
-            <img :src="ic__rate" /><span>{{ cafe.rate }} </span>
+          <div class="card__wrapper--row">
+            <div class="card__ic">
+              <img :src="ic__like" /><span>{{ cafe.like_count }} </span>
+            </div>
+            <div class="card__ic">
+              <img :src="ic__rate" /><span>{{ cafe.review_count }} </span>
+            </div>
+            <div class="card__ic">
+              <i class="fas fa-star fa-1x"></i
+              ><span>
+                {{ cafe.rate }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -38,15 +46,16 @@ export default {
     return {
       ic__rate,
       ic__like,
-      // cafeNum: 3,
       filter: "liked",
-      // cafes: {
-      //   name: "카페명",
-      //   roadaddr: "도로명 주소",
-      //   rate: 4.5,
-      //   like_count: 5,
-      // },
-      cafeData: [],
+      cafeData: [
+        {
+          name: "카페명",
+          roadaddr: "도로명 주소",
+          rate: 4.5,
+          review_count: 10,
+          like_count: 5,
+        },
+      ],
     };
   },
   created() {
