@@ -21,9 +21,21 @@ function fetchCoupons() {
   return instance.get("coupons");
 }
 
+// 내 쿠폰 사용하기
+function useCoupons(couponID) {
+  return instance.delete(`coupon/use?couponId=${couponID}`);
+}
+
 // 내가 한 스크랩 모아보기
 function fetchScrapList() {
   return instance.get("likes");
 }
 
-export { editNickname, fetchStamps, fetchCoupons, fetchMypage, fetchScrapList };
+export {
+  editNickname,
+  fetchStamps,
+  fetchCoupons,
+  fetchMypage,
+  fetchScrapList,
+  useCoupons,
+};
