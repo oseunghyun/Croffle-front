@@ -1,11 +1,11 @@
 // access_token 쿠키에 저장
 function saveAccessTokenToCookie(value) {
-  document.cookie = `Bearer=${value}`;
+  document.cookie = `Auth=${value}`;
 }
 
 // refresh_token 쿠키에 저장
 function saveRefreshTokenToCookie(value) {
-  document.cookie = `Bearer=${value}`;
+  document.cookie = `Auth=${value}`;
 }
 
 function saveUserToCookie(value) {
@@ -14,7 +14,7 @@ function saveUserToCookie(value) {
 
 function getAuthFromCookie() {
   return document.cookie.replace(
-    /(?:(?:^|.*;\s*)til_auth\s*=\s*([^;]*).*$)|^.*$/,
+    /(?:(?:^|.*;\s*)Auth\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
 }

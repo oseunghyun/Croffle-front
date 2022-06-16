@@ -1,4 +1,3 @@
-import { store } from "@/store/index";
 import { getAuthFromCookie } from "@/utils/cookies.js";
 
 export function setInterceptors(instance) {
@@ -8,8 +7,7 @@ export function setInterceptors(instance) {
       // Do something before request is sent
       // console.log(config);
       console.log(config);
-      config.headers.Authorization =
-        store.getters["userToken"] || getAuthFromCookie();
+      config.headers.Authorization = getAuthFromCookie();
       return config;
     },
     function (error) {

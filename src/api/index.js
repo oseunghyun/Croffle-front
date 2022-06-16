@@ -31,6 +31,14 @@ function createNaverInstance() {
   return setInterceptors(instance);
 }
 
+// 네이버 프로필 호출
+function createNaverProfile() {
+  const instance = axios.create({
+    baseURL: `/v4`,
+  });
+  return setInterceptors(instance);
+}
+
 // 네이버 GeoLocation 현재 위치 제공
 function createNaverGeoLocation() {
   const time = Math.floor(+new Date()).toString();
@@ -67,6 +75,9 @@ export const search = createNaverInstance();
 
 // 현재 위치 정보 제공
 export const geolocation = createNaverGeoLocation();
+
+// 네이버 프로필 호출
+export const profile = createNaverProfile();
 
 // 클라이언드 ip 주소 제공
 export const getIp = createIpInstance();
