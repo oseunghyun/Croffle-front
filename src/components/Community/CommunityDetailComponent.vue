@@ -3,13 +3,13 @@
     <div class="post__wrapper">
       <div>
         <span class="post__category">
-          &#91;{{ board.category }}&#93;&nbsp;</span
+          &#91;{{ postData[0].category }}&#93;&nbsp;</span
         >
-        <span class="post__title"> {{ board.title }} </span>
+        <span class="post__title"> {{ postData[0].title }} </span>
       </div>
-      <span class="post__create_date"> {{ board.create_date }} </span>
-      <span class="post__nick_name"> {{ board.nick_name }}&nbsp; </span>
-      <p class="post__content">{{ board.content }}&nbsp;</p>
+      <span class="post__create_date"> {{ postData[0].modifiedDate }} </span>
+      <span class="post__nick_name"> {{ postData[0].nickname }}&nbsp; </span>
+      <p class="post__content">{{ postData[0].content }}&nbsp;</p>
     </div>
     <div class="btn__wrapper">
       <button type="button" class="btn--border" @click="showDelModal">
@@ -35,18 +35,18 @@ export default {
   components: { ModalComponent, DelModalContent },
   data() {
     return {
-      board: {
-        id: "",
-        title: "제목",
-        boardCategory: "자유",
-        nick_name: "씽씽",
-        create_date: "2022-02-01",
-        content:
-          "크로플 맛집이란 크로플 맛집이란 크로플 맛집이란크로플 맛집이란크로플 맛집이란",
-      },
-      ic__arrow_left,
+      board: ic__arrow_left,
       isDelModalActive: false,
-      postItem: [],
+      postData: [
+        {
+          title: "제목",
+          category: "자유",
+          nickname: "씽씽",
+          modifiedDate: "2022-02-01",
+          content:
+            "크로플 맛집이란 크로플 맛집이란 크로플 맛집이란크로플 맛집이란크로플 맛집이란",
+        },
+      ],
     };
   },
   methods: {
@@ -55,18 +55,16 @@ export default {
     },
     modifyForm() {
       // 게시글 수정 페이지
-      this.$router.push("/community/edit/:id");
+      this.$router.push(`/community/edit/${this.$route.params.id}`);
+    },
+    async fetchPost() {
+      const { data } = await fetchPost(this.$route.params.id);
+      this.postData = data.data;
     },
   },
   // 게시글 내용 조회
-  async created() {
-    const id = this.$route.params.id;
-    const { data } = await fetchPost(id);
-    this.board.title = data.title;
-    this.board.content = data.content;
-    this.board.boardCategory = data.category;
-    this.board.nick_name = data.nick_name;
-    this.board.create_date = data.create_date;
+  created() {
+    this.fetchPost();
   },
 };
 </script>

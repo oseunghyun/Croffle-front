@@ -242,7 +242,7 @@ const routes = [
       // 스탬프 찍어주기
       {
         path: "/owner/stamp",
-        component: () => import("@/components/Owner/OwnerStampComponent.vue"),
+        component: () => import("@/components/Owner/StampCoupon.vue"),
       },
       // 회원 조회
       {

@@ -20,7 +20,7 @@
               {{ postItem.user_nickname }}&nbsp;
             </span>
             <span class="card__create_date">
-              {{ postItem.create_date }}
+              {{ postItem.modifiedDate }}
             </span>
           </div>
         </div>
@@ -38,7 +38,6 @@ import { fetchPosts } from "@/api/board";
 export default {
   data() {
     return {
-      postNum: 4,
       postItems: [],
     };
   },
@@ -52,7 +51,7 @@ export default {
     },
     // 커뮤니티 게시글 조회
     toDetailPage() {
-      this.$router.push("/community/detail/:id");
+      this.$router.push(`/community/detail/${this.$route.params.id}`);
     },
     // 게시글 정보 조회
     async fetchPosts() {
@@ -61,7 +60,7 @@ export default {
         const { data } = await fetchPosts();
         this.postItems = data.data;
         // console.log(JSON.stringify(this.postItems));
-        this.postItems.console.log(this.postItems);
+        console.log(this.postItems);
       } catch (error) {
         console.log(error.message);
       }
