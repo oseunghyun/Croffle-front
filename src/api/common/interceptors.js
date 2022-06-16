@@ -28,6 +28,7 @@ export function setInterceptors(instance) {
     function (error) {
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       // Do something with response error
+      // 재요청인데
       return Promise.reject(error);
     }
   );

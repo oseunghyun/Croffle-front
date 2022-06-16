@@ -72,7 +72,7 @@ import CafeListComponent from "@/components/Main/CafeListComponent.vue";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
 import { ref } from "vue";
 import { NaverMaps, NaverMarker, NaverInfoWindow } from "vue3-naver-maps";
-import { saveAuthToCookie } from "@/utils/cookies";
+import { saveAccessTokenToCookie } from "@/utils/cookies";
 
 export default {
   components: {
@@ -107,8 +107,6 @@ export default {
         window.naver.maps.Service.geocode(
           {
             address: cafe.roadaddr,
-            // mapx: cafe.mapx,
-            // mapy: cafe.mapy,
           },
           function (status, response) {
             if (status !== window.naver.maps.Service.Status.OK) {
@@ -128,24 +126,61 @@ export default {
     return { onLoadMarker, map, marker, onLoadMap, isOpen, onLoadInfoWindow };
   },
   mounted() {
-    // 네이버 로그인
-    const naver_id_login = new window.naver_id_login(
-      "WDBUTDGAh6YGJ6Umihxr",
-      // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes=34.64.45.86"
-      "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.45.86/cafes"
-      // "http://34.64.32.174:8080/oauth2/authorization/naver?http://localhost:3000/cafes"
-      // "http://localhost:3000/cafes"
-    );
-    const token = naver_id_login.getAccessToken();
-    console.log("access token", token);
+    // // 네이버 로그인
+    // const naver_id_login = new window.naver_id_login(
+    //   "WDBUTDGAh6YGJ6Umihxr",
+    //   //   // "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.45.86/cafes"
+    //   //   "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://localhost:3000/cafes&response_type=code&state=STATE_STRING"
+    //   // "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://localhost:3000/cafes"
+    //   // "/apioauth2/authorization/naver?redirect_uri=http://localhost:3000/cafes"
+    //   `/login=/local`
+    // );
+    // const accessToken = naver_id_login.getAccessToken();
+
+    // const naverState = naver_id_login.getUniqState();
+    // naver_id_login.setState(naverState);
+    // this.$store.commit("setNaverState", naverState);
+    const accessToken = this.$route.query.token;
+    console.log("access token", accessToken);
+
     // 토큰값 스토어에 저장
-    this.$store.commit("setToken", token);
-    saveAuthToCookie(token);
+    this.$store.commit("setAccessToken", accessToken);
+    saveAccessTokenToCookie(accessToken);
+
+    /* 네이버 로그인 처리 */
+    // let self = this;
+    // try {
+    //   //네이버로 로그인할때만 실행
+    //   if (this.$route.query.token.length !== undefined) {
+    //     const callbackFuc = async () => {
+    //       const res = await fetch(
+    //         "http://34.64.32.174:8080/oauth2/authorization/naver",
+    //         {
+    //           method: "POST",
+    //           headers: {
+    //             "Content-Type": "application/json",
+    //           },
+    //           body: JSON.stringify({
+    //             code: `${self.$route.query.code}`,
+    //             state: `${self.$route.query.state}`,
+    //           }),
+    //         }
+    //       );
+    //       const data = await res.json();
+    //       console.log(`네이버 로그인 : ${data.email}`);
+
+    //       //네이버 로그인 인증 코드 (nodejs api)
+    //     };
+    //     callbackFuc();
+    //   }
+    // } catch (e) {
+    //   console.log(e);
+    // }
   },
+  // 출처: https://archijude.tistory.com/424 [글을 잠깐 혼자 써봤던 진성 프로그래머:티스토리]
   async created() {
     let headerActive = true;
     this.$store.commit("isHeaderActive", headerActive);
-    // this.getIpClient();
     await this.getIpClient();
     await this.fetchLocation2();
     this.fetchCafes();
@@ -157,8 +192,8 @@ export default {
       page: "main",
       clientIp: "",
       clientAddr: "",
-      // registered: true,
       service: true,
+      email: "",
       cafes: [
         {
           id: "0",
@@ -187,12 +222,6 @@ export default {
       ],
     };
   },
-  props: {
-    registered: {
-      type: Boolean,
-      default: true,
-    },
-  },
 
   methods: {
     showResult(service) {
@@ -202,6 +231,7 @@ export default {
     toCafeReport() {
       this.$router.push("/cafes/report");
     },
+
     // 등록된 카페 전체 지도에 출력
     async fetchCafes() {
       try {

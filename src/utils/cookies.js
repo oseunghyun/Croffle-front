@@ -1,5 +1,11 @@
-function saveAuthToCookie(value) {
-  document.cookie = `til_auth=${value}`;
+// access_token 쿠키에 저장
+function saveAccessTokenToCookie(value) {
+  document.cookie = `Bearer=${value}`;
+}
+
+// refresh_token 쿠키에 저장
+function saveRefreshTokenToCookie(value) {
+  document.cookie = `Bearer=${value}`;
 }
 
 function saveUserToCookie(value) {
@@ -25,7 +31,8 @@ function deleteCookie(value) {
 }
 
 export {
-  saveAuthToCookie,
+  saveAccessTokenToCookie,
+  saveRefreshTokenToCookie,
   saveUserToCookie,
   getAuthFromCookie,
   getUserFromCookie,

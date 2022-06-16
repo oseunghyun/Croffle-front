@@ -1,3 +1,4 @@
+import { store } from "@/store";
 import { createWebHistory, createRouter } from "vue-router";
 
 // 라우터 정의
@@ -19,6 +20,14 @@ const routes = [
       {
         path: "/cafes/report",
         component: () => import("@/components/Report/ReportCafeComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters.isLogin) {
+            alert("로그인이 필요한 페이지입니다.");
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       {
         path: "/cafes/searchcafe",
@@ -39,15 +48,24 @@ const routes = [
       {
         path: "/cafe/:id/review",
         component: () => import("@/components/Cafe/ReviewFormComponent.vue"),
+        meta: {
+          auth: true,
+        },
       },
       // 카페 상세 - 메뉴 추가 제보 하기
       {
         path: "/cafe/:id/addreport",
         component: () => import("@/components/Report/ReportAddComponent.vue"),
+        meta: {
+          auth: true,
+        },
       }, // 카페 상세 - 정보 오류 제보 하기
       {
         path: "/cafe/:id/reportinfo",
         component: () => import("@/components/Report/ReportInfoComponent.vue"),
+        meta: {
+          auth: true,
+        },
       },
     ],
   },
@@ -57,7 +75,7 @@ const routes = [
     component: () => import("@/views/RecommendView.vue"),
     props: true,
   },
-  // 커뮤니티 
+  // 커뮤니티
   {
     path: "/community",
     component: () => import("@/views/CommunityView.vue"),
@@ -73,6 +91,9 @@ const routes = [
         path: "/community/post",
         component: () =>
           import("@/components/Community/CommunityFormComponent.vue"),
+        meta: {
+          auth: true,
+        },
       },
       // 커뮤니티 글 상세 보기
       {
@@ -85,39 +106,40 @@ const routes = [
         path: "/community/edit/:id",
         component: () =>
           import("@/components/Community/CommunityEditComponent.vue"),
+        meta: {
+          auth: true,
+        },
       },
     ],
   },
-  // // 로그인
-  // {
-  //   path: "/loginaccess",
-  //   component: () => import("@/views/LoginAccessView.vue"),
-  // },
   // 회원가입 -> 필요없음 수정하기
-  {
-    path: "/signup",
-    component: () => import("@/views/SignupView.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("../components/Signup/SignupComponent.vue"),
-      },
-      {
-        path: "/signup/info",
-        component: () =>
-          import("../components/Signup/SignupComponentStep2.vue"),
-      },
-      {
-        path: "/signup/complete",
-        component: () =>
-          import("../components/Signup/SignupCompleteComponent.vue"),
-      },
-    ],
-  },
+  // {
+  //   path: "/signup",
+  //   component: () => import("@/views/SignupView.vue"),
+  //   children: [
+  //     {
+  //       path: "",
+  //       component: () => import("../components/Signup/SignupComponent.vue"),
+  //     },
+  //     {
+  //       path: "/signup/info",
+  //       component: () =>
+  //         import("../components/Signup/SignupComponentStep2.vue"),
+  //     },
+  //     {
+  //       path: "/signup/complete",
+  //       component: () =>
+  //         import("../components/Signup/SignupCompleteComponent.vue"),
+  //     },
+  //   ],
+  // },
   // 사장님 서비스
   {
     path: "/owner",
     component: () => import("@/views/OwnerView.vue"),
+    meta: {
+      auth: true,
+    },
     children: [
       // 사장님 서비스 메인
       {
@@ -175,6 +197,12 @@ const routes = [
   {
     path: "/mypage",
     component: () => import("@/views/MypageView.vue"),
+    // meta: {
+    //   auth: true,
+    // },
+    meta: {
+      auth: true,
+    },
     children: [
       // 마이 페이지 메인
       {
@@ -202,3 +230,20 @@ export const router = createRouter({
 });
 
 export default router;
+
+// router.beforeEach((to, from, next) => {
+//   // 인증이 필요한 페이지 && 로그인 하지 않은 경우
+//   // if (
+//   //   to.matched.some(function (routeInfo) {
+//   //     return routeInfo.meta.authRequired;
+//   //   })
+//   // ) {
+//   //   // 이동할 페이지에 인증 정보가 필요하면 경고 창을 띄우고 페이지 전환은 하지 않음
+//   //   alert("Login Please!");
+//   if (to.meta.auth && !store.getters.isLogin) {
+//     alert("로그인이 필요한 페이지입니다.");
+//     // console.log("인증이 필요합니다.");
+//   } else {
+//     next();
+//   }
+// });
