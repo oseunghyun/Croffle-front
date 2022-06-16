@@ -11,6 +11,11 @@ function editNickname(postData) {
   return instance.put("nickname", postData);
 }
 
+// 닉네임 검증
+function verifyNickname(nickName) {
+  return instance.post("nickname/verify", nickName);
+}
+
 // 카페 별 모은 스탬프 리스트 보기
 function fetchStamps() {
   return instance.get("stamps");
@@ -38,4 +43,5 @@ export {
   fetchMypage,
   fetchScrapList,
   useCoupon,
+  verifyNickname,
 };
