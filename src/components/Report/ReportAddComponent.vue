@@ -5,6 +5,14 @@
     </header>
     <form>
       <div class="input__box">
+        <label>카페명</label>
+        <span class="info">{{ cafeData[0].name }}</span>
+      </div>
+      <div class="input__box">
+        <label>도로명 주소</label>
+        <span class="info">{{ cafeData[0].roadaddr }}</span>
+      </div>
+      <div class="input__box">
         <label>메뉴명</label>
         <input
           placeholder="메뉴명을 입력해주세요."
@@ -40,18 +48,23 @@
 
 <script>
 import { reportMenu } from "@/api/report";
+import { fetchCafeInfo } from "@/api/cafe";
 
 export default {
   data() {
     return {
       header: "메뉴 추가 제보하기",
       // 카페 상세 페이지 부터 이어지는 값
-      cafe_name: "",
-      roadAddress: "",
       menus: {
         name: "",
         price: "",
       },
+      cafeData: [
+        {
+          name: "밀크북",
+          roadaddr: "파주시 회현로",
+        },
+      ],
     };
   },
   computed: {
@@ -77,8 +90,8 @@ export default {
       try {
         console.log("메뉴 제보 폼 제출");
         const menuData = await reportMenu({
-          cafe_name: this.cafe_name,
-          roadAddress: this.roadAddress,
+          cafe_name: this.cafeData[0].name,
+          roadAddress: this.cafeData[0].roadaddr,
           menus: { name: this.menus.name, price: this.menus.price },
         });
         console.log(menuData);
@@ -92,6 +105,14 @@ export default {
     initForm() {
       this.rate = "";
       this.content = "";
+    },
+    async fetchCafeInfo() {
+      try {
+        const { cafeData } = await fetchCafeInfo(this.$route.params.id);
+        this.cafeData = cafeData;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
