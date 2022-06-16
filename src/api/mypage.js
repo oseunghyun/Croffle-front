@@ -22,7 +22,7 @@ function fetchCoupons() {
 }
 
 // 내 쿠폰 사용하기
-function useCoupons(couponID) {
+function useCoupon(couponID) {
   return instance.delete(`coupon/use?couponId=${couponID}`);
 }
 
@@ -37,5 +37,5 @@ export {
   fetchCoupons,
   fetchMypage,
   fetchScrapList,
-  useCoupons,
+  useCoupon,
 };

@@ -32,8 +32,8 @@
       </header>
       <div class="card__wrapper--column">
         <div v-for="(coupon, index) in couponData" :key="index" class="card">
-          <span @click="modalActive" class="card__title">
-            {{ coupons.cafe_name }}
+          <span @click="modalActive(index)" class="card__title">
+            {{ coupon.cafe_name }}
           </span>
           <span class="card__text">{{ coupon.benefit }}</span>
           <span class="card__text">{{ coupon.expire_date }}</span>
@@ -49,10 +49,6 @@ import { fetchStamps, fetchCoupons } from "@/api/mypage";
 export default {
   data() {
     return {
-      // stamps: {
-      //   cafe_name: "엔드테라스",
-      //   stamp_count: "3",
-      // },
       coupons: {
         cafe_name: "엔드테라스",
         benefit: "아메리카노(HOT/ICE) 1잔 무료",
@@ -68,9 +64,17 @@ export default {
           stamp_count: 2,
         },
       ],
+      // 더미 데이터
       couponData: [
         {
+          id: 1,
           cafe_name: "엔드테라스",
+          benefit: "아메리카노(HOT/ICE) 1잔 무료",
+          expire_date: "2022-04-11 ~ 2022-05-11",
+        },
+        {
+          id: 2,
+          cafe_name: "메가 커피",
           benefit: "아메리카노(HOT/ICE) 1잔 무료",
           expire_date: "2022-04-11 ~ 2022-05-11",
         },
@@ -82,15 +86,16 @@ export default {
     this.fetchCoupons();
   },
   methods: {
-    modalActive() {
+    modalActive(index) {
       let isModalActive = true;
-      this.$emit("modalActive", isModalActive);
+      let couponData = this.couponData[index];
+      this.$emit("modalActive", isModalActive, couponData);
     },
     // 카페 별 모은 스탬프 리스트 보기
     async fetchStamps() {
       try {
         console.log("스탬프 조회");
-        const { stampData } = fetchStamps();
+        const { stampData } = await fetchStamps();
         this.stampData = stampData.body.stamps;
         console.log(this.stampData);
       } catch (error) {
@@ -101,7 +106,7 @@ export default {
     async fetchCoupons() {
       try {
         console.log("쿠폰 조회");
-        const { couponData } = fetchCoupons();
+        const { couponData } = await fetchCoupons();
         this.couponData = couponData.body.coupons;
         console.log(this.couponData);
       } catch (error) {
