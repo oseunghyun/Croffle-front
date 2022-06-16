@@ -36,6 +36,11 @@ function createStamp(stampData) {
   return owner.post("stamp", stampData);
 }
 
+// 사장님 인증하기
+function verifyOwner() {
+  return owner.put("/verify");
+}
+
 export {
   fetchOwnerMenu,
   createOwnerMenu,
@@ -44,4 +49,5 @@ export {
   createStamp,
   editOwnerCafe,
   fetchOwnerCafe,
+  verifyOwner,
 };

@@ -69,7 +69,7 @@ export default {
       this.isActive2 = true;
     },
     toOwner() {
-      this.$router.push("/owner");
+      this.$router.push("/owner/verify");
     },
     // 마이 페이지 유저 정보 조회
     async fetchMypage() {
