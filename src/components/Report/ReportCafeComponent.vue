@@ -15,6 +15,10 @@
           <div class="text__cafe-title" v-if="this.cafeInfo != ''">
             {{ this.cafeInfo.title }}
           </div>
+          <div class="input__box">
+            <div><label>도로명 주소</label><em>*</em></div>
+            <span class="info">{{ this.cafeInfo.addr }}</span>
+          </div>
         </div>
         <div class="input__box">
           <div><label>메뉴</label><em>*</em></div>
