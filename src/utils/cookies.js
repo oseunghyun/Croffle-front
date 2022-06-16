@@ -1,10 +1,5 @@
 // access_token 쿠키에 저장
-function saveAccessTokenToCookie(value) {
-  document.cookie = `Auth=${value}`;
-}
-
-// refresh_token 쿠키에 저장
-function saveRefreshTokenToCookie(value) {
+function saveTokenToCookie(value) {
   document.cookie = `Auth=${value}`;
 }
 
@@ -31,8 +26,7 @@ function deleteCookie(value) {
 }
 
 export {
-  saveAccessTokenToCookie,
-  saveRefreshTokenToCookie,
+  saveTokenToCookie,
   saveUserToCookie,
   getAuthFromCookie,
   getUserFromCookie,

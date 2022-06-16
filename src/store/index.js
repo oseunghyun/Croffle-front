@@ -5,25 +5,24 @@ export const store = createStore({
   state: {
     // 메인 크로플 서비스에만 헤더를 보여주기 위함
     headerActive: false,
-    accessToken: getAuthFromCookie() || "",
-    refreshToken: "",
+    token: getAuthFromCookie() || "",
     naverState: "",
   },
   getters: {
     userToken(state) {
-      return state.accessToken;
+      return state.token;
     },
-    isLogin(state) {
-      return state.accessToken == "";
-    },
+    // isLogin(state) {
+    //   return state.token == "";
+    // },
   },
   mutations: {
     // 메인 크로플 서비스에만 헤더를 보여주기 위함
     isHeaderActive(state, headerActive) {
       state.headerActive = headerActive;
     },
-    setAccessToken(state, token) {
-      state.accessToken = token;
+    setToken(state, token) {
+      state.token = token;
     },
     setNaverState(state, naverState) {
       state.naverState = naverState;

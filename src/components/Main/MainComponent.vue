@@ -72,7 +72,7 @@ import CafeListComponent from "@/components/Main/CafeListComponent.vue";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
 import { ref } from "vue";
 import { NaverMaps, NaverMarker, NaverInfoWindow } from "vue3-naver-maps";
-import { saveAccessTokenToCookie } from "@/utils/cookies";
+import { saveTokenToCookie } from "@/utils/cookies";
 
 export default {
   components: {
@@ -140,12 +140,12 @@ export default {
     // const naverState = naver_id_login.getUniqState();
     // naver_id_login.setState(naverState);
     // this.$store.commit("setNaverState", naverState);
-    const accessToken = this.$route.query.token;
-    console.log("access token", accessToken);
+    const token = this.$route.query.token;
+    console.log("token", token);
 
     // 토큰값 스토어에 저장
-    this.$store.commit("setAccessToken", accessToken);
-    saveAccessTokenToCookie(accessToken);
+    this.$store.commit("setToken", token);
+    saveTokenToCookie(token);
 
     /* 네이버 로그인 처리 */
     // let self = this;
