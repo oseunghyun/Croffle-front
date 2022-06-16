@@ -47,7 +47,6 @@ export default {
       header: "메뉴 추가 제보하기",
       // 카페 상세 페이지 부터 이어지는 값
       cafe_name: "",
-      coord: "",
       roadAddress: "",
       menus: {
         name: "",
@@ -79,7 +78,6 @@ export default {
         console.log("메뉴 제보 폼 제출");
         const menuData = await reportMenu({
           cafe_name: this.cafe_name,
-          coord: this.coord,
           roadAddress: this.roadAddress,
           menus: { name: this.menus.name, price: this.menus.price },
         });
