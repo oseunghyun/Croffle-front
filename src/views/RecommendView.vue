@@ -3,7 +3,7 @@
     <header class="page-title">추천 크로플 카페</header>
     <div class="guide">좋아요, 평점이 높은 크로플 카페를 공유해요!</div>
     <div class="select__wrapper">
-      <select v-model="filter" @change="recommendCafe">
+      <select v-model="filter" @change="recommendCafe(this.filter)">
         <option value="liked">좋아요 순</option>
         <option value="review">평점순</option>
       </select>
@@ -31,7 +31,7 @@
 <script>
 import ic__rate from "@/assets/ic/review.svg";
 import ic__like from "@/assets/ic/heart.svg";
-import { recommendCafe } from "@/api/index";
+import { recommendCafe } from "@/api/recommend";
 
 export default {
   data() {
@@ -52,24 +52,15 @@ export default {
   created() {
     let headerActive = true;
     this.$store.commit("isHeaderActive", headerActive);
-    // this.recommendCafe();
-  },
-  computed: {
-    changeQuery() {
-      return this.$router.replace({
-        path: this.$route.path,
-        query: {
-          filter: this.filter,
-        },
-      });
-    },
+    // 최초 좋아요 순 카페 불러오기
+    this.recommendCafe(this.filter);
   },
   methods: {
-    async recommendCafe() {
+    async recommendCafe(filter) {
       // 카페 추천 게시판
       try {
         console.log("추천 게시판");
-        const { cafeData } = await recommendCafe(this.filter);
+        const { cafeData } = await recommendCafe(filter);
         console.log(cafeData);
         this.cafeData = cafeData.cafes;
       } catch (error) {

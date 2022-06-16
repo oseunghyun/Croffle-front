@@ -69,7 +69,7 @@ export default {
       this.isActive1 = false;
       this.isActive3 = false;
       // this.$router.push("/recommend");
-      this.$router.push({ path: "/recommend", query: { filter: "liked" } });
+      this.$router.push("/recommend");
     },
     showCommunity() {
       this.isActive3 = true;
