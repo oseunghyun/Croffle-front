@@ -1,24 +1,31 @@
 import axios from "axios";
-// import { search } from "core-js/fn/symbol";
 import { setInterceptors } from "./common/interceptors";
 
-// 액시오스 초기화 함수
+// 1. 액시오스 초기화 함수 - 회원 권한 필요 없는
 function createInstance() {
   const instance = axios.create({
     // baseURL: process.env.VUE_APP_API_URL, // 안되면 '/'로 변경
     baseURL: `/api`,
   });
-  return setInterceptors(instance);
+  return instance;
+  // return setInterceptors(instance);
 }
 
-// ip 주소 가져오기
-function createIpInstance() {
+// 2. 회원 권한 필요한 경우
+function createInstanceWithAuth() {
   const instance = axios.create({
-    baseURL: `/v2`,
+    baseURL: `/api`,
   });
   return setInterceptors(instance);
 }
 
+// 1. 공통(회원 권한 x)
+export const instance = createInstance();
+
+// 2. 회원 권한 필요한 경우
+export const instanceWithAuth = createInstanceWithAuth();
+
+/*********** 네이버 ************/
 // 네이버 검색
 function createNaverInstance() {
   const instance = axios.create({
@@ -28,7 +35,7 @@ function createNaverInstance() {
       "X-Naver-Client-Secret": "Vjn2nII5K3",
     },
   });
-  return setInterceptors(instance);
+  return instance;
 }
 
 // 네이버 프로필 호출
@@ -50,27 +57,18 @@ function createNaverGeoLocation() {
       "x-ncp-apigw-signature-v2": "l9RFKQeUe3n09f4cu2m6CWyayyoC0p5jgrPXerDf",
     },
   });
-  return setInterceptors(instance);
+  return instance;
 }
 
-// 회원 조회가 필요한 경우
-function createInstanceWithAuth(url) {
+// ip 주소 가져오기
+function createIpInstance() {
   const instance = axios.create({
-    // baseURL: `${process.env.VUE_APP_API_URL}${url}`,
-    baseURL: `/api/${url}`,
+    baseURL: `/v2`,
   });
-  return setInterceptors(instance);
+  return instance;
 }
 
-// 공통
-export const instance = createInstance();
-// 커뮤니티 게시판 경로
-export const board = createInstanceWithAuth("board");
-
-// 사장님 페이지 경로
-export const owner = createInstanceWithAuth("owner");
-
-// 카페 제보 검색
+// 카페 제보 네이버 검색
 export const search = createNaverInstance();
 
 // 현재 위치 정보 제공
@@ -81,36 +79,3 @@ export const profile = createNaverProfile();
 
 // 클라이언드 ip 주소 제공
 export const getIp = createIpInstance();
-
-// 카페 관련 경로
-// export const cafe = createInstanceWithAuth("cafe");
-
-// 제보 관련 경로
-export const report = createInstanceWithAuth("report");
-
-// 카페 검색 조회
-function searchCafe(cafeData) {
-  return search.get(`/local.json?query=${encodeURI(cafeData)}&display=5`);
-}
-
-// 현재 위치 정보 조회
-function fetchLocation(ip) {
-  return geolocation.get(`/geoLocation?ip=${ip}`);
-}
-
-// ip 주소 가져오기
-function fetchIpAddr() {
-  return getIp.get();
-}
-
-// // 로그인
-// function loginUser() {
-//   return instance.get("oauth2/authorization/naver");
-// }
-
-export {
-  searchCafe,
-  fetchLocation,
-  fetchIpAddr,
-  // loginUser,
-};

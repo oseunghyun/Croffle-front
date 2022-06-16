@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-import { searchCafe } from "@/api/index";
+import { searchCafe } from "@/api/naver";
 import logo_owner from "@/assets/Image/logo_owner.svg";
 
 export default {

@@ -1,8 +1,8 @@
-import { instance } from "@/api/index";
+import { instance, instanceWithAuth } from "@/api/index";
 
 // 리뷰 작성하기
 function createReview(reviewData) {
-  return instance.post("review", reviewData);
+  return instanceWithAuth.post("review", reviewData);
 }
 
 // 리뷰 조회하기

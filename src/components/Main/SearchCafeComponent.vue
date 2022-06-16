@@ -38,7 +38,7 @@
   </div>
 </template>
 <script>
-import { searchCafe } from "@/api/index";
+import { searchCafe } from "@/api/naver";
 
 export default {
   created() {

@@ -65,7 +65,7 @@
 <script>
 import ic__speechBubble from "@/assets/ic/speechBubble.svg";
 import ic__marker from "@/assets/ic/marker.svg";
-import { fetchIpAddr, fetchLocation } from "@/api/index";
+import { fetchIpAddr, fetchLocation } from "@/api/naver";
 import { fetchCafes } from "@/api/cafe";
 import NotRegisteredCafe from "@/components/Main/NotRegisteredCafe.vue";
 import CafeListComponent from "@/components/Main/CafeListComponent.vue";
