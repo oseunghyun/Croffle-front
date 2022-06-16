@@ -103,38 +103,13 @@ function fetchIpAddr() {
   return getIp.get();
 }
 
-// 리뷰 작성하기
-function registerReview(reviewData) {
-  return instance.post("review", reviewData);
-}
-
-// /review/list?cafe_id=1
-// 리뷰 조회하기
-function fetchReview(cafeId) {
-  return instance.get(`review/list/${cafeId}`);
-}
-
-// 스크랩 기능
-function likeCafe(cafeId) {
-  return instance.post("like", cafeId);
-}
-
-// 스크랩 취소
-function delLikeCafe(cafeId) {
-  return instance.post("like/del", cafeId);
-}
-
 // // 로그인
 // function loginUser() {
 //   return instance.get("oauth2/authorization/naver");
 // }
 
 export {
-  registerReview,
   searchCafe,
-  fetchReview,
-  likeCafe,
-  delLikeCafe,
   fetchLocation,
   fetchIpAddr,
   // loginUser,
