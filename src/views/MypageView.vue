@@ -12,8 +12,11 @@
       @modalActive="modalActive"
       :isModalActive="isModalActive"
     ></coupon-list-component>
-    <modal-component v-if="isModalActive">
-      <coupon-modal-content @close-modal="isModalActive = false" />
+    <modal-component v-if="isModalActive" :couponData="couponData">
+      <coupon-modal-content
+        @close-modal="isModalActive = false"
+        :couponData="couponData"
+      />
     </modal-component>
   </div>
 </template>
@@ -36,6 +39,7 @@ export default {
       message: "",
       activeList: 1,
       isModalActive: false,
+      couponData: [],
     };
   },
   methods: {
@@ -45,8 +49,9 @@ export default {
     showList(activeList) {
       this.activeList = activeList;
     },
-    modalActive(isModalActive) {
+    modalActive(isModalActive, couponData) {
       this.isModalActive = isModalActive;
+      this.couponData = couponData;
     },
   },
   created() {
