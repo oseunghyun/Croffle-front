@@ -20,7 +20,7 @@
               {{ postItem.user_nickname }}&nbsp;
             </span>
             <span class="card__create_date">
-              {{ postItem.modifiedDate }}
+              {{ formatDate(postItem.modifiedDate) }}
             </span>
           </div>
         </div>
@@ -40,6 +40,11 @@ export default {
     return {
       postItems: [],
     };
+  },
+  computed: {
+    formatDate(date) {
+      return date.split("T")[0];
+    },
   },
   created() {
     this.fetchPosts();

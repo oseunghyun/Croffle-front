@@ -7,7 +7,9 @@
         >
         <span class="post__title"> {{ postData[0].title }} </span>
       </div>
-      <span class="post__create_date"> {{ postData[0].modifiedDate }} </span>
+      <span class="post__create_date">
+        {{ formatDate(postData[0].modifiedDate) }}
+      </span>
       <span class="post__nick_name"> {{ postData[0].nickname }}&nbsp; </span>
       <p class="post__content">{{ postData[0].content }}&nbsp;</p>
     </div>
@@ -48,6 +50,11 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    formatDate(date) {
+      return date.split("T")[0];
+    },
   },
   methods: {
     showDelModal() {
