@@ -114,12 +114,6 @@ function fetchReview(cafeId) {
   return instance.get(`review/list/${cafeId}`);
 }
 
-// 카페 추천 기능
-function recommendCafe(filter) {
-  // const params = { filter: filter };
-  return instance.get(`cafe/recommend?filter=${filter}`);
-}
-
 // 스크랩 기능
 function likeCafe(cafeId) {
   return instance.post("like", cafeId);
@@ -141,7 +135,6 @@ export {
   fetchReview,
   likeCafe,
   delLikeCafe,
-  recommendCafe,
   fetchLocation,
   fetchIpAddr,
   // loginUser,
