@@ -1,7 +1,7 @@
 import { instance } from "@/api/index";
 
 // 리뷰 작성하기
-function postReview(reviewData) {
+function createReview(reviewData) {
   return instance.post("review", reviewData);
 }
 
@@ -10,4 +10,4 @@ function fetchReview(cafeId) {
   return instance.get(`review/${cafeId}`);
 }
 
-export { fetchReview, postReview };
+export { fetchReview, createReview };
