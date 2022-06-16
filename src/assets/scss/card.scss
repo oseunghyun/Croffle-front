@@ -79,6 +79,9 @@
       span {
         @include font(12px, 300, $color-black-100);
       }
+      i {
+        color: $color-secondary-100;
+      }
     }
   }
 }
