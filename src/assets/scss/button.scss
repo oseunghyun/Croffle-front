@@ -70,9 +70,10 @@ button {
 .btn--naver {
   @extend .button;
   background-color: $color-naver;
-  @include layout(row, center, center);
-  color: $color-white;
-  gap: 10px;
+  @include layout(column, center, center);
+  // color: $color-white;
+  // gap: 10px;
+  padding: 0px;
 }
 
 .btn--transparent {
@@ -141,3 +142,7 @@ button {
   font-size: 14px;
   font-weight: 600;
 }
+
+// #naver_id_login {
+//   display: none;
+// }
