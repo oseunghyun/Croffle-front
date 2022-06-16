@@ -57,7 +57,7 @@ function createNaverGeoLocation() {
 function createInstanceWithAuth(url) {
   const instance = axios.create({
     // baseURL: `${process.env.VUE_APP_API_URL}${url}`,
-    baseURL: `/api${url}`,
+    baseURL: `/api/${url}`,
   });
   return setInterceptors(instance);
 }

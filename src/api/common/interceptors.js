@@ -7,7 +7,7 @@ export function setInterceptors(instance) {
       // Do something before request is sent
       // console.log(config);
       console.log(config);
-      config.headers.Authorization = getAuthFromCookie();
+      config.headers.Authorization = `Bearer ${getAuthFromCookie()}`;
       return config;
     },
     function (error) {
