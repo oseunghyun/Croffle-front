@@ -61,7 +61,7 @@ export default {
         const { data } = await fetchPosts();
         this.postItems = data.data;
         // console.log(JSON.stringify(this.postItems));
-        console.log(this.postItems);
+        this.postItems.console.log(this.postItems);
       } catch (error) {
         console.log(error.message);
       }
