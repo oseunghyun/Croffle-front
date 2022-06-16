@@ -71,7 +71,6 @@
 </template>
 
 <script>
-import { searchCafe } from "@/api/index";
 import { verifyOwner } from "@/api/owner";
 import logo_owner from "@/assets/Image/logo_owner.svg";
 
@@ -119,15 +118,6 @@ export default {
     },
   },
   methods: {
-    // 카페 검색
-    async searchCafe() {
-      try {
-        const cafeData = await searchCafe(this.cafeData);
-        console.log(cafeData.data);
-      } catch (error) {
-        console.log(error);
-      }
-    },
     // 메뉴 제보 폼 제출
     async verifyOwner() {
       try {

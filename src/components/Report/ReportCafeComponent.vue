@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { searchCafe } from "@/api/index";
+import { searchCafe } from "@/api/naver";
 import { reportMenu } from "@/api/report";
 
 export default {

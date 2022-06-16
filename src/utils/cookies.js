@@ -1,6 +1,6 @@
 // access_token 쿠키에 저장
 function saveTokenToCookie(value) {
-  document.cookie = `Auth=${value}`;
+  document.cookie = `auth=${value}`;
 }
 
 function saveUserToCookie(value) {
