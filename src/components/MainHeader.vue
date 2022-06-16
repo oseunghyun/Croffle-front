@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     isUserLogin() {
-      if (this.$store.getters.isLogin) {
+      if (this.$store.getters.userToken) {
         return true;
       } else {
         return false;
