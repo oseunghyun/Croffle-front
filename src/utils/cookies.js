@@ -1,5 +1,11 @@
-function saveAuthToCookie(value) {
-  document.cookie = `til_auth=${value}`;
+// access_token 쿠키에 저장
+function saveAccessTokenToCookie(value) {
+  document.cookie = `Auth=${value}`;
+}
+
+// refresh_token 쿠키에 저장
+function saveRefreshTokenToCookie(value) {
+  document.cookie = `Auth=${value}`;
 }
 
 function saveUserToCookie(value) {
@@ -8,7 +14,7 @@ function saveUserToCookie(value) {
 
 function getAuthFromCookie() {
   return document.cookie.replace(
-    /(?:(?:^|.*;\s*)til_auth\s*=\s*([^;]*).*$)|^.*$/,
+    /(?:(?:^|.*;\s*)Auth\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
 }
@@ -25,7 +31,8 @@ function deleteCookie(value) {
 }
 
 export {
-  saveAuthToCookie,
+  saveAccessTokenToCookie,
+  saveRefreshTokenToCookie,
   saveUserToCookie,
   getAuthFromCookie,
   getUserFromCookie,
