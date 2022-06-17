@@ -1,6 +1,5 @@
-// access_token 쿠키에 저장
-function saveTokenToCookie(value) {
-  document.cookie = `auth=${value}`;
+function saveAuthToCookie(value) {
+  document.cookie = `til_auth=${value}`;
 }
 
 function saveUserToCookie(value) {
@@ -9,7 +8,7 @@ function saveUserToCookie(value) {
 
 function getAuthFromCookie() {
   return document.cookie.replace(
-    /(?:(?:^|.*;\s*)Auth\s*=\s*([^;]*).*$)|^.*$/,
+    /(?:(?:^|.*;\s*)til_auth\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
 }
@@ -26,7 +25,7 @@ function deleteCookie(value) {
 }
 
 export {
-  saveTokenToCookie,
+  saveAuthToCookie,
   saveUserToCookie,
   getAuthFromCookie,
   getUserFromCookie,

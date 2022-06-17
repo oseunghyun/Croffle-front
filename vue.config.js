@@ -13,14 +13,8 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       "/api": {
-        target: "http://34.64.139.239",
+        target: "http://34.64.139.239/",
         changeOrigin: true,
-      },
-      "/login": {
-        target: "oauth2/authorization/naver?redirect_uri=",
-      },
-      "/local": {
-        target: "http://localhost:3000/cafes",
       },
       "/v1": {
         target: "https://openapi.naver.com/",

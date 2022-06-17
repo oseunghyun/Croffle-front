@@ -1,13 +1,14 @@
 import axios from "axios";
+
 import { setInterceptors } from "./common/interceptors";
 
 // 1. 액시오스 초기화 함수 - 회원 권한 필요 없는
 function createInstance() {
-  const instance = axios.create({
+  return axios.create({
     // baseURL: process.env.VUE_APP_API_URL, // 안되면 '/'로 변경
     baseURL: `/api`,
   });
-  return instance;
+  // return instance;
   // return setInterceptors(instance);
 }
 
@@ -28,14 +29,14 @@ export const instanceWithAuth = createInstanceWithAuth();
 /*********** 네이버 ************/
 // 네이버 검색
 function createNaverInstance() {
-  const instance = axios.create({
+  return axios.create({
     baseURL: `/v1/search`,
     headers: {
       "X-Naver-Client-Id": "WDBUTDGAh6YGJ6Umihxr",
       "X-Naver-Client-Secret": "Vjn2nII5K3",
     },
   });
-  return instance;
+  // return instance;
 }
 
 // 네이버 프로필 호출
