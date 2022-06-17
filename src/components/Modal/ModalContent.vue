@@ -37,12 +37,12 @@ export default {
     // 크로플 메뉴 추가 제보 버튼 이벤트
     addReport() {
       this.$emit("close-modal");
-      this.$router.push("/cafe/addreport");
+      this.$router.push(`/cafe/${this.$route.params.id}/addreport`);
     },
     // 카페 정보 수정 이벤트
     reportInfo() {
       this.$emit("close-modal");
-      this.$router.push("/cafe/reportinfo");
+      this.$router.push(`/cafe/${this.$route.params.id}/reportinfo`);
     },
   },
 };

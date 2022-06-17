@@ -2,7 +2,10 @@
   <div>
     <searchbar-component
       @showResult="showResult"
+      @fetchInfo="fetchInfo"
+      @fetchResult="fetchResult"
       :service="service"
+      :registered="registered"
     ></searchbar-component>
     <div v-if="service == false" class="search">
       <not-registered-cafe
@@ -65,14 +68,14 @@
 <script>
 import ic__speechBubble from "@/assets/ic/speechBubble.svg";
 import ic__marker from "@/assets/ic/marker.svg";
-import { fetchIpAddr, fetchLocation } from "@/api/naver";
+// import { fetchIpAddr, fetchLocation } from "@/api/naver";
 import { fetchCafes } from "@/api/cafe";
 import NotRegisteredCafe from "@/components/Main/NotRegisteredCafe.vue";
 import CafeListComponent from "@/components/Main/CafeListComponent.vue";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
 import { ref } from "vue";
 import { NaverMaps, NaverMarker, NaverInfoWindow } from "vue3-naver-maps";
-import { saveTokenToCookie } from "@/utils/cookies";
+import { saveAuthToCookie } from "@/utils/cookies";
 
 export default {
   components: {
@@ -123,7 +126,14 @@ export default {
       });
     };
 
-    return { onLoadMarker, map, marker, onLoadMap, isOpen, onLoadInfoWindow };
+    return {
+      onLoadMarker,
+      map,
+      marker,
+      onLoadMap,
+      isOpen,
+      onLoadInfoWindow,
+    };
   },
   mounted() {
     // // 네이버 로그인
@@ -145,7 +155,7 @@ export default {
 
     // 토큰값 스토어에 저장
     this.$store.commit("setToken", token);
-    saveTokenToCookie(token);
+    saveAuthToCookie(token);
 
     /* 네이버 로그인 처리 */
     // let self = this;
@@ -177,16 +187,16 @@ export default {
     //   console.log(e);
     // }
   },
-  // 출처: https://archijude.tistory.com/424 [글을 잠깐 혼자 써봤던 진성 프로그래머:티스토리]
   async created() {
     let headerActive = true;
     this.$store.commit("isHeaderActive", headerActive);
-    await this.getIpClient();
-    await this.fetchLocation2();
-    this.fetchCafes();
+    // await this.getIpClient();
+    // await this.fetchLocation2();
+    await this.fetchCafes();
   },
   data() {
     return {
+      registered: false,
       ic__speechBubble,
       ic__marker,
       page: "main",
@@ -194,6 +204,8 @@ export default {
       clientAddr: "",
       service: true,
       email: "",
+      cafeList: [],
+
       cafes: [
         {
           id: "0",
@@ -221,6 +233,13 @@ export default {
   },
 
   methods: {
+    fetchInfo(data) {
+      this.cafeInfo = data;
+    },
+    fetchResult(registered, cafeData) {
+      this.registered = registered;
+      this.cafeList = cafeData;
+    },
     showResult(service) {
       this.service = service;
     },
@@ -245,30 +264,30 @@ export default {
       this.$router.push(`cafe/${cafe.id}`);
     },
     // 클라이언트 ip 주소 fetch
-    async getIpClient() {
-      try {
-        const response = await fetchIpAddr();
-        console.log("클라이언드 ip 주소", response.data);
-        // this.clientIp = response.data;
-        this.clientIp = response.data.toString();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    // 현재 주소 fetch
-    async fetchLocation2() {
-      try {
-        // console.log("jh teset", await fetchLocation(this.clientIp));
-        // const { location } = await fetchLocation(this.clientIp);
-        console.log("jh clientIp", this.clientIp);
-        const test = await fetchLocation(this.clientIp);
-        console.log("jh test", test);
-        // console.log("현위치", location);
-        // this.clientAddr = location;
-      } catch (error) {
-        console.error(error.message);
-      }
-    },
+    // async getIpClient() {
+    //   try {
+    //     const response = await fetchIpAddr();
+    //     console.log("클라이언드 ip 주소", response.data);
+    //     // this.clientIp = response.data;
+    //     this.clientIp = response.data.toString();
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // },
+    // // 현재 주소 fetch
+    // async fetchLocation2() {
+    //   try {
+    //     // console.log("jh teset", await fetchLocation(this.clientIp));
+    //     // const { location } = await fetchLocation(this.clientIp);
+    //     console.log("jh clientIp", this.clientIp);
+    //     const test = await fetchLocation(this.clientIp);
+    //     console.log("jh test", test);
+    //     // console.log("현위치", location);
+    //     // this.clientAddr = location;
+    //   } catch (error) {
+    //     console.error(error.message);
+    //   }
+    // },
     openInfoWindow(cafe) {
       console.log("jh cafe", this.marker, cafe);
       this.marker = new window.naver.maps.Marker({
