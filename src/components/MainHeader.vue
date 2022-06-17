@@ -101,7 +101,7 @@ export default {
     },
     logoutUser() {
       this.$store.commit("clearToken");
-      deleteCookie("auth");
+      deleteCookie("til_auth");
       this.$router.push("/");
     },
   },
