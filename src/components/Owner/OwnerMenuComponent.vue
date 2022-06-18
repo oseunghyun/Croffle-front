@@ -54,8 +54,8 @@ export default {
     async fetchOwnerMenu() {
       try {
         console.log("사장님 메뉴 조회");
-        const { ownerMenuData } = await fetchOwnerMenu();
-        this.menuList = ownerMenuData.body.menu;
+        const { data } = await fetchOwnerMenu();
+        this.menuList = data.data;
         console.log(this.menuList);
       } catch (error) {
         console.log("error.message");

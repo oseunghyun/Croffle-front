@@ -67,8 +67,9 @@ export default {
       try {
         console.log("사장님 - 메뉴 추가 폼 제출");
         await createOwnerMenu({
-          menu_name: this.menu_name,
-          menu_price: this.menu_price,
+          cafeId: "",
+          name: this.menu_name,
+          price: this.menu_price,
         });
       } catch (error) {
         console.log(error.message);

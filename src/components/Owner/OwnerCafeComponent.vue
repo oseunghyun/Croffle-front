@@ -38,6 +38,11 @@
 <script>
 import { fetchOwnerCafe } from "@/api/owner";
 export default {
+  data() {
+    return {
+      cafeInfo: [],
+    };
+  },
   created() {
     this.fetchOwnerCafe();
   },
@@ -52,17 +57,12 @@ export default {
     async fetchOwnerCafe() {
       try {
         console.log("사장님 - 매장 정보 조회");
-        const { ownerCafeData } = await fetchOwnerCafe();
-        this.cafeInfo = ownerCafeData.body.cafe;
+        const { data } = await fetchOwnerCafe();
+        this.cafeInfo = data.data;
       } catch (error) {
         console.log(error.message);
       }
     },
-  },
-  data() {
-    return {
-      cafeInfo: [],
-    };
   },
 };
 </script>

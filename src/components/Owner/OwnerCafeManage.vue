@@ -116,8 +116,8 @@ export default {
     async fetchOwnerCafe() {
       try {
         console.log("사장님 - 매장 정보 조회");
-        const { ownerCafeData } = await fetchOwnerCafe();
-        this.cafeInfo = ownerCafeData.body.cafe;
+        const { data } = await fetchOwnerCafe();
+        this.cafeInfo = data.data;
       } catch (error) {
         console.log(error.message);
       }
@@ -125,13 +125,12 @@ export default {
     // 매장 정보 수정
     async editOwnerCafe() {
       try {
-        await editOwnerCafe({
-          cafe_id: this.cafeInfo.cafe_id,
-          cafe_name: this.cafeInfo.cafe_name,
-          cafe_telephone: this.cafeInfo.cafe_telephone,
-          cafe_hours: this.cafeInfo.cafe_hours,
-          cafe_site: this.cafeInfo.cafe_site,
-          cafe_benefit: this.cafeInfo.cafe_benefit,
+        await editOwnerCafe(this.cafeInfo.cafe_id, {
+          cafeName: this.cafeInfo.cafe_name,
+          telephone: this.cafeInfo.cafe_telephone,
+          hours: this.cafeInfo.cafe_hours,
+          site: this.cafeInfo.cafe_site,
+          benefit: this.cafeInfo.cafe_benefit,
         });
       } catch (error) {
         console.log(error.message);
