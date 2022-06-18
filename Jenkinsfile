@@ -1,23 +1,23 @@
-node {
-	def app
-	stage('Clone repository') {
-		git 'https://github.com/ProjectDevelopment3/Croffle-front.git'
-	}
-	stage('Build image') {
-		app = docker.build("osh1477/test")
-	}
-	stage('Test image'){
-		app.inside {
-      sh 'ls'
-		}
-  }
-	stage('Push image') {
-		docker.withRegistry('https://registry.hub.docker.com', 'osh1477'){ 
-			app.push("${env.BUILD_NUMBER}")
-			app.push("latest")
-    }
-  }
-}
+// node {
+// 	def app
+// 	stage('Clone repository') {
+// 		git 'https://github.com/ProjectDevelopment3/Croffle-front.git'
+// 	}
+// 	stage('Build image') {
+// 		app = docker.build("osh1477/test")
+// 	}
+// 	stage('Test image'){
+// 		app.inside {
+//       sh 'ls'
+// 		}
+//   }
+// 	stage('Push image') {
+// 		docker.withRegistry('https://registry.hub.docker.com', 'osh1477'){ 
+// 			app.push("${env.BUILD_NUMBER}")
+// 			app.push("latest")
+//     }
+//   }
+// }
 
 // pipeline {
 //     agent any
@@ -88,7 +88,7 @@ pipeline {
         }
         stage('Deploy to GKE'){
             when {
-                branch 'main'
+                branch 'master'
             }
             steps{
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
