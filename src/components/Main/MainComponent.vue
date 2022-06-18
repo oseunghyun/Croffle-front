@@ -255,7 +255,7 @@ export default {
         const { cafeData } = await fetchCafes();
         this.cafes.id = cafeData.data.id;
         this.cafes.name = cafeData.data.name;
-        this.cafes.roadaddr = cafeData.data.roadaddr;
+        this.cafes.roadaddr = cafeData.data.addr;
       } catch (error) {
         console.log(error);
       }
