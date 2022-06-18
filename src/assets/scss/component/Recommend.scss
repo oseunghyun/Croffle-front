@@ -1,6 +1,4 @@
 .recommend {
-  box-sizing: border-box;
-  padding: 0px 20px;
   gap: 24px;
   @include layout(column, center, center);
   .select__wrapper {

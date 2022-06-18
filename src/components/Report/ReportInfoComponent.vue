@@ -41,7 +41,6 @@ export default {
   data() {
     return {
       header: "카페 정보 수정 제보",
-      cafe_id: "",
       category: "cafeInfo",
       content: "",
     };
@@ -64,11 +63,10 @@ export default {
         console.log("카페정보 수정 제보 폼 제출");
         console.log(process.env.VUE_APP_API_URL);
         const infoData = await reportInfo({
-          cafe_id: this.cafe_id,
+          cafe_id: this.$route.params.id,
           category: this.category,
           content: this.content,
         });
-
         console.log(infoData);
       } catch (error) {
         console.log(error.response.status);
@@ -78,7 +76,6 @@ export default {
       }
     },
     initForm() {
-      this.rate = "";
       this.content = "";
     },
   },

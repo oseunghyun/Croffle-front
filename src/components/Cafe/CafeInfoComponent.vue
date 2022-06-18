@@ -53,19 +53,23 @@
     <!-- 리뷰 조회 -->
     <div class="review__wrapper">
       <span
-        >리뷰&nbsp;&nbsp;<strong>{{ reviews.length }}</strong></span
+        >리뷰&nbsp;&nbsp;<strong>{{ reviewData.length }}</strong></span
       >
-      <div v-for="(review, index) in reviews" :key="index" class="review__card">
+      <div
+        v-for="(review, index) in reviewData"
+        :key="index"
+        class="review__card"
+      >
         <div class="card__info">
           <div class="card__user">
             <div class="text__nickname">
-              {{ review.nickname }}
+              {{ review.author }}
             </div>
-            <div class="text__date">{{ review.date }}</div>
+            <div class="text__date">{{ review.createdate }}</div>
           </div>
           <div class="rate__stars">
             <i
-              v-for="i in reviews[index].rate"
+              v-for="i in reviewData[index].rate"
               :key="i"
               class="fas fa-star fa-1x"
             ></i>
@@ -90,13 +94,14 @@
 <script>
 import ModalComponent from "@/components/Modal/ModalComponent.vue";
 import ModalContent from "@/components/Modal/ModalContent.vue";
-import { fetchReview, likeCafe, delLikeCafe } from "@/api/index";
+import { likeCafe, delLikeCafe, fetchLikedList } from "@/api/like";
+import { fetchReview } from "@/api/review";
 import { fetchCafeInfo } from "@/api/cafe";
 
 export default {
   created() {
-    // console.log(this.$route.query.id);
-    this.fetchCafeInfo();
+    // 카페 상세 정보 조회(활성화 하기)
+    // this.fetchCafeInfo();
   },
   mounted() {
     console.log("route", this.$route);
@@ -116,7 +121,8 @@ export default {
       cafeId: "cafeId",
       isModalActive: false,
       isHeaderActive: true,
-      reviews: [
+      liked: false,
+      reviewData: [
         {
           nickname: "씽씽",
           date: "2022.04.01",
@@ -132,50 +138,54 @@ export default {
           rate: 2,
         },
       ],
-      liked: true,
       cafeInfo: [],
     };
   },
   methods: {
-    // toReviewForm() {
-    //   this.$router.push("/cafe/review");
-    // },
+    // 리뷰 작성 페이지로 이동
+    toReviewForm() {
+      this.$router.push(`/cafe/${this.$route.params.id}/review`);
+    },
     // 리뷰 조회
     async fetchReview() {
       console.log("리뷰 조회");
       try {
-        const reviewData = await fetchReview();
-        this.reviews.nickname = reviewData.reviews.author;
-        this.reviews.date = reviewData.reviews.createdate;
-        this.reviews.content = reviewData.reviews.content;
-        this.reviews.rate = reviewData.reviews.rate;
+        const reviewData = await fetchReview(this.$route.params.id);
+        this.reviewsData = reviewData.reviews;
       } catch (error) {
         console.log(error);
       }
     },
-    // 스크랩
+    // 내가 이 카페 좋아요 했는지 여부 조회
+    async checkLike() {
+      try {
+        const { likedData } = await fetchLikedList;
+        likedData.some(function findCafe(element) {
+          if (element.id == this.$route.params.id) {
+            return (this.liked = true);
+          } else {
+            return (this.liked = false);
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // 좋아요
     async scrapCafe() {
-      console.log("스크랩하는 카페 id 출력");
-      this.liked = !this.liked;
-      // 좋아요 취소
       if (this.liked == false) {
         try {
-          console.log("스크랩 취소");
-          await likeCafe({
-            // 카페 아이디 값 넣어주기
-            cafe: this.id,
-          });
+          console.log("좋아요");
+          await likeCafe(this.$route.params.id);
+          this.liked = !this.liked;
         } catch (error) {
           console.log(error.message);
         }
-        // 좋아요 하기
       } else {
         try {
-          console.log("스크랩 하기");
-          await delLikeCafe({
-            // 카페 아이디 값 넣어주기
-            cafe: this.id,
-          });
+          console.log("좋아요 취소");
+          await delLikeCafe(this.$route.params.id);
+          this.liked = !this.liked;
         } catch (error) {
           console.log(error.message);
         }
@@ -185,9 +195,7 @@ export default {
     async fetchCafeInfo() {
       try {
         console.log("카페 상세정보 조회");
-        const { data } = await fetchCafeInfo({
-          cafeId: this.$route.params.id,
-        });
+        const { data } = await fetchCafeInfo(this.$route.params.id);
         this.cafeInfo = data.data;
       } catch (error) {
         console.log(error.message);

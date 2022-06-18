@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { fetchScrapList } from "@/api/mypage";
+import { fetchLikedList } from "@/api/like";
 
 export default {
   created() {
@@ -33,7 +33,7 @@ export default {
     async fetchScrapList() {
       try {
         console.log("마이페이지 - 내가 스크랩 한 리스트 조회");
-        const { scrapList } = await fetchScrapList();
+        const { scrapList } = await fetchLikedList();
         this.scrapList = scrapList.body.cafes;
         console.log(this.scrapLists);
       } catch (error) {

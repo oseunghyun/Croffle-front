@@ -1,9 +1,14 @@
 <template>
   <header id="main-header">
     <div class="main-header__wrapper">
-      <img :src="main_logo" @click="showHome" class="main-logo" />
-      <!-- 로그인 후 마이 페이지 버튼 등장 -->
       <div v-if="isUserLogin" class="main-header__isLogin">
+        <button
+          type="button"
+          class="btn--transparent btn__logout"
+          @click="logoutUser"
+        >
+          로그아웃
+        </button>
         <button
           type="button"
           class="btn--transparent btn__mypage"
@@ -12,6 +17,18 @@
           My Page
         </button>
       </div>
+      <!-- 로그인 안했을 때-->
+      <div v-if="!isUserLogin" class="main-header__isLogin">
+        <button
+          type="button"
+          class="btn--transparent btn__mypage"
+          @click="toLogin"
+        >
+          로그인
+        </button>
+      </div>
+      <img :src="main_logo" @click="showHome" class="main-logo" />
+      <!-- 로그인 후 마이 페이지 버튼 등장 -->
     </div>
 
     <nav>
@@ -45,7 +62,7 @@
 
 <script>
 import main_logo from "../assets/Image/logo_main.svg";
-import btn_my from "@/assets/ic/my.svg";
+import { deleteCookie } from "@/utils/cookies";
 export default {
   created() {},
   data() {
@@ -54,7 +71,6 @@ export default {
       isActive1: true,
       isActive2: false,
       isActive3: false,
-      btn_my,
     };
   },
   methods: {
@@ -69,7 +85,7 @@ export default {
       this.isActive1 = false;
       this.isActive3 = false;
       // this.$router.push("/recommend");
-      this.$router.push({ path: "/recommend", query: { filter: "liked" } });
+      this.$router.push("/recommend");
     },
     showCommunity() {
       this.isActive3 = true;
@@ -80,10 +96,18 @@ export default {
     toMypage() {
       this.$router.push("/mypage");
     },
+    toLogin() {
+      this.$router.push("/");
+    },
+    logoutUser() {
+      this.$store.commit("clearToken");
+      deleteCookie("til_auth");
+      this.$router.push("/");
+    },
   },
   computed: {
     isUserLogin() {
-      if (this.$store.state.token) {
+      if (this.$store.getters.userToken) {
         return true;
       } else {
         return false;

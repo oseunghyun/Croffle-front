@@ -1,3 +1,4 @@
+import { store } from "@/store";
 import { createWebHistory, createRouter } from "vue-router";
 
 // 라우터 정의
@@ -19,6 +20,21 @@ const routes = [
       {
         path: "/cafes/report",
         component: () => import("@/components/Report/ReportCafeComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters.userToken) {
+            const confirmContent = confirm(
+              "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       {
         path: "/cafes/searchcafe",
@@ -39,15 +55,60 @@ const routes = [
       {
         path: "/cafe/:id/review",
         component: () => import("@/components/Cafe/ReviewFormComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters.userToken) {
+            const confirmContent = confirm(
+              "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 카페 상세 - 메뉴 추가 제보 하기
       {
         path: "/cafe/:id/addreport",
         component: () => import("@/components/Report/ReportAddComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters.userToken) {
+            const confirmContent = confirm(
+              "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       }, // 카페 상세 - 정보 오류 제보 하기
       {
         path: "/cafe/:id/reportinfo",
         component: () => import("@/components/Report/ReportInfoComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters.userToken) {
+            const confirmContent = confirm(
+              "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
     ],
   },
@@ -57,7 +118,7 @@ const routes = [
     component: () => import("@/views/RecommendView.vue"),
     props: true,
   },
-  // 커뮤니티 
+  // 커뮤니티
   {
     path: "/community",
     component: () => import("@/views/CommunityView.vue"),
@@ -73,6 +134,21 @@ const routes = [
         path: "/community/post",
         component: () =>
           import("@/components/Community/CommunityFormComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters.userToken) {
+            const confirmContent = confirm(
+              "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 커뮤니티 글 상세 보기
       {
@@ -85,32 +161,21 @@ const routes = [
         path: "/community/edit/:id",
         component: () =>
           import("@/components/Community/CommunityEditComponent.vue"),
-      },
-    ],
-  },
-  // // 로그인
-  // {
-  //   path: "/loginaccess",
-  //   component: () => import("@/views/LoginAccessView.vue"),
-  // },
-  // 회원가입 -> 필요없음 수정하기
-  {
-    path: "/signup",
-    component: () => import("@/views/SignupView.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("../components/Signup/SignupComponent.vue"),
-      },
-      {
-        path: "/signup/info",
-        component: () =>
-          import("../components/Signup/SignupComponentStep2.vue"),
-      },
-      {
-        path: "/signup/complete",
-        component: () =>
-          import("../components/Signup/SignupCompleteComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters.userToken) {
+            const confirmContent = confirm(
+              "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
     ],
   },
@@ -118,56 +183,81 @@ const routes = [
   {
     path: "/owner",
     component: () => import("@/views/OwnerView.vue"),
+    beforeEnter: (to, from, next) => {
+      if (!store.getters.userToken) {
+        const confirmContent = confirm(
+          "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
+        );
+        if (confirmContent) {
+          next("/");
+        } else {
+          return;
+        }
+        console.log("인증이 필요합니다.");
+      } else {
+        next();
+      }
+    },
     children: [
       // 사장님 서비스 메인
       {
         path: "/owner",
-        component: () => import("../components/Owner/OwnerMainComponent.vue"),
+        component: () => import("@/components/Owner/OwnerMainComponent.vue"),
+      },
+      // 사장님 인증
+      {
+        path: "/owner/verify",
+        component: () => import("@/components/Owner/VerifyOwner.vue"),
+      },
+      // 카페 검색
+      {
+        path: "/owner/searchcafe",
+        component: () => import("@/components/Owner/SearchCafeComponent.vue"),
       },
       // 매장 정보 조회하기
       {
         path: "/owner/cafe",
-        component: () => import("../components/Owner/OwnerCafeComponent.vue"),
+        component: () => import("@/components/Owner/OwnerCafeComponent.vue"),
       },
       // 매장 정보 수정하기
       {
         path: "/owner/cafemanage",
-        component: () => import("../components/Owner/OwnerCafeManage.vue"),
+        component: () => import("@/components/Owner/OwnerCafeManage.vue"),
       },
       // 메뉴 조회하기
       {
         path: "/owner/menu",
-        component: () => import("../components/Owner/OwnerMenuComponent.vue"),
+        component: () => import("@/components/Owner/OwnerMenuComponent.vue"),
       },
       // 메뉴 추가하기
       {
         path: "/owner/menuadd",
-        component: () => import("../components/Owner/OwnerMenuAdd.vue"),
+        component: () => import("@/components/Owner/OwnerMenuAdd.vue"),
       },
       // 메뉴 수정하기
       {
         path: "/owner/menumodify",
-        component: () => import("../components/Owner/OwnerMenuModify.vue"),
+        component: () => import("@/components/Owner/OwnerMenuModify.vue"),
       },
       // 스탬프 찍어주기
       {
         path: "/owner/stamp",
-        component: () => import("../components/Owner/OwnerStampComponent.vue"),
+        component: () => import("@/components/Owner/StampCoupon.vue"),
       },
       // 회원 조회
       {
         path: "/owner/checkmember",
-        component: () => import("../components/Owner/CheckMember.vue"),
+        component: () => import("@/components/Owner/CheckMember.vue"),
       },
       // 회원 조회
       {
         path: "/owner/stampcoupon",
-        component: () => import("../components/Owner/StampCoupon.vue"),
+        component: () => import("@/components/Owner/StampCoupon.vue"),
       },
       // 회원 조회
       {
         path: "/owner/complete",
-        component: () => import("../components/CompleteComponent.vue"),
+        component: () => import("@/components/CompleteComponent.vue"),
       },
     ],
   },
@@ -175,6 +265,21 @@ const routes = [
   {
     path: "/mypage",
     component: () => import("@/views/MypageView.vue"),
+    beforeEnter: (to, from, next) => {
+      if (!store.getters.userToken) {
+        const confirmContent = confirm(
+          "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
+        );
+        if (confirmContent) {
+          next("/");
+        } else {
+          return;
+        }
+        console.log("인증이 필요합니다.");
+      } else {
+        next();
+      }
+    },
     children: [
       // 마이 페이지 메인
       {
