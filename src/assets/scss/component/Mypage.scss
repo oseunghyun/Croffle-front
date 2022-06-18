@@ -130,6 +130,11 @@
       @include font(16px, 700, $color-primary-dark);
     }
   }
+  .card__wrapper--column {
+    .card {
+      cursor: pointer;
+    }
+  }
 }
 
 .mypage-membership {
@@ -155,6 +160,7 @@
         // 스탬프 도장
         position: relative;
         height: 190px;
+        cursor: auto;
         .stamp-list {
           @include layout(row, center, flex-start);
           flex-wrap: wrap;
@@ -180,9 +186,12 @@
       }
     }
   }
+
   .mypage-coupon {
     .card__wrapper-column {
-      .card {
+      .community__card {
+        cursor: pointer;
+
         .card__title {
           cursor: pointer;
         }
