@@ -65,7 +65,7 @@
             <div class="text__nickname">
               {{ review.author }}
             </div>
-            <div class="text__date">{{ review.createdate }}</div>
+            <div class="text__date">{{ review.createdDate }}</div>
           </div>
           <div class="rate__stars">
             <i
@@ -113,15 +113,15 @@ export default {
       liked: false,
       reviewData: [
         {
-          nickname: "씽씽",
-          date: "2022.04.01",
+          author: "씽씽",
+          createdDate: "2022.04.01",
           content:
             "냉동 생지 사다가 만드는게 아니라 사장님이 직접 만든 반죽으로 하심",
           rate: 3,
         },
         {
-          nickname: "씽씽",
-          date: "2022.04.01",
+          author: "씽씽",
+          createdDate: "2022.04.01",
           content:
             "냉동 생지 사다가 만드는게 아니라 사장님이 직접 만든 반죽으로 하심",
           rate: 2,
@@ -146,8 +146,8 @@ export default {
     async fetchReview() {
       console.log("리뷰 조회");
       try {
-        const reviewData = await fetchReview(this.$route.params.id);
-        this.reviewsData = reviewData.reviews;
+        const data = await fetchReview(this.$route.params.id);
+        this.reviewsData = data.data;
       } catch (error) {
         console.log(error);
       }
