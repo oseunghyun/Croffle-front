@@ -54,14 +54,14 @@ export default {
   methods: {
     async searchCafe() {
       try {
-        const cafeData = await searchCafe(this.cafeData);
+        const data = await searchCafe(this.cafeData);
         /* this.cafes [{title: ''},{title: ''}]*/
-        this.cafes = cafeData.data.items;
+        this.cafes = data.data.items;
         this.cafes = this.cafes.map((cafe) => {
           cafe.title = cafe.title.replaceAll("<b>", "").replaceAll("</b>", "");
           return cafe;
         });
-        console.log(cafeData.data.items[0]);
+        console.log(data.data.items[0]);
       } catch (error) {
         console.log(error);
       }
