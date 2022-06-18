@@ -12,19 +12,6 @@ pipeline {
 						checkout scm
           }
         }
-        stage('build gradle') {
-            steps {
-                
-            }
-            post {
-                success {
-                    echo 'build success'
-                }
-                failure {
-                    echo 'build failed'
-                }
-            }
-        }
         stage('Build image'){
             steps {
                 croffle = docker.build("osh1477/croffle-front")
