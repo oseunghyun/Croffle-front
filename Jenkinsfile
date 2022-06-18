@@ -8,7 +8,7 @@ node {
 	}
 	stage('Test image'){
 		app.inside {
-                       sh 'ls'
+      sh 'ls'
 			sh'rm -rf /var/www/croffle/dist'
 			sh 'dir /var/jenkins_home/workspace/crof'
 			node 'node --version';
@@ -17,15 +17,14 @@ node {
 			sh 'mv dist /var/www/croffle'  
 			sh 'scp -r dist ohsh1477@34.64.45.86:/var/www/croffle'
 		}
-
-        }
-         stage('Push image') {
-        	docker.withRegistry('https://registry.hub.docker.com', 'osh1477'){ 
+  }
+  stage('Push image') {
+    docker.withRegistry('https://registry.hub.docker.com', 'osh1477'){ 
 			app.push("${env.BUILD_NUMBER}")
-                	app.push("latest")
-                }
-        }       
- }
+      app.push("latest")
+    }
+  }       
+}
 
 // pipeline {
 //     agent any
