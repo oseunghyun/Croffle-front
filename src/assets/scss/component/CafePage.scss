@@ -55,16 +55,25 @@
         margin-bottom: 10px;
       }
       .cafe__address {
-        font-size: 12px;
+        font-size: 14 px;
         font-weight: 400;
+        font-weight: 40px;
+        margin-bottom: 10px;
+
         color: $color-black-60;
       }
       // 좋아요 버튼
       .cafe__btn-like {
         background-color: transparent;
-        font-size: 16px;
-        color: $color-black-100;
+        font-size: 14px;
+        color: $color-black-80;
         font-weight: 200;
+        border: 1px solid $color-black-40;
+        border-radius: 8px;
+        padding: 5px 10px;
+        i {
+          color: $color-black-60;
+        }
       }
     }
     .cafe-info__detail {
@@ -87,52 +96,6 @@
           font-weight: 200;
           color: $color-black-80;
         }
-      }
-    }
-  }
-}
-
-/* 카페 정보 페이지 */
-#cafe-page {
-  @include layout(column, center, center);
-  gap: 10px;
-  .cafe-info {
-    @include layout(column, center, center);
-    border: 1px solid $color-black-10;
-    border-radius: 5px;
-    box-sizing: border-box;
-    padding: 20px 10px;
-    .cafe__name {
-      font-size: 18px;
-      font-weight: 700;
-      color: $color-black-100;
-      margin-bottom: 10px;
-    }
-    .cafe__address {
-      font-size: 12px;
-      font-weight: 400;
-      color: $color-black-60;
-    }
-  }
-  .cafe-info__detail {
-    @include layout(column, flex-start, center);
-    border: 1px solid $color-black-10;
-    border-radius: 5px;
-    box-sizing: border-box;
-    padding: 20px 20px;
-    gap: 24px;
-    .cafe-info__wrapper {
-      @include layout(column, flex-start, center);
-      gap: 12px;
-      label {
-        font-size: 16px;
-        font-weight: 700;
-        color: $color-black-100;
-      }
-      span {
-        font-size: 14px;
-        font-weight: 200;
-        color: $color-black-80;
       }
     }
   }
