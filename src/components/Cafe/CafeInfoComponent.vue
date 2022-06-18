@@ -155,7 +155,7 @@ export default {
     // 내가 이 카페 좋아요 했는지 여부 조회
     async checkLike() {
       try {
-        const { likedData } = await fetchLikedList;
+        const { likedData } = await fetchLikedList();
         likedData.some(function findCafe(element) {
           if (element.id == this.$route.params.id) {
             return (this.liked = true);
@@ -169,21 +169,28 @@ export default {
     },
     // 좋아요
     async scrapCafe() {
-      if (this.liked == false) {
-        try {
-          console.log("좋아요");
-          await likeCafe(this.$route.params.id);
-          this.liked = !this.liked;
-        } catch (error) {
-          console.log(error.message);
-        }
+      if (
+        this.$store.state.token == "" ||
+        this.$store.state.token == "undefined"
+      ) {
+        alert("로그인이 필요한 기능입니다.");
       } else {
-        try {
-          console.log("좋아요 취소");
-          await delLikeCafe(this.$route.params.id);
-          this.liked = !this.liked;
-        } catch (error) {
-          console.log(error.message);
+        if (this.liked == false) {
+          try {
+            console.log("좋아요");
+            await likeCafe(this.$route.params.id);
+            this.liked = !this.liked;
+          } catch (error) {
+            console.log(error.message);
+          }
+        } else {
+          try {
+            console.log("좋아요 취소");
+            await delLikeCafe(this.$route.params.id);
+            this.liked = !this.liked;
+          } catch (error) {
+            console.log(error.message);
+          }
         }
       }
     },
