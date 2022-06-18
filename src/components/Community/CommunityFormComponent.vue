@@ -4,7 +4,7 @@
     <form>
       <div class="input__box">
         <label>게시글 카테고리</label>
-        <select v-model="boardCategory">
+        <select v-model="category">
           <option value="RECIPE">레시피 공유 글</option>
           <option value="FREE">자유 글</option>
         </select>
@@ -45,11 +45,9 @@ import { createPost } from "@/api/board";
 export default {
   data() {
     return {
-      id: 0,
-      userId: 0,
       title: "",
       content: "",
-      boardCategory: "RECIPE",
+      category: "RECIPE",
     };
   },
   computed: {
@@ -72,16 +70,12 @@ export default {
       try {
         console.log("폼 제출");
         const postData = await createPost({
-          id: this.id,
-          userId: this.userId,
           title: this.title,
           content: this.content,
-          boardCategory: this.boardCategory,
-          // create_date: this.createDate,
-          // modifiedDate: this.modifiedDate,
+          boardCategory: this.category,
         });
         console.log(postData);
-        // this.$router.push("/community");
+        this.$router.push("/community");
       } catch (error) {
         console.log(error.message);
       }

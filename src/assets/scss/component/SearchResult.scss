@@ -1,0 +1,39 @@
+#not-regi-cafe {
+  height: 100%;
+  @include layout(column, flex-start, center);
+  position: relative;
+  top: 100px;
+  width: 100%;
+  p {
+    width: 100%;
+    color: $color-black-60;
+    text-align: center;
+    line-height: 28px;
+    font-size: 14px;
+    position: relative;
+    top: 120px;
+  }
+  button {
+    position: relative;
+    top: 0px;
+    background-color: transparent;
+    i {
+      color: $color-black-40;
+    }
+  }
+}
+
+#cafe-list {
+  height: 100%;
+  @include layout(column, flex-end, center);
+  position: relative;
+  top: 100px;
+  width: 100%;
+  button {
+    margin-top: 10px;
+    background-color: transparent;
+    i {
+      color: $color-black-40;
+    }
+  }
+}

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { registerReview } from "@/api/index";
+import { createReview } from "@/api/review";
 export default {
   data() {
     return {
@@ -62,21 +62,16 @@ export default {
   methods: {
     // 별점
     plusRate(index) {
-      // this.isActive.map(() => {
-      //   return false;
-      // });
-      // // this.isActive = [false, false, false, false, false];
       this.isActive = this.isActive.map((ia, idx) => {
         return idx <= index;
       });
       this.rate = this.isActive.filter((ia) => ia).length;
-      // console.log(this.rate);
     },
-
     async submitForm() {
       try {
         console.log("리뷰하기 폼 제출");
-        const reviewData = await registerReview({
+        const reviewData = await createReview({
+          cafeId: this.$route.params.id,
           rate: this.rate,
           content: this.content,
         });

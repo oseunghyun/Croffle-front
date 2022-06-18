@@ -7,33 +7,53 @@
     <form>
       <div class="input__box">
         <label for="nickname">닉네임</label>
+
         <input
           id="nickname"
           v-model="nickname"
           placeholder="닉네임을 입력해주세요."
-          maxlength="20"
+          maxlength="10"
+          @input="this.nickname = $event.target.value"
         />
-        <!-- <button type="button" class="btn__duplicate btn--primary">
+        <button
+          type="button"
+          @click="verifyNickname"
+          :class="[
+            'btn__duplicate',
+            this.nickname ? 'btnPrimary' : 'btnDisabled',
+          ]"
+          :disabled="!this.nickname"
+        >
           중복 확인
-        </button> -->
-        <span class="count">{{ nicknameLength }}/20</span>
-        <!-- <span class="error-message">{{ errorMessage }}</span> -->
+        </button>
+        <span class="count">{{ nicknameLength }}/10</span>
+        <span
+          class="error-message"
+          :class="['verifyMessage', isValid ? 'passMessage' : 'verifyMessage']"
+          >{{ errorMessage }}</span
+        >
       </div>
     </form>
-    <button type="button" @click="submitForm" class="btn--primary">
+    <button
+      type="button"
+      @click="submitForm"
+      :class="['btn--md', isValid ? 'btnPrimary' : 'btnDisabled']"
+      :disabled="isValid == false"
+    >
       닉네임 수정하기
     </button>
   </div>
 </template>
 
 <script>
-import { editNickname } from "@/api/mypage";
+import { editNickname, verifyNickname } from "@/api/mypage";
 
 export default {
   data() {
     return {
       errorMessage: "유효성검사 메세지",
       nickname: "",
+      isValid: false,
     };
   },
   computed: {
@@ -54,6 +74,20 @@ export default {
         this.$router.push("/mypage/nicknamecomplete");
       } catch (error) {
         console.log(error.message);
+      }
+    },
+    async verifyNickname() {
+      try {
+        console.log("닉네임 검증 완료");
+        const { data } = await verifyNickname({
+          nickname: this.nickname,
+        });
+        this.errorMessage = data.messages;
+        this.isValidated = true;
+      } catch (error) {
+        console.log(error.message);
+        this.errorMessage = error.message;
+        this.isValidated = false;
       }
     },
   },

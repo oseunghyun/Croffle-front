@@ -1,4 +1,9 @@
 <template>
+  <div id="owner-main" class="verify-header">
+    <header>
+      <img :src="logo_owner" />
+    </header>
+  </div>
   <div class="cafe-view">
     <div id="report-component">
       <form @submit.prevent="searchCafe">
@@ -39,16 +44,14 @@
 </template>
 <script>
 import { searchCafe } from "@/api/naver";
+import logo_owner from "@/assets/Image/logo_owner.svg";
 
 export default {
-  created() {
-    let headerActive = true;
-    this.$store.commit("isHeaderActive", headerActive);
-  },
   data() {
     return {
       cafeData: "",
       cafes: [],
+      logo_owner,
     };
   },
   methods: {
@@ -69,7 +72,7 @@ export default {
     submitCafeInfo(index) {
       const cafeInfo = this.cafes[index];
       this.$emit("submitCafeInfo", cafeInfo);
-      this.$router.push("/cafes/report");
+      this.$router.push("/verify/owner");
     },
   },
 };

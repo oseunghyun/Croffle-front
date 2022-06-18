@@ -15,6 +15,10 @@
           <div class="text__cafe-title" v-if="this.cafeInfo != ''">
             {{ this.cafeInfo.title }}
           </div>
+          <div class="input__box">
+            <div><label>도로명 주소</label><em>*</em></div>
+            <span class="info">{{ this.cafeInfo.addr }}</span>
+          </div>
         </div>
         <div class="input__box">
           <div><label>메뉴</label><em>*</em></div>
@@ -37,26 +41,6 @@
           />
           <span class="count">{{ priceLength }}/20</span>
         </div>
-        <div class="input__box">
-          <label>운영시간</label>
-          <textarea
-            placeholder="운영시간을 입력해주세요."
-            type="text"
-            v-model="this.hours"
-            maxlength="255"
-          />
-          <span class="count">{{ hoursLength }}/255</span>
-        </div>
-        <div class="input__box">
-          <label>sns</label>
-          <textarea
-            placeholder="sns 주소를 입력해주세요."
-            type="text"
-            v-model="this.site"
-            maxlength="255"
-          />
-          <span class="count">{{ snsLength }}/255</span>
-        </div>
       </form>
 
       <button
@@ -72,8 +56,8 @@
 </template>
 
 <script>
-import { searchCafe } from "@/api/index";
-import { reportCafe } from "@/api/report";
+import { searchCafe } from "@/api/naver";
+import { reportMenu } from "@/api/report";
 
 export default {
   created() {
@@ -88,8 +72,6 @@ export default {
   data() {
     return {
       header: "카페 제보하기",
-      hours: "",
-      site: "",
       menus: {
         name: "",
         price: "",
@@ -107,12 +89,6 @@ export default {
     menuLength() {
       return this.menus.name.length;
     },
-    hoursLength() {
-      return this.hours.length;
-    },
-    snsLength() {
-      return this.site.length;
-    },
     priceLength() {
       {
         return this.menus.price.length;
@@ -120,22 +96,18 @@ export default {
     },
   },
   methods: {
-    // 카페 제보 폼 제출: api 명세 완성 후 수정하기
     async reportCafe() {
       try {
         console.log("카페 제보 폼 제출");
-        const reportCafeData = await reportCafe({
+        const cafeData = await reportMenu({
           cafe_name: this.cafeInfo.title,
-          coord: (this.cafeInfo.mapx, this.cafeInfo.mapy),
-          roadaddr: this.cafeInfo.roadAddress,
+          roadaddress: this.cafeInfo.roadAddress,
           menus: {
             name: this.menus.name,
             price: this.menus.price,
           },
-          hours: this.hours,
-          site: this.site,
         });
-        console.lot(reportCafeData);
+        console.lot(cafeData);
       } catch (error) {
         console.log(error);
       } finally {
@@ -143,24 +115,6 @@ export default {
         this.$router.push("/cafes");
       }
     },
-    // // 메뉴 제보 폼 제출
-    // async reportMenu() {
-    //   try {
-    //     console.log("메뉴 제보 폼 제출");
-    //     const menuData = await reportMenu({
-    //       cafe_name: this.cafe_name,
-    //       coord: this.coord,
-    //       roadAddress: this.roadAddress,
-    //       menus: { name: this.menus.name, price: this.menus.price },
-    //     });
-    //     console.log(menuData);
-    //   } catch (error) {
-    //     console.log(error.response.status);
-    //     console.log(error.response.headers);
-    //   } finally {
-    //     this.initForm();
-    //   }
-    // },
     initForm() {
       this.rate = "";
       this.content = "";
