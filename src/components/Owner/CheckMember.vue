@@ -29,18 +29,19 @@
 </template>
 
 <script>
-import { fetchMembership } from "@/api/owner";
+import { fetchMemberInfo } from "@/api/owner";
 
 export default {
   data() {
     return {
       cafe_id: "",
-      user_id: "",
       contact: "",
-      stampInfo: {
-        user_nickname: "",
-        stamp_cnt: 0,
-      },
+      stampInfo: [
+        {
+          name: "오승현",
+          stampCnt: 4,
+        },
+      ],
     };
   },
   computed: {
@@ -123,13 +124,11 @@ export default {
     async fetchMembership() {
       try {
         console.log("회원정보 조회");
-        const { memberInfo } = await fetchMembership({
-          cafe_id: this.cafe_id,
-          user_phone: this.user_phone,
-          user_id: this.user_id,
+        // 카페 id 보내기
+        const { data } = await fetchMemberInfo({
+          telephone: this.contact,
         });
-        this.stampInfo.user_nickname = memberInfo.user_nickname;
-        this.stampInfo.stamp_cnt = memberInfo.stamp_cnt;
+        this.stampInfo = data.data;
       } catch (error) {
         console.log(error.message);
       } finally {

@@ -7,25 +7,25 @@
     <!-- 카페 정보 -->
     <div id="cafe-page">
       <div class="cafe-info">
-        <span class="cafe__name">{{ cafeInfo.cafe_name }}</span>
-        <span class="cafe__address">{{ cafeInfo.cafe_addr }}</span>
+        <span class="cafe__name">{{ cafeInfo.cafeName }}</span>
+        <span class="cafe__address">{{ cafeInfo.cafeAddr }}</span>
       </div>
       <div class="cafe-info__detail">
         <div class="cafe-info__wrapper">
           <label>전화번호</label>
-          <span>{{ cafeInfo.cafe_telephone }}</span>
+          <span>{{ cafeInfo.cafeTelephone }}</span>
         </div>
         <div class="cafe-info__wrapper">
           <label>운영시간</label>
-          <span>{{ cafeInfo.cafe_hours }}</span>
+          <span>{{ cafeInfo.cafeHours }}</span>
         </div>
         <div class="cafe-info__wrapper">
           <label>SNS</label>
-          <span>{{ cafeInfo.cafe_site }}</span>
+          <span>{{ cafeInfo.cafeSite }}</span>
         </div>
         <div class="cafe-info__wrapper">
           <label>제공 혜택</label>
-          <span>{{ cafeInfo.cafe_benefit }}</span>
+          <span>{{ cafeInfo.cafeBenefit }}</span>
         </div>
       </div>
     </div>
@@ -45,9 +45,6 @@ export default {
   },
   created() {
     this.fetchOwnerCafe();
-  },
-  components: {
-    // CafeInfoComponent,
   },
   methods: {
     manageForm() {
