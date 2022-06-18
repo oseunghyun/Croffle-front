@@ -14,7 +14,9 @@ pipeline {
         }
         stage('Build image'){
             steps {
+							script {
                 croffle = docker.build("osh1477/croffle-front")
+							}
             }
         }
         stage("Push image") {
