@@ -4,7 +4,7 @@ COPY . /app/
 WORKDIR /app/
 CMD rm -rf /var/www/croffle/dist \
 cd /var/jenkins_home/workspace \
-npm install \
-npm run build \
+# npm install \
+# npm run build \
 mv dist /var/www/croffle/
 
