@@ -71,7 +71,7 @@ export default {
         console.log("추천 게시판");
         const { cafeData } = await recommendCafe(filter);
         console.log(cafeData);
-        this.cafeData = cafeData.cafes;
+        this.cafeData = cafeData.data;
       } catch (error) {
         console.log(error.message);
       }

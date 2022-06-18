@@ -44,8 +44,8 @@ export default {
         console.log("등록된 카페 여부 검색");
         const { cafeData } = await searchCafeInfo(this.name);
 
-        // this.cafeInfo = cafeData.data;
-        if (this.cafeInfo == "") {
+        // 카페 등록 여부에 따른 페이지 처리 다시 하기
+        if (cafeData.messages == "일치하는 카페가 없습니다.") {
           const registered = false;
           this.$emit("fetchResult", registered);
         } else {

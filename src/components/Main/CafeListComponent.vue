@@ -1,7 +1,7 @@
 <template>
   <div id="cafe-list" class="container">
     <div class="card__wrapper--column">
-      <div v-for="cafe in cafes" :key="cafe.id" class="cafe__card">
+      <div v-for="cafe in cafeList" :key="cafe.id" class="cafe__card">
         <span class="text__name">{{ cafe.name }} </span>
         <span class="text__addr">{{ cafe.addr }} </span>
       </div>
@@ -15,21 +15,19 @@
 <script>
 export default {
   data() {
-    return {
-      cafes: [
-        {
-          name: "카페 이름",
-          addr: "주소",
-        },
-        {
-          name: "카페 이름",
-          addr: "주소",
-        },
-      ],
-    };
+    return {};
   },
   props: {
-    cafeList: [],
+    cafeList: [
+      {
+        name: "카페 이름1",
+        addr: "주소1",
+      },
+      {
+        name: "카페 이름2",
+        addr: "주소2",
+      },
+    ],
   },
 };
 </script>
