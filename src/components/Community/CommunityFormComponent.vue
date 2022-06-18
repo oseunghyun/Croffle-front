@@ -5,7 +5,7 @@
       <div class="input__box">
         <label>게시글 카테고리</label>
         <select v-model="category">
-          <option value="RECIPE">레시피 공유 글</option>
+          <option value="RECIPE">레시피 글</option>
           <option value="FREE">자유 글</option>
         </select>
       </div>
