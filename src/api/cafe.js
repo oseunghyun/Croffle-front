@@ -17,4 +17,6 @@ function searchCafeInfo(cafeName) {
   return instance.get(`cafe/search?name=${cafeName}`);
 }
 
+// 카페 메뉴 조회(추가 예정)
+
 export { fetchCafes, fetchCafeInfo, searchCafeInfo };

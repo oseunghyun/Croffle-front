@@ -5,17 +5,17 @@
       <div class="input__box">
         <label>카페이름</label>
         <input
-          v-model="cafeInfo.cafe_name"
+          v-model="cafeInfo.cafeName"
           placeholder="카페이름을 입력해주세요."
           maxlength="40"
-          @input="this.cafeInfo.cafe_name = $event.target.value"
+          @input="this.cafeInfo.cafeName = $event.target.value"
         />
         <span class="count">{{ cafeNameLength }}/40</span>
       </div>
       <div class="input__box">
         <label>전화번호</label>
         <input
-          v-model="cafeInfo.cafe_telephone"
+          v-model="cafeInfo.cafeTelephone"
           placeholder="전화번호를 입력해주세요."
           maxlength="30"
           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
@@ -25,31 +25,31 @@
       <div class="input__box">
         <label>운영시간</label>
         <textarea
-          v-model="cafeInfo.cafe_hours"
+          v-model="cafeInfo.cafeHours"
           placeholder="운영시간을 입력해주세요."
           rows="2"
           maxlength="255"
-          @input="this.cafeInfo.cafe_hours = $event.target.value"
+          @input="this.cafeInfo.cafeHours = $event.target.value"
         />
         <span class="count">{{ cafeHoursLength }}/255</span>
       </div>
       <div class="input__box">
         <label>SNS</label>
         <input
-          v-model="cafeInfo.cafe_site"
+          v-model="cafeInfo.cafeSite"
           placeholder="SNS 주소를 입력해주세요."
           maxlength="255"
-          @input="this.cafeInfo.cafe_site = $event.target.value"
+          @input="this.cafeInfo.cafeSite = $event.target.value"
         />
         <span class="count">{{ cafeSiteLength }}/255</span>
       </div>
       <div class="input__box">
         <label>제공혜택</label>
         <textarea
-          v-model="cafeInfo.cafe_benefit"
+          v-model="cafeInfo.cafeBenefit"
           placeholder="제공혜택을 입력해주세요."
           maxlength="255"
-          @input="this.cafeInfo.cafe_benefit = $event.target.value"
+          @input="this.cafeInfo.cafeBenefit = $event.target.value"
         />
         <span class="count">{{ cafeBenefitLength }}/255</span>
       </div>
@@ -72,38 +72,38 @@ export default {
   data() {
     return {
       cafeInfo: {
-        cafe_id: "",
-        cafe_name: "",
-        cafe_telephone: "",
-        cafe_hours: "",
-        cafe_site: "",
-        cafe_benefit: "",
+        cafeId: "",
+        cafeName: "",
+        cafeTelephone: "",
+        cafeHours: "",
+        cafeSite: "",
+        cafeBenefit: "",
       },
     };
   },
   computed: {
     cafeNameLength() {
-      return this.cafeInfo.cafe_name.length;
+      return this.cafeInfo.cafeName.length;
     },
     cafeTelephoneLength() {
-      return this.cafeInfo.cafe_telephone.length;
+      return this.cafeInfo.cafeTelephone.length;
     },
     cafeHoursLength() {
-      return this.cafeInfo.cafe_hours.length;
+      return this.cafeInfo.cafeHours.length;
     },
     cafeSiteLength() {
-      return this.cafeInfo.cafe_site.length;
+      return this.cafeInfo.cafeSite.length;
     },
     cafeBenefitLength() {
-      return this.cafeInfo.cafe_benefit.length;
+      return this.cafeInfo.cafeBenefit.length;
     },
     isValid() {
       if (
-        this.cafeInfo.cafe_name &&
-        this.cafeInfo.cafe_telephone &&
-        this.cafeInfo.cafe_hours &&
-        this.cafeInfo.cafe_site &&
-        this.cafeInfo.cafe_benefit
+        this.cafeInfo.cafeName &&
+        this.cafeInfo.cafeTelephone &&
+        this.cafeInfo.cafe_Hours &&
+        this.cafeInfo.cafeSite &&
+        this.cafeInfo.cafeBenefit
       ) {
         return true;
       } else {
@@ -116,8 +116,8 @@ export default {
     async fetchOwnerCafe() {
       try {
         console.log("사장님 - 매장 정보 조회");
-        const { ownerCafeData } = await fetchOwnerCafe();
-        this.cafeInfo = ownerCafeData.body.cafe;
+        const { data } = await fetchOwnerCafe();
+        this.cafeInfo = data.data;
       } catch (error) {
         console.log(error.message);
       }
@@ -125,19 +125,21 @@ export default {
     // 매장 정보 수정
     async editOwnerCafe() {
       try {
-        await editOwnerCafe({
-          cafe_id: this.cafeInfo.cafe_id,
-          cafe_name: this.cafeInfo.cafe_name,
-          cafe_telephone: this.cafeInfo.cafe_telephone,
-          cafe_hours: this.cafeInfo.cafe_hours,
-          cafe_site: this.cafeInfo.cafe_site,
-          cafe_benefit: this.cafeInfo.cafe_benefit,
-        });
+        await editOwnerCafe(
+          this.cafeInfo.cafeId,
+          this.cafeInfo.cafeName,
+          this.cafeInfo.cafeTelephone,
+          this.cafeInfo.cafeHours,
+          this.cafeInfo.cafeSite,
+          this.cafeInfo.cafeBenefit
+        );
       } catch (error) {
         console.log(error.message);
       } finally {
         let message = "수정이";
         this.$emit("setMessage", message);
+        let cafeId = this.cafeInfo.cafeId;
+        this.$emit("setCafeId", cafeId);
         this.$router.push("/owner/complete");
       }
     },

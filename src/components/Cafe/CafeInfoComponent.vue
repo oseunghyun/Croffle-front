@@ -23,10 +23,10 @@
           <span>{{ cafeInfo.site }}</span>
         </div>
       </div>
-      <p class="guide">
+      <!-- <p class="guide">
         이 가게에서 크로플을 파나요?<br />
         원정대를 위해 제보해주세요!
-      </p>
+      </p> -->
     </div>
     <!-- 카페 메뉴 -->
     <div id="cafe-menu">
@@ -65,7 +65,7 @@
             <div class="text__nickname">
               {{ review.author }}
             </div>
-            <div class="text__date">{{ review.createdate }}</div>
+            <div class="text__date">{{ review.createdDate }}</div>
           </div>
           <div class="rate__stars">
             <i
@@ -100,45 +100,41 @@ import { fetchCafeInfo } from "@/api/cafe";
 
 export default {
   created() {
-    // 카페 상세 정보 조회(활성화 하기)
-    // this.fetchCafeInfo();
-  },
-  mounted() {
-    console.log("route", this.$route);
-    console.log("mounted id:", this.$route.params.id);
+    this.fetchCafeInfo();
   },
   components: {
     ModalComponent,
     ModalContent,
   },
-  // props: {
-  //   cafeInfo: {
-  //     type: Object,
-  //   },
-  // },
   data() {
     return {
-      cafeId: "cafeId",
       isModalActive: false,
       isHeaderActive: true,
       liked: false,
       reviewData: [
         {
-          nickname: "씽씽",
-          date: "2022.04.01",
+          author: "씽씽",
+          createdDate: "2022.04.01",
           content:
             "냉동 생지 사다가 만드는게 아니라 사장님이 직접 만든 반죽으로 하심",
           rate: 3,
         },
         {
-          nickname: "씽씽",
-          date: "2022.04.01",
+          author: "씽씽",
+          createdDate: "2022.04.01",
           content:
             "냉동 생지 사다가 만드는게 아니라 사장님이 직접 만든 반죽으로 하심",
           rate: 2,
         },
       ],
-      cafeInfo: [],
+      cafeInfo: {
+        id: 0,
+        name: "밀크북",
+        roadaddr: "서울특별시 성북구 80로 ",
+        telephone: "02-345-6720",
+        hours: "오전 10시 부터 오후 8시 까지",
+        site: "",
+      },
     };
   },
   methods: {
@@ -150,8 +146,8 @@ export default {
     async fetchReview() {
       console.log("리뷰 조회");
       try {
-        const reviewData = await fetchReview(this.$route.params.id);
-        this.reviewsData = reviewData.reviews;
+        const data = await fetchReview(this.$route.params.id);
+        this.reviewsData = data.data;
       } catch (error) {
         console.log(error);
       }
@@ -159,7 +155,7 @@ export default {
     // 내가 이 카페 좋아요 했는지 여부 조회
     async checkLike() {
       try {
-        const { likedData } = await fetchLikedList;
+        const { likedData } = await fetchLikedList();
         likedData.some(function findCafe(element) {
           if (element.id == this.$route.params.id) {
             return (this.liked = true);
@@ -173,21 +169,28 @@ export default {
     },
     // 좋아요
     async scrapCafe() {
-      if (this.liked == false) {
-        try {
-          console.log("좋아요");
-          await likeCafe(this.$route.params.id);
-          this.liked = !this.liked;
-        } catch (error) {
-          console.log(error.message);
-        }
+      if (
+        this.$store.state.token == "" ||
+        this.$store.state.token == "undefined"
+      ) {
+        alert("로그인이 필요한 기능입니다.");
       } else {
-        try {
-          console.log("좋아요 취소");
-          await delLikeCafe(this.$route.params.id);
-          this.liked = !this.liked;
-        } catch (error) {
-          console.log(error.message);
+        if (this.liked == false) {
+          try {
+            console.log("좋아요");
+            await likeCafe(this.$route.params.id);
+            this.liked = !this.liked;
+          } catch (error) {
+            console.log(error.message);
+          }
+        } else {
+          try {
+            console.log("좋아요 취소");
+            await delLikeCafe(this.$route.params.id);
+            this.liked = !this.liked;
+          } catch (error) {
+            console.log(error.message);
+          }
         }
       }
     },

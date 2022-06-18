@@ -7,13 +7,13 @@
     <div class="owner__card">
       <span class="owner__card-title">고객정보</span><br />
       <span class="owner__card-text"
-        ><strong>{{ stampInfo.user_nickname }}</strong> 님</span
+        ><strong>{{ stampInfo[0].name }}</strong> 님</span
       >
     </div>
     <div class="owner__card">
       <span class="owner__card-title">보유 스탬프</span><br />
       <span class="owner__card-text"
-        ><strong class="count">{{ stampInfo.stamp_cnt }}</strong> / 10개</span
+        ><strong class="count">{{ stampInfo[0].stampCnt }}</strong> / 10개</span
       >
     </div>
     <button type="button" @click="createStamp" class="btn--primary">
@@ -26,26 +26,17 @@
 import { createStamp } from "@/api/owner";
 
 export default {
-  data() {
-    return {
-      user: {
-        user_nickname: "닉네임",
-        stamp_cnt: "2",
-      },
-    };
-  },
   props: {
-    stampInfo: {
-      type: Object,
-    },
+    stampInfo: {},
+    cafeId: Number,
   },
   methods: {
     async createStamp() {
       try {
         console.log("스탬프 적립 완료");
         const stampData = await createStamp({
-          cafe_id: this.cafe_id,
-          user_id: this.user_id,
+          cafeId: this.cafeId,
+          userId: this.stampInfo[0].userId,
         });
         console.log(stampData);
       } catch (error) {

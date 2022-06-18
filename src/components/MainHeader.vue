@@ -107,11 +107,7 @@ export default {
   },
   computed: {
     isUserLogin() {
-      if (this.$store.getters.userToken) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.$store.getters.isLogin;
     },
   },
 };

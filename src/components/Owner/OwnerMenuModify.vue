@@ -4,31 +4,31 @@
     <form>
       <div class="input__box">
         <label>현재 메뉴</label>
-        <select v-model="menu_id">
+        <select v-model="menuId">
           <option selected>메뉴명</option>
           <option
             v-for="menu in menuData"
-            :key="menu.menu_id"
-            :value="menu.menu_id"
+            :key="menu.menuId"
+            :value="menu.menuId"
           >
-            {{ menu.menu_name }}
+            {{ menu.menuName }}
           </option>
         </select>
       </div>
       <div class="input__box">
-        <label>수정할 메뉴명</label>
+        <label>수정될 메뉴명</label>
         <input
-          @input="this.menu_name = $event.target.value"
-          v-model="menu_name"
+          @input="this.menuName = $event.target.value"
+          v-model="menuName"
           maxlength="40"
-          placeholder="수정하실 메뉴명을 입력해주세요."
+          placeholder="수정될 메뉴명을 입력해주세요."
         />
         <span class="count">{{ menuLength }}/40</span>
       </div>
       <div class="input__box">
         <label>수정할 가격<span class="won">원</span></label>
         <input
-          v-model="menu_price"
+          v-model="menuPrice"
           placeholder="수정하실 가격을 입력해주세요."
           maxlength="20"
           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
@@ -56,29 +56,23 @@ export default {
   },
   data() {
     return {
-      cafe_id: "",
       // 바꿀 메뉴
-      menu_name: "",
-      menu_price: "",
+      menuName: "",
+      menuPrice: "",
       // 기존 메뉴
-      menuData: [
-        // {
-        //   menu_id: 1,
-        //   menu_name: "menu",
-        // },
-      ],
-      menu_id: "",
+      menuId: 0,
+      menuData: [],
     };
   },
   computed: {
     menuLength() {
-      return this.menu_name.length;
+      return this.menuName.length;
     },
     priceLength() {
-      return this.menu_price.length;
+      return this.menuPrice.length;
     },
     isValid() {
-      if (this.menu_id && this.menu_name && this.menu_price) {
+      if (this.menuId && this.menuName && this.menuPrice) {
         return true;
       } else {
         return false;
@@ -89,8 +83,8 @@ export default {
     //메뉴 조회
     async fetchOwnerMenu() {
       try {
-        const { menuData } = await fetchOwnerMenu();
-        this.menuData = menuData.body.menu;
+        const { data } = await fetchOwnerMenu();
+        this.menuData = data.data;
       } catch (error) {
         console.log(error.message);
       }
@@ -99,13 +93,10 @@ export default {
     async editOwnerMenu() {
       try {
         console.log("사장님 - 메뉴 수정 폼 제출");
-        const { newMenuData } = await editOwnerMenu({
-          cafe_id: this.cafe_id,
-          menu_id: this.menu_id,
-          menu_name: this.menu_name,
-          menu_price: this.menu_price,
+        await editOwnerMenu(this.menuId, {
+          menuName: this.menuName,
+          menuPrice: this.menuPrice,
         });
-        console.log(newMenuData);
       } catch (error) {
         console.log(error.message);
       } finally {

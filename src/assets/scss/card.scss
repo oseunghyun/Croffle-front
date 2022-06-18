@@ -10,13 +10,15 @@
     border-radius: 10px;
     box-sizing: border-box;
     padding: 16px;
+    cursor: pointer;
+
     .card__title {
       font-size: 16px;
       font-weight: 700;
     }
     .card__text {
       font-size: 12px;
-      font-weight: 300;
+      font-weight: 400;
       color: $color-black-60;
     }
   }
@@ -27,12 +29,14 @@
     box-shadow: none;
     border-bottom: 1px solid $color-black-10;
     border-radius: 0;
+    cursor: pointer;
+
     .card__title {
-      @include font(14px, 500, $color-black-100);
+      @include font(14px, 400, $color-black-100);
       cursor: pointer;
     }
     .card__text {
-      @include font(12px, 300, $color-black-60);
+      @include font(12px, 200, $color-black-60);
       @include layout(row, flex-start, space-between);
     }
   }
@@ -43,6 +47,8 @@
     width: 100%;
     border-bottom: 1px solid $color-black-10;
     padding-bottom: 10px;
+    cursor: pointer;
+
     .text__name {
       font-size: 14px;
       color: $color-black-dark;
@@ -62,11 +68,11 @@
   padding: 16px;
   border: 1px solid $color-black-10;
   .card__name {
-    @include font(14px, 500, $color-black-100);
+    @include font(14px, 400, $color-black-100);
     cursor: pointer;
   }
   .card__addr {
-    @include font(12px, 300, $color-black-60);
+    @include font(12px, 200, $color-black-60);
     @include layout(row, flex-start, flex-start);
   }
   .card__wrapper--row {
@@ -77,7 +83,7 @@
       @include layout(row, center, flex-end);
       gap: 5px;
       span {
-        @include font(12px, 300, $color-black-100);
+        @include font(12px, 200, $color-black-100);
       }
       i {
         color: $color-secondary-100;
@@ -100,11 +106,11 @@
         @include font(12px, 700, $color-black-100);
       }
       .text__date {
-        @include font(12px, 300, $color-black-60);
+        @include font(12px, 200, $color-black-60);
       }
     }
     .text__content {
-      @include font(12px, 400, $color-black-80);
+      @include font(14px, 400, $color-black-80);
       line-height: 22px;
     }
     .rate__stars {

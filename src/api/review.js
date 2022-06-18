@@ -5,7 +5,7 @@ function createReview(reviewData) {
   return instanceWithAuth.post("review", reviewData);
 }
 
-// 리뷰 조회하기
+// 리뷰 조회하기(확인)
 function fetchReview(cafeId) {
   return instance.get(`review/${cafeId}`);
 }

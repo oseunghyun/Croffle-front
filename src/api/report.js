@@ -6,7 +6,7 @@ function reportMenu(reportMenuData) {
   return instanceWithAuth.post("report/menu", reportMenuData);
 }
 
-// 정보 수정 요청 제보
+// 정보 수정 요청 제보(확인)
 function reportInfo(reportInfoData) {
   return instanceWithAuth.post("report/info", reportInfoData);
 }

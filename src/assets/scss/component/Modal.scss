@@ -70,10 +70,10 @@
         @include font(12px, 700, $color-black-100);
       }
       .card__text--benefit {
-        @include font(12px, 500, $color-black-100);
+        @include font(12px, 400, $color-black-100);
       }
       .card__text--expire {
-        @include font(10px, 300, $color-black-60);
+        @include font(10px, 200, $color-black-60);
       }
     }
 

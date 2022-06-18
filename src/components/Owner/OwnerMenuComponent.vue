@@ -4,10 +4,19 @@
       <h1>메뉴 관리</h1>
       <span>메뉴를 관리해주세요.</span>
     </header>
-    <cafe-menu-component
-      :menuList="menuList"
-      class="cafe-menu-component"
-    ></cafe-menu-component>
+    <div id="cafe-menu">
+      <p class="guide">
+        아래 버튼을 눌러 메뉴 수정 또는<br />
+        메뉴 추가를 해주세요!
+      </p>
+      <div class="menu__list">
+        <div v-for="menu in menuList" :key="menu" class="menu-info__wrapper">
+          <span class="menus__name">{{ menu.menuName }}</span>
+          <span class="menus__price">{{ menu.menuPrice }}</span>
+        </div>
+      </div>
+    </div>
+
     <div class="btn__wrapper">
       <button type="button" class="btn--primary" @click="modifyMenu">
         수정하기
@@ -20,25 +29,25 @@
 </template>
 
 <script>
-import CafeMenuComponent from "@/components/Cafe/CafeMenuComponent.vue";
 import { fetchOwnerMenu } from "@/api/owner";
 export default {
   data() {
     return {
       menuList: [
         {
-          menu_name: "메뉴1",
-          menu_price: "가격",
+          menuName: "메뉴1",
+          menuPrice: "가격",
         },
         {
-          menu_name: "메뉴2",
-          menu_price: "가격",
+          menuName: "메뉴2",
+          menuPrice: "가격",
+        },
+        {
+          menuName: "메뉴2",
+          menuPrice: "가격",
         },
       ],
     };
-  },
-  components: {
-    CafeMenuComponent,
   },
   created() {
     this.fetchOwnerMenu();
@@ -54,8 +63,8 @@ export default {
     async fetchOwnerMenu() {
       try {
         console.log("사장님 메뉴 조회");
-        const { ownerMenuData } = await fetchOwnerMenu();
-        this.menuList = ownerMenuData.body.menu;
+        const { data } = await fetchOwnerMenu();
+        this.menuList = data.data;
         console.log(this.menuList);
       } catch (error) {
         console.log("error.message");
