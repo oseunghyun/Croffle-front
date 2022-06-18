@@ -32,9 +32,11 @@
 import { fetchMemberInfo } from "@/api/owner";
 
 export default {
+  props: {
+    cafeId: Number,
+  },
   data() {
     return {
-      cafe_id: "",
       contact: "",
       stampInfo: [
         {

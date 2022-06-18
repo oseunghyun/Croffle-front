@@ -16,27 +16,29 @@ function fetchOwnerMenu() {
   return instanceWithAuth.get("owner/menus");
 }
 
-// 매장 조회(수정필요)
+// 매장 조회(완료)
 function fetchOwnerCafe() {
   return instanceWithAuth.get("owner/cafe");
 }
 
-// 매장 정보 수정(카페 아이디 보내는 부분 수정필요)
-function editOwnerCafe(cafeId) {
-  return instanceWithAuth.put(`owner/cafe/${cafeId}`);
+// 매장 정보 수정(완료)
+function editOwnerCafe(cafeId, name, telephone, hours, site, benefit) {
+  return instanceWithAuth.put(
+    `owner/cafe/${cafeId}?cafeName=${name}&telephone=${telephone}&hours=${hours}&site=${site}&benefit=${benefit}`
+  );
 }
 
-// 메뉴 추가(카페 아이디 값 추가하기 - OwnerMenuAdd.vue 에서 )
+// 메뉴 추가(완료)
 function createOwnerMenu() {
   return instanceWithAuth.post("owner/menu");
 }
 
-// 스탬프 찍어주기(카페 아이디 값 추가하기 - OwnerMenuAdd.vue 에서)
+// 스탬프 찍어주기(완료)
 function createStamp(cafeId, userId) {
   return instanceWithAuth.post("owner/stamp", cafeId, userId);
 }
 
-// 회원 조회(카페 아이디 값 추가하기 - OwnerMenuAdd.vue 에서)
+// 회원 조회(회원 id 보내지는거 체크)
 function fetchMemberInfo(phoneNum) {
   return instanceWithAuth.post("owner/find-user", phoneNum);
 }

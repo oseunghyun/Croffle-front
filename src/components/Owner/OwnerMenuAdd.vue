@@ -40,12 +40,16 @@
 import { createOwnerMenu } from "@/api/owner";
 
 export default {
+  props: {
+    cafeId: Number,
+  },
   data: function () {
     return {
       menu_name: "",
       menu_price: "",
     };
   },
+
   computed: {
     menuLength() {
       return this.menu_name.length;
@@ -67,7 +71,7 @@ export default {
       try {
         console.log("사장님 - 메뉴 추가 폼 제출");
         await createOwnerMenu({
-          cafeId: "",
+          cafeId: this.cafeId,
           name: this.menu_name,
           price: this.menu_price,
         });

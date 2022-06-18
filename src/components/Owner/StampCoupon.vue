@@ -28,14 +28,14 @@ import { createStamp } from "@/api/owner";
 export default {
   props: {
     stampInfo: {},
+    cafeId: Number,
   },
   methods: {
     async createStamp() {
       try {
         console.log("스탬프 적립 완료");
-        // 카페 아이디 보내주기
         const stampData = await createStamp({
-          cafeId: this.stampInfo[0].cafeId,
+          cafeId: this.cafeId,
           userId: this.stampInfo[0].userId,
         });
         console.log(stampData);
