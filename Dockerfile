@@ -15,8 +15,7 @@ RUN apt-get update && apt-get -y install \
                                 nginx \
                                 vim
 RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
-RUN cd /var/jenkins_home/workspace \
-mv dist /var/www/croffle/
+
 COPY default /etc/nginx/sites-available/default
 COPY ./run.sh /tmp/
 
