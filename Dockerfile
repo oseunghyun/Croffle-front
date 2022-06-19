@@ -5,6 +5,7 @@ WORKDIR /app/
 RUN rm -rf /var/www/croffle/dist \
 cd /var/jenkins_home/workspace \
 mv dist /var/www/croffle/
-COPY /etc/conf/nginx.conf /etc/nginx/sites-available/default
+COPY default /etc/nginx/sites-available/default
 
+EXPOSE 80
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
