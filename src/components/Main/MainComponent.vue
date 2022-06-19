@@ -4,6 +4,7 @@
       @showResult="showResult"
       @fetchInfo="fetchInfo"
       @fetchResult="fetchResult"
+      :cafeData="cafeData"
       :service="service"
       :registered="registered"
     ></searchbar-component>

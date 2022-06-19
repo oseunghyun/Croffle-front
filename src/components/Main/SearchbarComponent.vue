@@ -49,7 +49,7 @@ export default {
           const registered = false;
           this.$emit("fetchResult", registered);
         } else {
-          const registered = false;
+          const registered = true;
           this.$emit("fetchResult", registered, cafeData);
         }
       } catch (error) {

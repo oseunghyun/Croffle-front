@@ -1,7 +1,12 @@
 <template>
   <div id="cafe-list" class="container">
     <div class="card__wrapper--column">
-      <div v-for="cafe in cafeList" :key="cafe.id" class="cafe__card">
+      <div
+        v-for="cafe in cafeList"
+        :key="cafe.id"
+        class="cafe__card"
+        @click="toCafeDetail"
+      >
         <span class="text__name">{{ cafe.name }} </span>
         <span class="text__addr">{{ cafe.addr }} </span>
       </div>
@@ -18,16 +23,13 @@ export default {
     return {};
   },
   props: {
-    cafeList: [
-      {
-        name: "카페 이름1",
-        addr: "주소1",
-      },
-      {
-        name: "카페 이름2",
-        addr: "주소2",
-      },
-    ],
+    cafeList: [],
+  },
+  methods: {
+    toCafeDetail() {
+      const cafeId = this.cafeList.id;
+      this.$router.push(`/cafe/${cafeId}`);
+    },
   },
 };
 </script>
