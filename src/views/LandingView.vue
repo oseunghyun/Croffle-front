@@ -23,6 +23,7 @@ export default {
     const naver_id_login = new window.naver_id_login(
       "WDBUTDGAh6YGJ6Umihxr",
       "http://34.64.139.239/oauth2/authorization/naver?redirect_uri=http://34.64.173.239/cafes"
+      // "http://34.64.139.239/oauth2/authorization/naver?redirect_uri=http://localhost:3000/cafes"
     );
     naver_id_login.setButton("green", 3, 45);
     naver_id_login.init_naver_id_login();
