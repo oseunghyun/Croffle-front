@@ -45,7 +45,7 @@ export default {
         const { cafeData } = await searchCafeInfo(this.name);
 
         // 카페 등록 여부에 따른 페이지 처리 다시 하기
-        if (cafeData.messages == "일치하는 카페가 없습니다.") {
+        if (cafeData.code == "4040") {
           const registered = false;
           this.$emit("fetchResult", registered);
         } else {
