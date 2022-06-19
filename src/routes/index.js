@@ -21,7 +21,7 @@ const routes = [
         path: "/cafes/report",
         component: () => import("@/components/Report/ReportCafeComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.userToken) {
+          if (!store.getters.isLogin) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -56,7 +56,7 @@ const routes = [
         path: "/cafe/:id/review",
         component: () => import("@/components/Cafe/ReviewFormComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.userToken) {
+          if (!store.getters.isLogin) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -76,7 +76,7 @@ const routes = [
         path: "/cafe/:id/addreport",
         component: () => import("@/components/Report/ReportAddComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.userToken) {
+          if (!store.getters.isLogin) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -95,14 +95,14 @@ const routes = [
         path: "/cafe/:id/reportinfo",
         component: () => import("@/components/Report/ReportInfoComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.userToken) {
+          if (!store.getters.isLogin) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
             if (confirmContent) {
               next("/");
             } else {
-              return;
+              return from();
             }
             console.log("인증이 필요합니다.");
           } else {
@@ -135,7 +135,7 @@ const routes = [
         component: () =>
           import("@/components/Community/CommunityFormComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.userToken) {
+          if (!store.getters.isLogin) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -162,7 +162,7 @@ const routes = [
         component: () =>
           import("@/components/Community/CommunityEditComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.userToken) {
+          if (!store.getters.isLogin) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -183,81 +183,245 @@ const routes = [
   {
     path: "/owner",
     component: () => import("@/views/OwnerView.vue"),
-    beforeEnter: (to, from, next) => {
-      if (!store.getters.userToken) {
-        const confirmContent = confirm(
-          "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
-        );
-        if (confirmContent) {
-          next("/");
-        } else {
-          return;
-        }
-        console.log("인증이 필요합니다.");
-      } else {
-        next();
-      }
-    },
+
     children: [
       // 사장님 서비스 메인
       {
         path: "/owner",
         component: () => import("@/components/Owner/OwnerMainComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "사장님 회원만 접근 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 사장님 인증
       {
         path: "/owner/verify",
         component: () => import("@/components/Owner/VerifyOwner.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm("로그인");
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 카페 검색
       {
         path: "/owner/searchcafe",
         component: () => import("@/components/Owner/SearchCafeComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "사장님 회원만 접근 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 매장 정보 조회하기
       {
         path: "/owner/cafe",
         component: () => import("@/components/Owner/OwnerCafeComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "사장님 회원만 접근 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 매장 정보 수정하기
       {
         path: "/owner/cafemanage",
         component: () => import("@/components/Owner/OwnerCafeManage.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "사장님 회원만 접근 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 메뉴 조회하기
       {
         path: "/owner/menu",
         component: () => import("@/components/Owner/OwnerMenuComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "사장님 회원만 접근 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 메뉴 추가하기
       {
         path: "/owner/menuadd",
         component: () => import("@/components/Owner/OwnerMenuAdd.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "사장님 회원만 접근 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 메뉴 수정하기
       {
         path: "/owner/menumodify",
         component: () => import("@/components/Owner/OwnerMenuModify.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "사장님 회원만 접근 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 스탬프 찍어주기
       {
         path: "/owner/stamp",
         component: () => import("@/components/Owner/StampCoupon.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "사장님 회원만 접근 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
       // 회원 조회
       {
         path: "/owner/checkmember",
         component: () => import("@/components/Owner/CheckMember.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "사장님 회원만 접근 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
-      // 회원 조회
+      // 스탬프 찍어주기 페이지
       {
         path: "/owner/stampcoupon",
         component: () => import("@/components/Owner/StampCoupon.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "사장님 회원만 접근 가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
-      // 회원 조회
+      // 스탬프 완료
       {
         path: "/owner/complete",
         component: () => import("@/components/CompleteComponent.vue"),
+        beforeEnter: (to, from, next) => {
+          if (store.getters.isOwner) {
+            const confirmContent = confirm(
+              "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
+            );
+            if (confirmContent) {
+              next("/");
+            } else {
+              return;
+            }
+            console.log("인증이 필요합니다.");
+          } else {
+            next();
+          }
+        },
       },
     ],
   },
@@ -266,7 +430,7 @@ const routes = [
     path: "/mypage",
     component: () => import("@/views/MypageView.vue"),
     beforeEnter: (to, from, next) => {
-      if (!store.getters.userToken) {
+      if (!store.getters.isLogin) {
         const confirmContent = confirm(
           "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
         );
