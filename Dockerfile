@@ -19,7 +19,7 @@ WORKDIR /app/
 RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 RUN mv dist /var/www/croffle/
 
-COPY default /etc/nginx/sites-available/default
+COPY default.conf /etc/nginx/sites-available/default.conf
 COPY ./run.sh /tmp/
 
 WORKDIR /tmp
