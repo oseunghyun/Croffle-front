@@ -18,7 +18,7 @@
           </div>
           <div class="card__wrapper--row">
             <div class="card__ic">
-              <img :src="ic__like" /><span>{{ cafe.like_count }} </span>
+              <img :src="ic__like" /><span>{{ cafe.liked_count }} </span>
             </div>
             <div class="card__ic">
               <img :src="ic__rate" /><span>{{ cafe.review_count }} </span>
@@ -54,7 +54,7 @@ export default {
           roadaddr: "도로명 주소",
           rate: 4.5,
           review_count: 10,
-          like_count: 5,
+          liked_count: 5,
         },
       ],
     };
@@ -71,11 +71,11 @@ export default {
       try {
         console.log("추천 게시판");
         // const { cafeData } = await recommendCafe(filter);
-        const { cafeData } = await axios.get(
-          `http://34.64.139.239/recommend?filter=${filter}`
+        const { data } = await axios.get(
+          `http://34.64.139.239/cafe/recommend?filter=${filter}`
         );
-        console.log(cafeData);
-        this.cafeData = cafeData.data;
+        console.log(data);
+        this.cafeData = data.data;
       } catch (error) {
         console.log(error.message);
       }
