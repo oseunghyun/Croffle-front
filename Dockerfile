@@ -25,4 +25,4 @@ COPY ./run.sh /tmp/
 WORKDIR /tmp
 EXPOSE 80
 # CMD bash run.sh
-RUN service nginx restart 
+RUN service nginx start 
