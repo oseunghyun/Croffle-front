@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkcroffle_frontend"]=self["webpackChunkcroffle_frontend"]||[]).push([[11],{11:function(e,r,t){t.r(r),t.d(r,{default:function(){return u}});var n=t(3396);const c={class:"container"};function o(e,r,t,o,s,f){const i=(0,n.up)("router-view");return(0,n.wg)(),(0,n.iD)("div",c,[(0,n.Wm)(i)])}var s={created(){let e=!0;this.$store.commit("isHeaderActive",e)}},f=t(89);const i=(0,f.Z)(s,[["render",o]]);var u=i}}]);
-//# sourceMappingURL=11.917da4e5.js.map

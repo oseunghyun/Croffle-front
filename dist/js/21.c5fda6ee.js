@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkcroffle_frontend"]=self["webpackChunkcroffle_frontend"]||[]).push([[21],{5021:function(f,n,e){e.r(n),e.d(n,{default:function(){return c}});var o=e(3396);function t(f,n,e,t,r,u){const a=(0,o.up)("router-view");return(0,o.wg)(),(0,o.j4)(a,{onSubmitCafeInfo:u.submitCafeInfo,cafeInfo:r.cafeInfo},null,8,["onSubmitCafeInfo","cafeInfo"])}var r={data(){return{cafeInfo:[]}},methods:{submitCafeInfo(f){this.cafeInfo=f}}},u=e(89);const a=(0,u.Z)(r,[["render",t]]);var c=a}}]);
-//# sourceMappingURL=21.c5fda6ee.js.map
