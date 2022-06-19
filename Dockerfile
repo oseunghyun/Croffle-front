@@ -17,7 +17,7 @@ RUN apt-get update && apt-get -y install \
 COPY . /app/
 WORKDIR /app/
 RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf 
-RUN mkdir /var/www/croffle/dist/
+RUN mkdir -p /var/www/croffle/dist/
 RUN mv dist /var/www/croffle/dist/
 
 COPY default.conf /etc/nginx/conf.d/default.conf
