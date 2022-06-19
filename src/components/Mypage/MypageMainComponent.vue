@@ -44,13 +44,17 @@ export default {
   data() {
     return {
       ic_edit,
-      myData: [],
+      myData: {
+        nickname: "",
+        isOwner: false,
+      },
       isActive1: true,
       isActive2: false,
     };
   },
-  created() {
-    this.fetchMypage();
+  async created() {
+    await this.fetchMypage();
+    await this.$store.commit("setOwner", this.myData.isOwner);
   },
   methods: {
     editInfo() {
@@ -68,8 +72,13 @@ export default {
       this.isActive1 = false;
       this.isActive2 = true;
     },
+    // 오너 유무 데이터 타입 수정하기
     toOwner() {
-      this.$router.push("/owner/verify");
+      if (this.myData.isOwner == true) {
+        this.$router.push("/owner");
+      } else {
+        this.$router.push("/owner/verify");
+      }
     },
     // 마이 페이지 유저 정보 조회
     async fetchMypage() {
