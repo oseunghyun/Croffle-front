@@ -13,7 +13,8 @@ FROM debian:buster
 
 RUN apt-get update && apt-get -y install \
                                 nginx \
-                                vim
+                                vim \
+                                npm
 RUN rm -rf /app/
 COPY . /app/
 WORKDIR /app/
