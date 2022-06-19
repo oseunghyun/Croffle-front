@@ -15,7 +15,7 @@ pipeline {
         stage('Build image'){
             steps {
                 script {
-                    croffle = docker.build("osh1477/croffle-front")
+                    croffle = docker.build("osh1477/croffle-front", "--no-cache .)
 				}
             }
         }
