@@ -27,24 +27,29 @@
         @onLoad="onLoadMap(cafes)"
       >
         <naver-marker
-          v-for="cafe in cafes"
-          :key="cafe.id"
+          v-for="(cafe, index) in cafes"
+          :key="index"
           :latitude="cafe.mapy"
           :longitude="cafe.mapx"
           @onLoad="onLoadMarker($event)"
-          @click="openInfoWindow(cafe)"
+          @click="openInfo(cafe[index].id)"
         >
           <img :src="ic__marker" />
           <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail"> -->
           <!-- <img :src="ic__speechBubble" /> -->
           <!-- </button> -->
+          <div v-if="isWindowOpen" class="infoWindow">
+            {{ cafe[index].id }}
+          </div>
         </naver-marker>
         <naver-info-window
           :marker="marker"
           :isOpen="isOpen"
-          @onLoad="onLoadInfoWindow($event)"
+          @onLoad="onLoadInfoWindow(event)"
         >
-          <div class="infowindow-style">click Marker!😎</div>
+          <!-- <div class="infowindow-style">
+            {{ cafes.mapx }}
+          </div> -->
         </naver-info-window>
       </naver-maps>
       <div class="map__wrapper">
@@ -99,6 +104,11 @@ export default {
 
     const onLoadInfoWindow = (infoWindowObject) => {
       infoWindow.value = infoWindowObject;
+      //   console.log("cafe window", cafes);
+      //   cafes = cafes.map((cafe) => {
+      //     console.log(cafes);
+      //     console.log("cafe.name");
+      //   });
     };
     const onLoadMarker = (markerObject) => {
       marker.value = markerObject;
@@ -136,56 +146,12 @@ export default {
     };
   },
   mounted() {
-    // // 네이버 로그인
-    // const naver_id_login = new window.naver_id_login(
-    //   "WDBUTDGAh6YGJ6Umihxr",
-    //   //   // "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.45.86/cafes"
-    //   //   "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://localhost:3000/cafes&response_type=code&state=STATE_STRING"
-    //   // "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://localhost:3000/cafes"
-    //   // "/apioauth2/authorization/naver?redirect_uri=http://localhost:3000/cafes"
-    //   `/login=/local`
-    // );
-    // const accessToken = naver_id_login.getAccessToken();
-
-    // const naverState = naver_id_login.getUniqState();
-    // naver_id_login.setState(naverState);
-    // this.$store.commit("setNaverState", naverState);
     const token = this.$route.query.token;
     console.log("token", token);
 
     // 토큰값 스토어에 저장
     this.$store.commit("setToken", token);
     saveAuthToCookie(token);
-
-    /* 네이버 로그인 처리 */
-    // let self = this;
-    // try {
-    //   //네이버로 로그인할때만 실행
-    //   if (this.$route.query.token.length !== undefined) {
-    //     const callbackFuc = async () => {
-    //       const res = await fetch(
-    //         "http://34.64.32.174:8080/oauth2/authorization/naver",
-    //         {
-    //           method: "POST",
-    //           headers: {
-    //             "Content-Type": "application/json",
-    //           },
-    //           body: JSON.stringify({
-    //             code: `${self.$route.query.code}`,
-    //             state: `${self.$route.query.state}`,
-    //           }),
-    //         }
-    //       );
-    //       const data = await res.json();
-    //       console.log(`네이버 로그인 : ${data.email}`);
-
-    //       //네이버 로그인 인증 코드 (nodejs api)
-    //     };
-    //     callbackFuc();
-    //   }
-    // } catch (e) {
-    //   console.log(e);
-    // }
   },
   async created() {
     let headerActive = true;
@@ -208,26 +174,28 @@ export default {
       cafes: [
         {
           id: "0",
-          name: "",
+          name: "메가 커피",
           roadaddr: "서울 중구 세종대로 135",
           mapx: 0,
           mapy: 0,
         },
         {
           id: "2",
-          name: "",
+          name: "빽다방",
           roadaddr: "서울 중구 세종대로22길 16",
           mapx: 0,
           mapy: 0,
         },
         {
           id: "3",
-          name: "",
+          name: "투썸",
           roadaddr: "서울 중구 세종대로 110 서울특별시청 ",
           mapx: 0,
           mapy: 0,
         },
       ],
+
+      isWindowOpen: false,
     };
   },
 
@@ -259,8 +227,10 @@ export default {
         console.log(error);
       }
     },
-    selectCafe(cafe) {
-      this.$router.push(`cafe/${cafe.id}`);
+    openInfo(cafeId) {
+      this.$router.push(`cafe/${cafeId}`);
+      console.log(cafeId);
+      this.isWindowOpen;
     },
     // 클라이언트 ip 주소 fetch
     // async getIpClient() {

@@ -34,6 +34,13 @@
   padding: 15px;
   position: relative;
   top: 0px;
+  .infoWindow {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    z-index: 100;
+  }
   .map__wrapper {
     top: 0px;
     position: relative;

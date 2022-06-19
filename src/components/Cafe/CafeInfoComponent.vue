@@ -41,8 +41,8 @@
           v-for="menu in cafeInfo.menus"
           :key="menu"
         >
-          <span class="menus__name">{{ cafeInfo.menus.name }}</span>
-          <span class="menus__price">{{ cafeInfo.menus.price }}</span>
+          <span class="menus__name">{{ cafeInfo.menuListDtos.name }}</span>
+          <span class="menus__price">{{ cafeInfo.menuListDtos.price }}</span>
         </div>
       </div>
     </div>
@@ -134,6 +134,14 @@ export default {
         telephone: "02-345-6720",
         hours: "오전 10시 부터 오후 8시 까지",
         site: "",
+        menuListDtos: [
+          {
+            menuId: 5,
+            cafeId: 1,
+            name: "테스트 메뉴1",
+            price: "테스트 가격1",
+          },
+        ],
       },
     };
   },
