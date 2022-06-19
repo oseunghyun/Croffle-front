@@ -205,7 +205,6 @@ export default {
       service: true,
       email: "",
       cafeList: [],
-
       cafes: [
         {
           id: "0",
