@@ -9,4 +9,4 @@ mkdir -p /var/www/croffle/dist/ ;
 mv /app/dist /var/www/croffle/;
 
 
-service nginx restart;
+service nginx start;
