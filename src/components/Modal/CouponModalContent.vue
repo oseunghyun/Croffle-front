@@ -12,9 +12,9 @@
     <div class="content__wrapper">
       <div class="content__wrapper--text">
         <img :src="ic__ticket" />
-        <span class="card__title">{{ couponData.cafe_name }}</span>
+        <span class="card__title">{{ couponData.cafeName }}</span>
         <span class="card__text--benefit">{{ couponData.benefit }}</span>
-        <span class="card__text--expire">{{ couponData.expire_date }}</span>
+        <span class="card__text--expire">{{ couponData.expiredDate }}</span>
       </div>
 
       <input placeholder="사장님 아이디를 입력하세요." v-model="ownerId" />
@@ -39,7 +39,7 @@ export default {
   name: "ModalContent",
   props: {
     msg: String,
-    couponData: [],
+    couponData: Object,
   },
   created() {
     console.log("쿠폰 데이터", this.couponData);
@@ -69,7 +69,7 @@ export default {
     async useCoupon() {
       try {
         console.log("쿠폰 사용");
-        const { data } = await useCoupon(this.couponData.id);
+        const { data } = await useCoupon(this.couponData.cafeId);
         console.log(data.message);
         this.$emit("close-modal");
       } catch (error) {

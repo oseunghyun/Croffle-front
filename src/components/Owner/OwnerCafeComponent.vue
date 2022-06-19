@@ -7,25 +7,25 @@
     <!-- 카페 정보 -->
     <div id="cafe-page">
       <div class="cafe-info">
-        <span class="cafe__name">{{ cafeInfo.cafe_name }}</span>
-        <span class="cafe__address">{{ cafeInfo.cafe_addr }}</span>
+        <span class="cafe__name">{{ cafeInfo.cafeName }}</span>
+        <span class="cafe__address">{{ cafeInfo.cafeAddr }}</span>
       </div>
       <div class="cafe-info__detail">
         <div class="cafe-info__wrapper">
           <label>전화번호</label>
-          <span>{{ cafeInfo.cafe_telephone }}</span>
+          <span>{{ cafeInfo.cafeTelephone }}</span>
         </div>
         <div class="cafe-info__wrapper">
           <label>운영시간</label>
-          <span>{{ cafeInfo.cafe_hours }}</span>
+          <span>{{ cafeInfo.cafeHours }}</span>
         </div>
         <div class="cafe-info__wrapper">
           <label>SNS</label>
-          <span>{{ cafeInfo.cafe_site }}</span>
+          <span>{{ cafeInfo.cafeSite }}</span>
         </div>
         <div class="cafe-info__wrapper">
           <label>제공 혜택</label>
-          <span>{{ cafeInfo.cafe_benefit }}</span>
+          <span>{{ cafeInfo.cafeBenefit }}</span>
         </div>
       </div>
     </div>
@@ -38,11 +38,13 @@
 <script>
 import { fetchOwnerCafe } from "@/api/owner";
 export default {
+  data() {
+    return {
+      cafeInfo: [],
+    };
+  },
   created() {
     this.fetchOwnerCafe();
-  },
-  components: {
-    // CafeInfoComponent,
   },
   methods: {
     manageForm() {
@@ -52,17 +54,12 @@ export default {
     async fetchOwnerCafe() {
       try {
         console.log("사장님 - 매장 정보 조회");
-        const { ownerCafeData } = await fetchOwnerCafe();
-        this.cafeInfo = ownerCafeData.body.cafe;
+        const { data } = await fetchOwnerCafe();
+        this.cafeInfo = data.data;
       } catch (error) {
         console.log(error.message);
       }
     },
-  },
-  data() {
-    return {
-      cafeInfo: [],
-    };
   },
 };
 </script>

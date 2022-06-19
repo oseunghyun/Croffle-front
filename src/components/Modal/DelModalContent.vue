@@ -41,7 +41,7 @@ export default {
   methods: {
     // 커뮤니티 게시글 삭제
     async deletePost() {
-      await deletePost(this.postItem.id);
+      await deletePost(this.$route.params.id);
       // 커뮤니티 게시판 동기화
       // this.$emit("refresh");
       this.$emit("close-modal");

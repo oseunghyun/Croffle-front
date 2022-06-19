@@ -19,6 +19,7 @@
           @input="this.content = $event.target.value"
           rows="5"
           maxlength="100"
+          v-model="content"
         ></textarea>
         <span class="count">{{ contentLength }}/100</span>
       </div>
@@ -61,9 +62,8 @@ export default {
     async reportInfo() {
       try {
         console.log("카페정보 수정 제보 폼 제출");
-        console.log(process.env.VUE_APP_API_URL);
         const infoData = await reportInfo({
-          cafe_id: this.$route.params.id,
+          cafeId: this.$route.params.id,
           category: this.category,
           content: this.content,
         });

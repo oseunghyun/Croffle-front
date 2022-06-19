@@ -12,6 +12,9 @@ export const store = createStore({
     userToken(state) {
       return state.token;
     },
+    isLogin(state) {
+      return !(state.token !== "" || "undefined");
+    },
   },
   mutations: {
     // 메인 크로플 서비스에만 헤더를 보여주기 위함

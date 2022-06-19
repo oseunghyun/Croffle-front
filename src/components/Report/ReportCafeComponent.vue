@@ -17,7 +17,7 @@
           </div>
           <div class="input__box">
             <div><label>도로명 주소</label><em>*</em></div>
-            <span class="info">{{ this.cafeInfo.addr }}</span>
+            <span class="info">{{ this.cafeInfo.roadAddress }}</span>
           </div>
         </div>
         <div class="input__box">
@@ -47,7 +47,7 @@
         type="button"
         :class="['btn--md', isValid ? 'btnPrimary' : 'btnDisabled']"
         :disabled="isValid == false"
-        @click="reportMenu"
+        @click="reportCafe"
       >
         완료
       </button>
@@ -66,7 +66,8 @@ export default {
   },
   props: {
     cafeInfo: {
-      type: Object,
+      title: "",
+      roadAddress: "",
     },
   },
   data() {
@@ -100,9 +101,9 @@ export default {
       try {
         console.log("카페 제보 폼 제출");
         const cafeData = await reportMenu({
-          cafe_name: this.cafeInfo.title,
-          roadaddress: this.cafeInfo.roadAddress,
-          menus: {
+          cafeName: this.cafeInfo.title,
+          roadAddress: this.cafeInfo.roadAddress,
+          menuList: {
             name: this.menus.name,
             price: this.menus.price,
           },
@@ -116,8 +117,8 @@ export default {
       }
     },
     initForm() {
-      this.rate = "";
-      this.content = "";
+      // eslint-disable-next-line vue/no-mutating-props
+      this.cafeInfo.title = "";
     },
     // 카페 검색
     async searchCafe() {

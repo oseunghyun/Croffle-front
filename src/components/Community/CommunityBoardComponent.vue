@@ -4,16 +4,16 @@
     <p class="guide">크로플 원정대와 공유하고 싶은 내용이 있나요?</p>
     <div class="card__wrapper--column">
       <div
-        v-for="postItem in postItems"
-        :key="postItem.id"
+        v-for="(postItem, index) in postItems"
+        :key="index"
         class="community__card"
       >
-        <span @click="toDetailPage" class="card__title">
+        <span @click="toDetailPage(index)" class="card__title">
           {{ postItem.title }}
         </span>
         <div class="card__text">
           <span class="card__category">
-            &#91;{{ postItem.boardCategory }}&#93;
+            &#91;{{ postItem.category }}&#93;
           </span>
           <div>
             <span class="card__nick_name">
@@ -55,8 +55,8 @@ export default {
       this.$router.push("/community/post");
     },
     // 커뮤니티 게시글 조회
-    toDetailPage() {
-      this.$router.push(`/community/detail/${this.$route.params.id}`);
+    toDetailPage(index) {
+      this.$router.push(`/community/detail/${this.postItems[index].id}`);
     },
     // 게시글 정보 조회
     async fetchPosts() {

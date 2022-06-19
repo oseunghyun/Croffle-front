@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      cafeInfo: [],
+      cafeInfo: {},
       // 등록된 카페 검색 했을 때 정보
       cafeList: [],
       registered: {

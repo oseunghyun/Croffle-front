@@ -51,7 +51,7 @@ import { editNickname, verifyNickname } from "@/api/mypage";
 export default {
   data() {
     return {
-      errorMessage: "유효성검사 메세지",
+      errorMessage: "",
       nickname: "",
       isValid: false,
     };

@@ -7,6 +7,8 @@
       :message="message"
       @fetchInfo="fetchInfo"
       :cafeInfo="cafeInfo"
+      @setCafeId="setCafeId"
+      :cafeId="cafeId"
     ></router-view>
   </div>
 </template>
@@ -20,6 +22,7 @@ export default {
       stampInfo: {
         type: Object,
       },
+      cafeId: 0,
     };
   },
   methods: {
@@ -31,6 +34,9 @@ export default {
     },
     fetchStamp(stampInfo) {
       this.stampInfo = stampInfo;
+    },
+    setCafeId(cafeId) {
+      this.cafeId = cafeId;
     },
   },
   created() {
