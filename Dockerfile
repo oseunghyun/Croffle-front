@@ -14,6 +14,8 @@ FROM debian:buster
 RUN apt-get update && apt-get -y install \
                                 nginx \
                                 vim
+COPY . /app/
+WORKDIR /app/
 RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 RUN mv dist /var/www/croffle/
 
