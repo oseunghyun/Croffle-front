@@ -32,7 +32,7 @@
           :latitude="cafe.mapy"
           :longitude="cafe.mapx"
           @onLoad="onLoadMarker($event)"
-          @click="openInfo(cafe[index].id)"
+          @click="openInfo(index)"
         >
           <img :src="ic__marker" />
           <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail"> -->
@@ -74,7 +74,8 @@
 import ic__speechBubble from "@/assets/ic/speechBubble.svg";
 import ic__marker from "@/assets/ic/marker.svg";
 // import { fetchIpAddr, fetchLocation } from "@/api/naver";
-import { fetchCafes } from "@/api/cafe";
+// import { fetchCafes } from "@/api/cafe";
+import axios from "axios";
 import NotRegisteredCafe from "@/components/Main/NotRegisteredCafe.vue";
 import CafeListComponent from "@/components/Main/CafeListComponent.vue";
 import SearchbarComponent from "@/components/Main/SearchbarComponent.vue";
@@ -119,7 +120,7 @@ export default {
       cafes = cafes.map((cafe) => {
         window.naver.maps.Service.geocode(
           {
-            address: cafe.roadaddr,
+            address: cafe.addr,
           },
           function (status, response) {
             if (status !== window.naver.maps.Service.Status.OK) {
@@ -146,6 +147,8 @@ export default {
     };
   },
   mounted() {
+    this.fetchCafes();
+
     const token = this.$route.query.token;
     console.log("token", token);
 
@@ -158,7 +161,7 @@ export default {
     this.$store.commit("isHeaderActive", headerActive);
     // await this.getIpClient();
     // await this.fetchLocation2();
-    await this.fetchCafes();
+    // await this.fetchCafes();
   },
   data() {
     return {
@@ -172,27 +175,27 @@ export default {
       email: "",
       cafeList: [],
       cafes: [
-        {
-          id: "0",
-          name: "메가 커피",
-          roadaddr: "서울 중구 세종대로 135",
-          mapx: 0,
-          mapy: 0,
-        },
-        {
-          id: "2",
-          name: "빽다방",
-          roadaddr: "서울 중구 세종대로22길 16",
-          mapx: 0,
-          mapy: 0,
-        },
-        {
-          id: "3",
-          name: "투썸",
-          roadaddr: "서울 중구 세종대로 110 서울특별시청 ",
-          mapx: 0,
-          mapy: 0,
-        },
+        // {
+        //   id: "0",
+        //   name: "메가 커피",
+        //   roadaddr: "서울 중구 세종대로 135",
+        //   mapx: 0,
+        //   mapy: 0,
+        // },
+        // {
+        //   id: "2",
+        //   name: "빽다방",
+        //   roadaddr: "서울 중구 세종대로22길 16",
+        //   mapx: 0,
+        //   mapy: 0,
+        // },
+        // {
+        //   id: "3",
+        //   name: "투썸",
+        //   roadaddr: "서울 중구 세종대로 110 서울특별시청 ",
+        //   mapx: 0,
+        //   mapy: 0,
+        // },
       ],
 
       isWindowOpen: false,
@@ -218,17 +221,33 @@ export default {
     // 등록된 카페 전체 지도에 출력
     async fetchCafes() {
       try {
-        console.log("전체 카페 조회(지도 출력)");
-        const { cafeData } = await fetchCafes();
-        this.cafes.id = cafeData.data.id;
-        this.cafes.name = cafeData.data.name;
-        this.cafes.roadaddr = cafeData.data.addr;
+        // console.log("전체 카페 조회(지도 출력)");
+        const { data } = await axios.get("http://192.168.0.17:8080/cafes");
+        console.log("카페 로그 찍기", data);
+
+        // axios
+        //   .get("http://192.168.0.17:8080/cafes")
+        //   .then(function (response) {
+        //     // response
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     // 오류발생시 실행
+        //     console.log(error);
+        //   })
+        //   .then(function () {
+        //     // 항상 실행
+        //   });
+        this.cafes = data.data;
+        // this.cafes.id = cafeData.data.id;
+        // this.cafes.name = cafeData.data.name;
+        // this.cafes.roadaddr = cafeData.data.addr;
       } catch (error) {
         console.log(error);
       }
     },
     openInfo(cafeId) {
-      this.$router.push(`cafe/${cafeId}`);
+      this.$router.push(`/cafe/${cafeId}`);
       console.log(cafeId);
       this.isWindowOpen;
     },

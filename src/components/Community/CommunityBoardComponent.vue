@@ -20,7 +20,7 @@
               {{ postItem.user_nickname }}&nbsp;
             </span>
             <span class="card__create_date">
-              {{ formatDate(postItem.modifiedDate) }}
+              {{ postItem.modifiedDate }}
             </span>
           </div>
         </div>
@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import { fetchPosts } from "@/api/board";
+// import { fetchPosts } from "@/api/board";
+import axios from "axios";
 
 export default {
   data() {
@@ -41,11 +42,11 @@ export default {
       postItems: [],
     };
   },
-  computed: {
-    formatDate(date) {
-      return date.split("T")[0];
-    },
-  },
+  // computed: {
+  //   formatDate(date) {
+  //     return date.split("T")[0];
+  //   },
+  // },
   created() {
     this.fetchPosts();
   },
@@ -56,16 +57,18 @@ export default {
     },
     // 커뮤니티 게시글 조회
     toDetailPage(index) {
+      console.log("게시글 id 조회", this.postItems[index].id);
       this.$router.push(`/community/detail/${this.postItems[index].id}`);
     },
     // 게시글 정보 조회
     async fetchPosts() {
       try {
-        console.log("게시글 정보 조회");
-        const { data } = await fetchPosts();
+        // const { data } = await fetchPosts();
+        const { data } = await axios.get("http://192.168.0.17:8080/boards");
+        console.log("게시글 정보 조회", data.data);
         this.postItems = data.data;
         // console.log(JSON.stringify(this.postItems));
-        console.log(this.postItems);
+        console.log("this.postItems", this.postItems);
       } catch (error) {
         console.log(error.message);
       }

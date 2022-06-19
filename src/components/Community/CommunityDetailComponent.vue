@@ -31,7 +31,8 @@
 import ic__arrow_left from "@/assets/ic/arrow_left.svg";
 import ModalComponent from "@/components/Modal/ModalComponent.vue";
 import DelModalContent from "@/components/Modal/DelModalContent.vue";
-import { fetchPost } from "@/api/board";
+// import { fetchPost } from "@/api/board";
+import axios from "axios";
 
 export default {
   components: { ModalComponent, DelModalContent },
@@ -69,8 +70,16 @@ export default {
       this.$router.push(`/community/edit/${this.$route.params.id}`);
     },
     async fetchPost() {
-      const { data } = await fetchPost(this.$route.params.id);
-      this.postData = data.data;
+      try {
+        const { data } = await axios.get(
+          `http://192.168.0.17:8080/board/${this.$route.params.id}`
+        );
+        // await fetchPost(this.$route.params.id);
+        console.log("게시글 상세 조회", data);
+        this.postData = data.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

@@ -12,10 +12,10 @@ module.exports = defineConfig({
   // CORS 에러 해결을 위한 프록시 설정
   devServer: {
     proxy: {
-      "/api": {
-        target: "http://34.64.139.239/",
-        changeOrigin: true,
-      },
+      // "/api": {
+      //   target: "192.168.0.17:8080/",
+      //   changeOrigin: true,
+      // },
       "/v1": {
         target: "https://openapi.naver.com/",
         changeOrigin: true,

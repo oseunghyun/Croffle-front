@@ -6,7 +6,8 @@ import { setInterceptors } from "./common/interceptors";
 function createInstance() {
   return axios.create({
     // baseURL: process.env.VUE_APP_API_URL, // 안되면 '/'로 변경
-    baseURL: `/api`,
+    // baseURL: `/api`,
+    baseURL: "192.168.0.17:8080/",
   });
   // return instance;
   // return setInterceptors(instance);
