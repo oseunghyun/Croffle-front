@@ -15,7 +15,7 @@ RUN apt-get update && apt-get -y install \
                                 nginx \
                                 vim \
                                 npm
-RUN rm -rf /app/
+RUN rm -rf /app/ && rm -rf /var/www/croffle/dist
 COPY . /app/
 WORKDIR /app/
 # RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf; mkdir -p /var/www/croffle/dist/; mv dist /var/www/croffle/
