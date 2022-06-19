@@ -7,7 +7,7 @@ function createInstance() {
   return axios.create({
     // baseURL: process.env.VUE_APP_API_URL, // 안되면 '/'로 변경
     // baseURL: `/api`,
-    baseURL: "192.168.0.17:8080/",
+    baseURL: "http://34.64.139.239/",
   });
   // return instance;
   // return setInterceptors(instance);

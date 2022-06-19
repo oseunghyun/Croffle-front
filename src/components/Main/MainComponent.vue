@@ -222,11 +222,11 @@ export default {
     async fetchCafes() {
       try {
         // console.log("전체 카페 조회(지도 출력)");
-        const { data } = await axios.get("http://192.168.0.17:8080/cafes");
+        const { data } = await axios.get("http://34.64.139.239/cafes");
         console.log("카페 로그 찍기", data);
 
         // axios
-        //   .get("http://192.168.0.17:8080/cafes")
+        //   .get("http://34.64.139.239/cafes")
         //   .then(function (response) {
         //     // response
         //     console.log(response);

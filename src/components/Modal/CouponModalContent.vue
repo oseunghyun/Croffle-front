@@ -33,7 +33,8 @@
 <script>
 import ic__close from "@/assets/ic/close.svg";
 import ic__ticket from "@/assets/ic/ticket.svg";
-import { useCoupon } from "@/api/mypage";
+// import { useCoupon } from "@/api/mypage";
+import axios from "axios";
 
 export default {
   name: "ModalContent",
@@ -69,7 +70,17 @@ export default {
     async useCoupon() {
       try {
         console.log("쿠폰 사용");
-        const { data } = await useCoupon(this.couponData.cafeId);
+        // const { data } = await useCoupon(this.couponData.cafeId);
+        const { data } = await axios.delete(
+          `http://34.64.139.239/coupon/use?couponId=${this.couponData.cafeId}`,
+
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
+
         console.log(data.message);
         this.$emit("close-modal");
       } catch (error) {

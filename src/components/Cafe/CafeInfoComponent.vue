@@ -94,8 +94,9 @@
 <script>
 import ModalComponent from "@/components/Modal/ModalComponent.vue";
 import ModalContent from "@/components/Modal/ModalContent.vue";
-import { likeCafe, delLikeCafe, fetchLikedList } from "@/api/like";
-import { fetchReview } from "@/api/review";
+import { likeCafe, delLikeCafe } from "@/api/like";
+// import { fetchReview } from "@/api/review";
+import axios from "axios";
 import { fetchCafeInfo } from "@/api/cafe";
 
 export default {
@@ -152,9 +153,12 @@ export default {
     },
     // 리뷰 조회
     async fetchReview() {
-      console.log("리뷰 조회");
       try {
-        const data = await fetchReview(this.$route.params.id);
+        // const data = await fetchReview(this.$route.params.id);
+        const { data } = await axios.get(
+          `http://34.64.139.239/review/${this.$route.params.id}`
+        );
+        console.log("리뷰 조회", data);
         this.reviewsData = data.data;
       } catch (error) {
         console.log(error);
@@ -163,8 +167,9 @@ export default {
     // 내가 이 카페 좋아요 했는지 여부 조회
     async checkLike() {
       try {
-        const { likedData } = await fetchLikedList();
-        likedData.some(function findCafe(element) {
+        // const { likedData } = await fetchLikedList();
+        const { data } = await axios.get("http://34.64.139.239/likes");
+        data.some(function findCafe(element) {
           if (element.id == this.$route.params.id) {
             return (this.liked = true);
           } else {

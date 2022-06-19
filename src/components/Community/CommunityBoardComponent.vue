@@ -64,7 +64,7 @@ export default {
     async fetchPosts() {
       try {
         // const { data } = await fetchPosts();
-        const { data } = await axios.get("http://192.168.0.17:8080/boards");
+        const { data } = await axios.get("http://34.64.139.239/boards");
         console.log("게시글 정보 조회", data.data);
         this.postItems = data.data;
         // console.log(JSON.stringify(this.postItems));

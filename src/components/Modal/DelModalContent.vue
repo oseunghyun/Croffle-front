@@ -23,7 +23,8 @@
 
 <script>
 import ic__close from "@/assets/ic/close.svg";
-import { deletePost } from "@/api/board";
+// import { deletePost } from "@/api/board";
+import axios from "axios";
 
 export default {
   name: "DelModalContent",
@@ -41,7 +42,15 @@ export default {
   methods: {
     // 커뮤니티 게시글 삭제
     async deletePost() {
-      await deletePost(this.$route.params.id);
+      // await deletePost(this.$route.params.id);
+      await axios.delete(
+        `http://34.64.139.239/board/${this.$route.params.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        }
+      );
       // 커뮤니티 게시판 동기화
       // this.$emit("refresh");
       this.$emit("close-modal");

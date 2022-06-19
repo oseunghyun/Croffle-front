@@ -48,7 +48,8 @@
 </template>
 
 <script>
-import { editOwnerMenu, fetchOwnerMenu } from "@/api/owner";
+// import { editOwnerMenu, fetchOwnerMenu } from "@/api/owner";
+import axios from "axios";
 
 export default {
   created() {
@@ -83,8 +84,17 @@ export default {
     //메뉴 조회
     async fetchOwnerMenu() {
       try {
-        const { data } = await fetchOwnerMenu();
-        this.menuData = data.data;
+        // const { data } = await fetchOwnerMenu();
+        // this.menuData = data.data;
+
+        console.log("사장님 메뉴 조회");
+        const { data } = await axios.get("http://34.64.139.239/owner/menus", {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        });
+        this.menuList = data.data;
+        console.log(this.menuList);
       } catch (error) {
         console.log(error.message);
       }
@@ -93,10 +103,22 @@ export default {
     async editOwnerMenu() {
       try {
         console.log("사장님 - 메뉴 수정 폼 제출");
-        await editOwnerMenu(this.menuId, {
-          menuName: this.menuName,
-          menuPrice: this.menuPrice,
-        });
+        // await editOwnerMenu(this.menuId, {
+        //   menuName: this.menuName,
+        //   menuPrice: this.menuPrice,
+        // });
+        await axios.put(
+          `http://34.64.139.239/owner/menu/${this.menuId}`,
+          {
+            menuName: this.menuName,
+            menuPrice: this.menuPrice,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
       } catch (error) {
         console.log(error.message);
       } finally {

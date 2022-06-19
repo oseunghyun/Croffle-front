@@ -71,7 +71,8 @@
 </template>
 
 <script>
-import { verifyOwner } from "@/api/owner";
+// import { verifyOwner } from "@/api/owner";
+import axios from "axios";
 import logo_owner from "@/assets/Image/logo_owner.svg";
 
 export default {
@@ -118,17 +119,32 @@ export default {
     },
   },
   methods: {
-    // 메뉴 제보 폼 제출
+    // 사장님 권한 인증
     async verifyOwner() {
       try {
-        console.log("메뉴 제보 폼 제출");
-        const { data } = await verifyOwner({
-          cafeName: this.cafeInfo.title,
-          cafeAddr: this.cafeInfo.roadAddress,
-          b_no: this.b_no,
-          start_dt: this.start_dt,
-          p_nm: this.p_nm,
-        });
+        console.log("사장님 권한 인증");
+        // const { data } = await verifyOwner({
+        //   cafeName: this.cafeInfo.title,
+        //   cafeAddr: this.cafeInfo.roadAddress,
+        //   b_no: this.b_no,
+        //   start_dt: this.start_dt,
+        //   p_nm: this.p_nm,
+        // });
+        const { data } = await axios.put(
+          "http://34.64.139.239/owner/verify",
+          {
+            cafeName: this.cafeInfo.title,
+            cafeAddr: this.cafeInfo.roadAddress,
+            b_no: this.b_no,
+            start_dt: this.start_dt,
+            p_nm: this.p_nm,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
         console.log(data);
       } catch (error) {
         console.log(error);

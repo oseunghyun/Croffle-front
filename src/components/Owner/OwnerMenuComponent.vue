@@ -29,7 +29,8 @@
 </template>
 
 <script>
-import { fetchOwnerMenu } from "@/api/owner";
+// import { fetchOwnerMenu } from "@/api/owner";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -63,7 +64,12 @@ export default {
     async fetchOwnerMenu() {
       try {
         console.log("사장님 메뉴 조회");
-        const { data } = await fetchOwnerMenu();
+        // const { data } = await fetchOwnerMenu();
+        const { data } = await axios.get("http://34.64.139.239/owner/menus", {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        });
         this.menuList = data.data;
         console.log(this.menuList);
       } catch (error) {

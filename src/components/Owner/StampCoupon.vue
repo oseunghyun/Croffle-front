@@ -23,7 +23,8 @@
 </template>
 
 <script>
-import { createStamp } from "@/api/owner";
+// import { createStamp } from "@/api/owner";
+import axios from "axios";
 
 export default {
   props: {
@@ -34,10 +35,22 @@ export default {
     async createStamp() {
       try {
         console.log("스탬프 적립 완료");
-        const stampData = await createStamp({
-          cafeId: this.cafeId,
-          userId: this.stampInfo[0].userId,
-        });
+        // const stampData = await createStamp({
+        //   cafeId: this.cafeId,
+        //   userId: this.stampInfo[0].userId,
+        // });
+        const { stampData } = await axios.post(
+          "http://34.64.139.239/owner/stamp",
+          {
+            cafeId: this.cafeId,
+            userId: this.stampInfo[0].userId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
         console.log(stampData);
       } catch (error) {
         console.log(error.message);

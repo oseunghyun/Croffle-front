@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import { fetchStamps, fetchCoupons } from "@/api/mypage";
+// import { fetchStamps, fetchCoupons } from "@/api/mypage";
+import axios from "axios";
 
 export default {
   data() {
@@ -101,8 +102,13 @@ export default {
     async fetchStamps() {
       try {
         console.log("스탬프 조회");
-        const { stampData } = await fetchStamps();
-        this.stampData = stampData.body.stamps;
+        // const { stampData } = await fetchStamps();
+        const { stampData } = await axios.get(`http://34.64.139.239/stamps`, {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        });
+        this.stampData = stampData.data;
         console.log(this.stampData);
       } catch (error) {
         console.log(error.message);
@@ -112,7 +118,8 @@ export default {
     async fetchCoupons() {
       try {
         console.log("쿠폰 조회");
-        const { data } = await fetchCoupons();
+        // const { data } = await fetchCoupons();
+        const { data } = await axios.get(`http://34.64.139.239/coupons`);
         this.couponData = data.data;
         console.log(this.couponData);
       } catch (error) {

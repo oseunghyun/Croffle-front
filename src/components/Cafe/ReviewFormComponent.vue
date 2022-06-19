@@ -38,7 +38,8 @@
 </template>
 
 <script>
-import { createReview } from "@/api/review";
+// import { createReview } from "@/api/review";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -70,11 +71,24 @@ export default {
     async submitForm() {
       try {
         console.log("리뷰하기 폼 제출");
-        const reviewData = await createReview({
-          cafeId: this.$route.params.id,
-          rate: this.rate,
-          content: this.content,
-        });
+        // const reviewData = await createReview({
+        //   cafeId: this.$route.params.id,
+        //   rate: this.rate,
+        //   content: this.content,
+        // });
+        const { reviewData } = await axios.post(
+          "http://34.64.139.239/review/",
+          {
+            cafeId: this.$route.params.id,
+            rate: this.rate,
+            content: this.content,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
         console.log(reviewData);
       } catch (error) {
         console.log(error.message);

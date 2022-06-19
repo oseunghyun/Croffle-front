@@ -47,8 +47,9 @@
 </template>
 
 <script>
-import { reportMenu } from "@/api/report";
-import { fetchCafeInfo } from "@/api/cafe";
+// import { reportMenu } from "@/api/report";
+// import { fetchCafeInfo } from "@/api/cafe";
+import axios from "axios";
 
 export default {
   data() {
@@ -89,12 +90,25 @@ export default {
     async reportMenu() {
       try {
         console.log("메뉴 제보 폼 제출");
-        const menuData = await reportMenu({
-          cafe_name: this.cafeData[0].name,
-          roadAddress: this.cafeData[0].roadaddr,
-          menus: { name: this.menus.name, price: this.menus.price },
-        });
-        console.log(menuData);
+        // const menuData = await reportMenu({
+        //   cafe_name: this.cafeData[0].name,
+        //   roadAddress: this.cafeData[0].roadaddr,
+        //   menus: { name: this.menus.name, price: this.menus.price },
+        // });
+        // console.log(menuData);
+        await axios.post(
+          "http://34.64.139.239/report/menu",
+          {
+            cafe_name: this.cafeData[0].name,
+            roadAddress: this.cafeData[0].roadaddr,
+            menus: { name: this.menus.name, price: this.menus.price },
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
       } catch (error) {
         console.log(error.response.status);
         console.log(error.response.headers);
@@ -108,8 +122,12 @@ export default {
     },
     async fetchCafeInfo() {
       try {
-        const { cafeData } = await fetchCafeInfo(this.$route.params.id);
-        this.cafeData = cafeData;
+        // const { cafeData } = await fetchCafeInfo(this.$route.params.id);
+        // this.cafeData = cafeData;
+        const { data } = await axios.get(
+          `http://34.64.139.239/report/menu/${this.$route.params.id}`
+        );
+        console.log("카페 상세 정보 조회", data);
       } catch (error) {
         console.log(error);
       }

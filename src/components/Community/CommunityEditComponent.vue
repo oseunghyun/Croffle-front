@@ -40,7 +40,8 @@
 </template>
 
 <script>
-import { editPost, fetchPost } from "@/api/board";
+// import { editPost } from "@/api/board";
+import axios from "axios";
 
 export default {
   data() {
@@ -72,21 +73,32 @@ export default {
   methods: {
     // 커뮤니티 게시글 수정하기
     async editPost() {
-      const id = this.$route.params.id;
-      try {
-        console.log("커뮤니티 글 수정");
-        await editPost(id, {
-          title: this.title,
-          content: this.content,
-          boardCategory: this.boardCategory,
-        });
-        // this.$router.push("/community");
-      } catch (error) {
-        console.log(error.message);
-      }
+      // const id = this.$route.params.id;
+      // try {
+      //   console.log("커뮤니티 글 수정");
+      //   await editPost(id, {
+      //     title: this.title,
+      //     content: this.content,
+      //     boardCategory: this.boardCategory,
+      //   });
+      //   // this.$router.push("/community");
+      // } catch (error) {
+      //   console.log(error.message);
+      await axios.post.put(
+        `http://34.64.139.239/board/${this.$route.params.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        }
+      );
     },
     async fetchPost() {
-      const { data } = await fetchPost(this.$route.params.id);
+      // const { data } = await fetchPost(this.$route.params.id);
+      const { data } = await axios.get(
+        `http://34.64.139.239/board/${this.$route.params.id}`
+      );
+      console.log("커뮤니티 특정 게시글 조회", data);
       this.title = data.title;
       this.content = data.content;
     },

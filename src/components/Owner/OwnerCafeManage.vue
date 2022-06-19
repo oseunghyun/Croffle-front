@@ -66,7 +66,8 @@
 </template>
 
 <script>
-import { fetchOwnerCafe, editOwnerCafe } from "@/api/owner";
+// import { fetchOwnerCafe, editOwnerCafe } from "@/api/owner";
+import axios from "axios";
 
 export default {
   data() {
@@ -116,7 +117,12 @@ export default {
     async fetchOwnerCafe() {
       try {
         console.log("사장님 - 매장 정보 조회");
-        const { data } = await fetchOwnerCafe();
+        // const { data } = await fetchOwnerCafe();
+        const { data } = await axios.get("http://34.64.139.239/owner/cafe", {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        });
         this.cafeInfo = data.data;
       } catch (error) {
         console.log(error.message);
@@ -125,13 +131,28 @@ export default {
     // 매장 정보 수정
     async editOwnerCafe() {
       try {
-        await editOwnerCafe(
-          this.cafeInfo.cafeId,
-          this.cafeInfo.cafeName,
-          this.cafeInfo.cafeTelephone,
-          this.cafeInfo.cafeHours,
-          this.cafeInfo.cafeSite,
-          this.cafeInfo.cafeBenefit
+        // await editOwnerCafe(
+        //   this.cafeInfo.cafeId,
+        //   this.cafeInfo.cafeName,
+        //   this.cafeInfo.cafeTelephone,
+        //   this.cafeInfo.cafeHours,
+        //   this.cafeInfo.cafeSite,
+        //   this.cafeInfo.cafeBenefit
+        // );
+        await axios.put(
+          `http://34.64.139.239/owner/cafe/${this.cafeInfo.cafeId}`,
+          {
+            cafeName: this.cafeInfo.cafeName,
+            telephone: this.cafeInfo.cafeTelephone,
+            hours: this.cafeInfo.cafeHours,
+            site: this.cafeInfo.cafeSite,
+            benefit: this.cafeInfo.cafeBenefit,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
         );
       } catch (error) {
         console.log(error.message);

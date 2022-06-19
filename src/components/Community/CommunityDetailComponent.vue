@@ -72,7 +72,7 @@ export default {
     async fetchPost() {
       try {
         const { data } = await axios.get(
-          `http://192.168.0.17:8080/board/${this.$route.params.id}`
+          `http://34.64.139.239/board/${this.$route.params.id}`
         );
         // await fetchPost(this.$route.params.id);
         console.log("게시글 상세 조회", data);

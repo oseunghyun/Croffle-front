@@ -39,7 +39,8 @@
 <script>
 import ic__rate from "@/assets/ic/review.svg";
 import ic__like from "@/assets/ic/heart.svg";
-import { recommendCafe } from "@/api/recommend";
+// import { recommendCafe } from "@/api/recommend";
+import axios from "axios";
 
 export default {
   data() {
@@ -69,7 +70,10 @@ export default {
       // 카페 추천 게시판
       try {
         console.log("추천 게시판");
-        const { cafeData } = await recommendCafe(filter);
+        // const { cafeData } = await recommendCafe(filter);
+        const { cafeData } = await axios.get(
+          `http://34.64.139.239/recommend?filter=${filter}`
+        );
         console.log(cafeData);
         this.cafeData = cafeData.data;
       } catch (error) {

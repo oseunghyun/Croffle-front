@@ -38,7 +38,8 @@
 
 <script>
 import ic_edit from "@/assets/ic/edit.svg";
-import { fetchMypage } from "@/api/mypage";
+// import { fetchMypage } from "@/api/mypage";
+import axios from "axios";
 
 export default {
   data() {
@@ -84,7 +85,12 @@ export default {
     async fetchMypage() {
       try {
         console.log("마이페이지 유저 정보 조회");
-        const { myData } = await fetchMypage();
+        // const { myData } = await fetchMypage();
+        const { myData } = await axios.get("http://34.64.139.239/user/me", {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        });
         this.myData = myData.data;
         console.log(myData);
       } catch (error) {

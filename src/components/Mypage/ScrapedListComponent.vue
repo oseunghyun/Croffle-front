@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import { fetchLikedList } from "@/api/like";
+// import { fetchLikedList } from "@/api/like";
+import axios from "axios";
 
 export default {
   created() {
@@ -40,7 +41,12 @@ export default {
     async fetchScrapList() {
       try {
         console.log("마이페이지 - 내가 스크랩 한 리스트 조회");
-        const { data } = await fetchLikedList();
+        // const { data } = await fetchLikedList();
+        const { data } = await axios.get("http://34.64.139.239/likes", {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        });
         this.scrapList = data.data;
         console.log(this.scrapLists);
       } catch (error) {

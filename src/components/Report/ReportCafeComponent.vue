@@ -56,8 +56,9 @@
 </template>
 
 <script>
-import { searchCafe } from "@/api/naver";
-import { reportMenu } from "@/api/report";
+// import { searchCafe } from "@/api/naver";
+// import { reportMenu } from "@/api/report";
+import axios from "axios";
 
 export default {
   created() {
@@ -100,15 +101,31 @@ export default {
     async reportCafe() {
       try {
         console.log("카페 제보 폼 제출");
-        const cafeData = await reportMenu({
-          cafeName: this.cafeInfo.title,
-          roadAddress: this.cafeInfo.roadAddress,
-          menuList: {
-            name: this.menus.name,
-            price: this.menus.price,
+        // const cafeData = await reportMenu({
+        //   cafeName: this.cafeInfo.title,
+        //   roadAddress: this.cafeInfo.roadAddress,
+        //   menuList: {
+        //     name: this.menus.name,
+        //     price: this.menus.price,
+        //   },
+        // });
+        // console.lot(cafeData);
+        await axios.post(
+          "http://34.64.139.239/report/menu",
+          {
+            cafeName: this.cafeInfo.title,
+            roadAddress: this.cafeInfo.roadAddress,
+            menuList: {
+              name: this.menus.name,
+              price: this.menus.price,
+            },
           },
-        });
-        console.lot(cafeData);
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
       } catch (error) {
         console.log(error);
       } finally {
@@ -123,8 +140,11 @@ export default {
     // 카페 검색
     async searchCafe() {
       try {
-        const cafeData = await searchCafe(this.cafeData);
-        console.log(cafeData.data);
+        // const cafeData = await searchCafe(this.cafeData);
+        // console.log(cafeData.data);
+        await axios.get(
+          `http://34.64.139.239/cafe/search?name=${this.cafeData}`
+        );
       } catch (error) {
         console.log(error);
       }

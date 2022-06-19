@@ -21,7 +21,7 @@ function fetchOwnerCafe() {
   return instanceWithAuth.get("owner/cafe");
 }
 
-// 매장 정보 수정(완료)
+// 매장 정보 수정(아님)
 function editOwnerCafe(cafeId, name, telephone, hours, site, benefit) {
   return instanceWithAuth.put(
     `owner/cafe/${cafeId}?cafeName=${name}&telephone=${telephone}&hours=${hours}&site=${site}&benefit=${benefit}`

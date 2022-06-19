@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import { reportInfo } from "@/api/report";
+// import { reportInfo } from "@/api/report";
+import axios from "axios";
 
 export default {
   data() {
@@ -61,13 +62,27 @@ export default {
   methods: {
     async reportInfo() {
       try {
-        console.log("카페정보 수정 제보 폼 제출");
-        const infoData = await reportInfo({
-          cafeId: this.$route.params.id,
-          category: this.category,
-          content: this.content,
-        });
-        console.log(infoData);
+        // console.log("카페정보 수정 제보 폼 제출");
+        // const infoData = await reportInfo({
+        //   cafeId: this.$route.params.id,
+        //   category: this.category,
+        //   content: this.content,
+        // });
+        // console.log(infoData);
+
+        await axios.post(
+          "http://34.64.139.239/report/info",
+          {
+            cafeId: this.$route.params.id,
+            category: this.category,
+            content: this.content,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
       } catch (error) {
         console.log(error.response.status);
         console.log(error.response.headers);

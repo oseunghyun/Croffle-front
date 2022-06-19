@@ -24,7 +24,8 @@
 <script>
 import ic_position from "@/assets/ic/position.svg";
 import ic_magnifier from "@/assets/ic/magnifier.svg";
-import { searchCafeInfo } from "@/api/cafe";
+// import { searchCafeInfo } from "@/api/cafe";
+import axios from "axios";
 
 export default {
   data() {
@@ -41,8 +42,11 @@ export default {
       const service = false;
       this.$emit("showResult", service);
       try {
-        console.log("등록된 카페 여부 검색");
-        const { cafeData } = await searchCafeInfo(this.name);
+        // console.log("등록된 카페 여부 검색");
+        // const { cafeData } = await searchCafeInfo(this.name);
+        const { cafeData } = await axios.get(
+          `http://34.64.139.239/cafe/search?name=${this.name}`
+        );
 
         // 카페 등록 여부에 따른 페이지 처리 다시 하기
         if (cafeData.code == "4040") {
