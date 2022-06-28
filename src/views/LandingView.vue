@@ -24,8 +24,8 @@ export default {
       "WDBUTDGAh6YGJ6Umihxr",
       // "http://192.168.0.3:8080/oauth2/authorization/naver?redirect_uri=http://34.64.173.239/cafes"
       // "http://192.168.0.3:8080/oauth2/authorization/naver?redirect_uri=http://localhost:3000/cafes"
-      // "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.186.163/cafes"
-      "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://localhost:3000/cafes"
+      "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://34.64.186.163/cafes"
+      // "http://34.64.32.174:8080/oauth2/authorization/naver?redirect_uri=http://localhost:3000/cafes"
     
     );
     naver_id_login.setButton("green", 3, 45);
