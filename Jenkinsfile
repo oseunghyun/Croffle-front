@@ -15,8 +15,8 @@ pipeline {
         stage('Build image'){
             steps {
                 script {
-                    croffle = docker.build("osh1477/croffle-front", "--no-cache .")
-				}
+			croffle = docker.build("osh1477/croffle-front:${env.BUILD_ID}", "--no-cache .")
+		}
             }
         }
         stage("Push image") {
@@ -24,15 +24,17 @@ pipeline {
                 script{
                     docker.withRegistry('https://registry.hub.docker.com','osh1477') {
                         croffle.push("latest")
+			croffle.push("${env.BUILD_ID}")
                     }
-				}
-			}
+		}
+	    }
         }
         stage('Deploy to GKE'){
             when {
                 branch 'master'
             }
             steps{
+		sh "sed -i 's/croffle-front:latest/croffle-front:${env.BUILD_ID}/g' deployment.yml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }
