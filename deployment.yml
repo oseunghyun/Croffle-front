@@ -2,36 +2,37 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: croffle
-  name: croffle
+    app: croffle-front
+  name: croffle-front
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: croffle
+      app: croffle-front
   template:
     metadata:
       labels:
-        app: croffle
+        app: croffle-front
     spec:
       containers:
         - image: osh1477/croffle-front:latest
-          name: croffle
+          imagePullPolicy: Always
+          name: croffle-front
           resources: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: croffle
-  name: croffle
+    app: croffle-front
+  name: croffle-front
 spec:
   ports:
     - port: 80
       targetPort: 80
       protocol: TCP
   selector:
-    app: croffle
+    app: croffle-front
   type: LoadBalancer
