@@ -46,7 +46,8 @@
 </template>
 
 <script>
-import { editNickname, verifyNickname } from "@/api/mypage";
+// import { editNickname, verifyNickname } from "@/api/mypage";
+import axios from "axios";
 
 export default {
   data() {
@@ -65,9 +66,20 @@ export default {
     async submitForm() {
       try {
         console.log("닉네임 수정 폼 제출");
-        const postData = await editNickname({
-          nickname: this.nickname,
-        });
+        // const postData = await editNickname({
+        //   nickname: this.nickname,
+        // });
+        const { postData } = await axios.put(
+          ` http://34.64.32.174:8080/board/nickname`,
+          {
+            nickname: this.nickname,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
         console.log(postData);
         let message = "수정이";
         this.$emit("setMessage", message);
@@ -78,10 +90,21 @@ export default {
     },
     async verifyNickname() {
       try {
-        console.log("닉네임 검증 완료");
-        const { data } = await verifyNickname({
-          nickname: this.nickname,
-        });
+        // console.log("닉네임 검증 완료");
+        // const { data } = await verifyNickname({
+        //   nickname: this.nickname,
+        // });
+        const { data } = await axios.post(
+          ` http://34.64.32.174:8080/nickname/verify`,
+          {
+            nickname: this.nickname,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
         this.errorMessage = data.messages;
         this.isValidated = true;
       } catch (error) {

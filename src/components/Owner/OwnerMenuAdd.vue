@@ -37,19 +37,16 @@
 </template>
 
 <script>
-import { createOwnerMenu } from "@/api/owner";
+// import { createOwnerMenu } from "@/api/owner";
+import axios from "axios";
 
 export default {
-  props: {
-    cafeId: Number,
-  },
   data: function () {
     return {
       menu_name: "",
       menu_price: "",
     };
   },
-
   computed: {
     menuLength() {
       return this.menu_name.length;
@@ -69,12 +66,23 @@ export default {
     // 메뉴 추가
     async createOwnerMenu() {
       try {
-        console.log("사장님 - 메뉴 추가 폼 제출");
-        await createOwnerMenu({
-          cafeId: this.cafeId,
-          name: this.menu_name,
-          price: this.menu_price,
-        });
+        // console.log("사장님 - 메뉴 추가 폼 제출");
+        // await createOwnerMenu({
+        //   menu_name: this.menu_name,
+        //   menu_price: this.menu_price,
+        // });
+        await axios.post(
+          " http://34.64.32.174:8080/owner/menu",
+          {
+            menu_name: this.menu_name,
+            menu_price: this.menu_price,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
       } catch (error) {
         console.log(error.message);
       } finally {

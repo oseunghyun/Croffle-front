@@ -18,7 +18,7 @@
           </div>
           <div class="card__wrapper--row">
             <div class="card__ic">
-              <img :src="ic__like" /><span>{{ cafe.like_count }} </span>
+              <img :src="ic__like" /><span>{{ cafe.liked_count }} </span>
             </div>
             <div class="card__ic">
               <img :src="ic__rate" /><span>{{ cafe.review_count }} </span>
@@ -39,7 +39,8 @@
 <script>
 import ic__rate from "@/assets/ic/review.svg";
 import ic__like from "@/assets/ic/heart.svg";
-import { recommendCafe } from "@/api/recommend";
+// import { recommendCafe } from "@/api/recommend";
+import axios from "axios";
 
 export default {
   data() {
@@ -47,15 +48,7 @@ export default {
       ic__rate,
       ic__like,
       filter: "liked",
-      cafeData: [
-        {
-          name: "카페명",
-          roadaddr: "도로명 주소",
-          rate: 4.5,
-          review_count: 10,
-          like_count: 5,
-        },
-      ],
+      cafeData: [],
     };
   },
   created() {
@@ -69,12 +62,19 @@ export default {
       // 카페 추천 게시판
       try {
         console.log("추천 게시판");
-        const { cafeData } = await recommendCafe(filter);
-        console.log(cafeData);
-        this.cafeData = cafeData.data;
+        // const { cafeData } = await recommendCafe(filter);
+        const { data } = await axios.get(
+          ` http://34.64.32.174:8080/cafe/recommend?filter=${filter}`
+        );
+        console.log(data);
+        this.cafeData = data.data;
       } catch (error) {
         console.log(error.message);
       }
+    },
+    showDetail() {
+      // console.log(this.cafeData.id);
+      this.$router.push(`/cafe/17`);
     },
   },
 };

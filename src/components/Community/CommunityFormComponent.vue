@@ -40,7 +40,9 @@
 </template>
 
 <script>
-import { createPost } from "@/api/board";
+// import { createPost } from "@/api/board";
+import { getAuthFromCookie } from "@/utils/cookies";
+import axios from "axios";
 
 export default {
   data() {
@@ -69,12 +71,25 @@ export default {
     async createPost() {
       try {
         console.log("폼 제출");
-        const postData = await createPost({
-          title: this.title,
-          content: this.content,
-          boardCategory: this.category,
-        });
-        console.log(postData);
+        // const postData = await createPost({
+        //   title: this.title,
+        //   content: this.content,
+        //   boardCategory: this.category,
+        // });
+        // console.log(postData);
+        await axios.post(
+          " http://34.64.32.174:8080/board",
+          {
+            title: this.title,
+            content: this.content,
+            boardCategory: this.category,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${getAuthFromCookie()}`,
+            },
+          }
+        );
         this.$router.push("/community");
       } catch (error) {
         console.log(error.message);

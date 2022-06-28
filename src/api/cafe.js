@@ -9,7 +9,8 @@ function fetchCafes() {
 
 // 카페 상세정보 조회
 function fetchCafeInfo(cafeId) {
-  return instance.get(`cafe?id=${cafeId}`);
+  // return instance.get(`cafe?id=${cafeId}`);
+  return instance.get(`cafe/${cafeId}`);
 }
 
 // 전체 검색 - 카페

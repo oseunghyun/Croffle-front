@@ -29,7 +29,8 @@
 </template>
 
 <script>
-import { fetchMemberInfo } from "@/api/owner";
+// import { fetchMemberInfo } from "@/api/owner";
+import axios from "axios";
 
 export default {
   props: {
@@ -127,9 +128,21 @@ export default {
       try {
         console.log("회원정보 조회");
         // 카페 id 보내기
-        const { data } = await fetchMemberInfo({
-          telephone: this.contact,
-        });
+        // const { data } = await fetchMemberInfo({
+        //   telephone: this.contact,
+        // });
+        const { data } = await axios.get(
+          " http://34.64.32.174:8080/owner/find-user",
+          {
+            telephone: this.contact,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
+
         this.stampInfo = data.data;
       } catch (error) {
         console.log(error.message);

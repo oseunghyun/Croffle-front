@@ -94,13 +94,15 @@
 <script>
 import ModalComponent from "@/components/Modal/ModalComponent.vue";
 import ModalContent from "@/components/Modal/ModalContent.vue";
-import { likeCafe, delLikeCafe, fetchLikedList } from "@/api/like";
-import { fetchReview } from "@/api/review";
-import { fetchCafeInfo } from "@/api/cafe";
+import { likeCafe, delLikeCafe } from "@/api/like";
+// import { fetchReview } from "@/api/review";
+import axios from "axios";
+// import { fetchCafeInfo } from "@/api/cafe";
 
 export default {
   created() {
     this.fetchCafeInfo();
+    this.fetchReview();
   },
   components: {
     ModalComponent,
@@ -111,38 +113,8 @@ export default {
       isModalActive: false,
       isHeaderActive: true,
       liked: false,
-      reviewData: [
-        {
-          author: "씽씽",
-          createdDate: "2022.04.01",
-          content:
-            "냉동 생지 사다가 만드는게 아니라 사장님이 직접 만든 반죽으로 하심",
-          rate: 3,
-        },
-        {
-          author: "씽씽",
-          createdDate: "2022.04.01",
-          content:
-            "냉동 생지 사다가 만드는게 아니라 사장님이 직접 만든 반죽으로 하심",
-          rate: 2,
-        },
-      ],
-      cafeInfo: {
-        id: 0,
-        name: "밀크북",
-        roadaddr: "서울특별시 성북구 80로 ",
-        telephone: "02-345-6720",
-        hours: "오전 10시 부터 오후 8시 까지",
-        site: "",
-        menuListDtos: [
-          {
-            menuId: 5,
-            cafeId: 1,
-            name: "테스트 메뉴1",
-            price: "테스트 가격1",
-          },
-        ],
-      },
+      reviewData: [],
+      cafeInfo: {},
     };
   },
   methods: {
@@ -152,10 +124,13 @@ export default {
     },
     // 리뷰 조회
     async fetchReview() {
-      console.log("리뷰 조회");
       try {
-        const data = await fetchReview(this.$route.params.id);
-        this.reviewsData = data.data;
+        // const data = await fetchReview(this.$route.params.id);
+        const { data } = await axios.get(
+          ` http://34.64.32.174:8080/review/${this.$route.params.id}`
+        );
+        console.log("리뷰 조회", data);
+        this.reviewData = data.data;
       } catch (error) {
         console.log(error);
       }
@@ -163,8 +138,9 @@ export default {
     // 내가 이 카페 좋아요 했는지 여부 조회
     async checkLike() {
       try {
-        const { likedData } = await fetchLikedList();
-        likedData.some(function findCafe(element) {
+        // const { likedData } = await fetchLikedList();
+        const { data } = await axios.get(" http://34.64.32.174:8080/likes");
+        data.some(function findCafe(element) {
           if (element.id == this.$route.params.id) {
             return (this.liked = true);
           } else {
@@ -206,8 +182,11 @@ export default {
     async fetchCafeInfo() {
       try {
         console.log("카페 상세정보 조회");
-        const { data } = await fetchCafeInfo(this.$route.params.id);
-        this.cafeInfo = data.data;
+        // const { data } = await fetchCafeInfo(this.$route.params.id);
+        const { data } = await axios.get(
+          ` http://34.64.32.174:8080/cafe/${this.$route.params.id}`
+        );
+        this.cafeInfo = data.data[0];
       } catch (error) {
         console.log(error.message);
       }

@@ -38,16 +38,14 @@
 
 <script>
 import ic_edit from "@/assets/ic/edit.svg";
-import { fetchMypage } from "@/api/mypage";
+// import { fetchMypage } from "@/api/mypage";
+import axios from "axios";
 
 export default {
   data() {
     return {
       ic_edit,
-      myData: {
-        nickname: "",
-        isOwner: false,
-      },
+      myData: [],
       isActive1: true,
       isActive2: false,
     };
@@ -74,7 +72,7 @@ export default {
     },
     // 오너 유무 데이터 타입 수정하기
     toOwner() {
-      if (this.myData.isOwner == true) {
+      if (this.myData.owner == true) {
         this.$router.push("/owner");
       } else {
         this.$router.push("/owner/verify");
@@ -84,9 +82,14 @@ export default {
     async fetchMypage() {
       try {
         console.log("마이페이지 유저 정보 조회");
-        const { myData } = await fetchMypage();
-        this.myData = myData.data;
-        console.log(myData);
+        // const { myData } = await fetchMypage();
+        const { data } = await axios.get(" http://34.64.32.174:8080/user/me", {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        });
+        this.myData = data.data[0];
+        console.log(data);
       } catch (error) {
         console.log(error.message);
       }

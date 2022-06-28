@@ -10,9 +10,9 @@
         메뉴 추가를 해주세요!
       </p>
       <div class="menu__list">
-        <div v-for="menu in menuList" :key="menu" class="menu-info__wrapper">
-          <span class="menus__name">{{ menu.menuName }}</span>
-          <span class="menus__price">{{ menu.menuPrice }}</span>
+        <div class="menu-info__wrapper">
+          <span class="menus__name">{{ menuList.menuName }}</span>
+          <span class="menus__price">{{ menuList.menuPrice }}</span>
         </div>
       </div>
     </div>
@@ -29,24 +29,12 @@
 </template>
 
 <script>
-import { fetchOwnerMenu } from "@/api/owner";
+// import { fetchOwnerMenu } from "@/api/owner";
+import axios from "axios";
 export default {
   data() {
     return {
-      menuList: [
-        {
-          menuName: "메뉴1",
-          menuPrice: "가격",
-        },
-        {
-          menuName: "메뉴2",
-          menuPrice: "가격",
-        },
-        {
-          menuName: "메뉴2",
-          menuPrice: "가격",
-        },
-      ],
+      menuList: [],
     };
   },
   created() {
@@ -63,8 +51,16 @@ export default {
     async fetchOwnerMenu() {
       try {
         console.log("사장님 메뉴 조회");
-        const { data } = await fetchOwnerMenu();
-        this.menuList = data.data;
+        // const { data } = await fetchOwnerMenu();
+        const { data } = await axios.get(
+          " http://34.64.32.174:8080/owner/menus",
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
+        this.menuList = data.data[0];
         console.log(this.menuList);
       } catch (error) {
         console.log("error.message");

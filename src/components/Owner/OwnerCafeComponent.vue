@@ -36,7 +36,9 @@
 </template>
 
 <script>
-import { fetchOwnerCafe } from "@/api/owner";
+// import { fetchOwnerCafe } from "@/api/owner";
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -54,8 +56,13 @@ export default {
     async fetchOwnerCafe() {
       try {
         console.log("사장님 - 매장 정보 조회");
-        const { data } = await fetchOwnerCafe();
-        this.cafeInfo = data.data;
+        // const { data } = await fetchOwnerCafe();
+        const { data } = await axios.get(" http://34.64.32.174:8080/owner/cafe", {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        });
+        this.cafeInfo = data.data[0];
       } catch (error) {
         console.log(error.message);
       }

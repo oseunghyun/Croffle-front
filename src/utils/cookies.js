@@ -1,7 +1,8 @@
 function saveAuthToCookie(value) {
-  document.cookie = `til_auth=${value}`;
+  let date = new Date(Date.now() + 86400e3);
+  date = date.toUTCString();
+  document.cookie = `til_auth=${value}; "expires=` + date;
 }
-
 function saveUserToCookie(value) {
   document.cookie = `til_user=${value}`;
 }
