@@ -16,9 +16,7 @@
             &#91;{{ postItem.category }}&#93;
           </span>
           <div>
-            <span class="card__nick_name">
-              {{ postItem.user_nickname }}&nbsp;
-            </span>
+            <span class="card__nick_name"> {{ postItem.nickname }}&nbsp; </span>
             <span class="card__create_date">
               {{ postItem.modifiedDate }}
             </span>
@@ -64,7 +62,7 @@ export default {
     async fetchPosts() {
       try {
         // const { data } = await fetchPosts();
-        const { data } = await axios.get("http://34.64.139.239/boards");
+        const { data } = await axios.get(" http://34.64.32.174:8080/boards");
         console.log("게시글 정보 조회", data.data);
         this.postItems = data.data;
         // console.log(JSON.stringify(this.postItems));

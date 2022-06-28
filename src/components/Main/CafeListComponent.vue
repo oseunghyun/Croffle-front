@@ -18,16 +18,7 @@ export default {
     return {};
   },
   props: {
-    cafeList: [
-      {
-        name: "카페 이름1",
-        addr: "주소1",
-      },
-      {
-        name: "카페 이름2",
-        addr: "주소2",
-      },
-    ],
+    cafeList: Array,
   },
 };
 </script>

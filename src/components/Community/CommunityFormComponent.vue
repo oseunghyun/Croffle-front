@@ -41,6 +41,7 @@
 
 <script>
 // import { createPost } from "@/api/board";
+import { getAuthFromCookie } from "@/utils/cookies";
 import axios from "axios";
 
 export default {
@@ -77,7 +78,7 @@ export default {
         // });
         // console.log(postData);
         await axios.post(
-          "http://34.64.139.239/board",
+          " http://34.64.32.174:8080/board",
           {
             title: this.title,
             content: this.content,
@@ -85,7 +86,7 @@ export default {
           },
           {
             headers: {
-              Authorization: `Bearer ${this.$store.state.token}`,
+              Authorization: `Bearer ${getAuthFromCookie()}`,
             },
           }
         );

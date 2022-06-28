@@ -35,6 +35,7 @@ export default {
       address: "서울특별시 성북구",
       name: "",
       cafeInfo: [],
+      cafeData: [],
     };
   },
   methods: {
@@ -44,17 +45,20 @@ export default {
       try {
         // console.log("등록된 카페 여부 검색");
         // const { cafeData } = await searchCafeInfo(this.name);
-        const { cafeData } = await axios.get(
-          `http://34.64.139.239/cafe/search?name=${this.name}`
+        const { data } = await axios.get(
+          ` http://34.64.32.174:8080/cafe/search?name=${this.name}`
         );
-
+        console.log(data);
+        this.cafeData = data.data[0];
         // 카페 등록 여부에 따른 페이지 처리 다시 하기
-        if (cafeData.code == "4040") {
-          const registered = false;
-          this.$emit("fetchResult", registered);
+        if (data.data.code == 200) {
+          const registered = true;
+          const cafeData = this.cafeData;
+          this.$emit("fetchResult", registered, cafeData);
+          console.log("데이터", data.data);
         } else {
           const registered = false;
-          this.$emit("fetchResult", registered, cafeData);
+          this.$emit("fetchResult", registered);
         }
       } catch (error) {
         console.log(error);

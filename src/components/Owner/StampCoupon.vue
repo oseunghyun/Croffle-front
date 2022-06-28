@@ -40,7 +40,7 @@ export default {
         //   userId: this.stampInfo[0].userId,
         // });
         const { stampData } = await axios.post(
-          "http://34.64.139.239/owner/stamp",
+          " http://34.64.32.174:8080/owner/stamp",
           {
             cafeId: this.cafeId,
             userId: this.stampInfo[0].userId,

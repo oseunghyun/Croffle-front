@@ -72,7 +72,7 @@ export default {
         console.log("쿠폰 사용");
         // const { data } = await useCoupon(this.couponData.cafeId);
         const { data } = await axios.delete(
-          `http://34.64.139.239/coupon/use?couponId=${this.couponData.cafeId}`,
+          ` http://34.64.32.174:8080/coupon/use?couponId=${this.couponData.cafeId}`,
 
           {
             headers: {

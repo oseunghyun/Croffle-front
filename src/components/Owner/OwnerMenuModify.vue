@@ -88,12 +88,15 @@ export default {
         // this.menuData = data.data;
 
         console.log("사장님 메뉴 조회");
-        const { data } = await axios.get("http://34.64.139.239/owner/menus", {
-          headers: {
-            Authorization: `Bearer ${this.$store.state.token}`,
-          },
-        });
-        this.menuList = data.data;
+        const { data } = await axios.get(
+          " http://34.64.32.174:8080/owner/menus",
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        );
+        this.menuList = data.data[0];
         console.log(this.menuList);
       } catch (error) {
         console.log(error.message);
@@ -108,7 +111,7 @@ export default {
         //   menuPrice: this.menuPrice,
         // });
         await axios.put(
-          `http://34.64.139.239/owner/menu/${this.menuId}`,
+          ` http://34.64.32.174:8080/owner/menu/${this.menuId}`,
           {
             menuName: this.menuName,
             menuPrice: this.menuPrice,

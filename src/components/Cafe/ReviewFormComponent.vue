@@ -77,7 +77,7 @@ export default {
         //   content: this.content,
         // });
         const { reviewData } = await axios.post(
-          "http://34.64.139.239/review/",
+          " http://34.64.32.174:8080/review/",
           {
             cafeId: this.$route.params.id,
             rate: this.rate,
@@ -94,6 +94,7 @@ export default {
         console.log(error.message);
       } finally {
         this.initForm;
+        this.$router.push(`/cafe/${this.$route.params.id}`);
       }
     },
     initForm() {

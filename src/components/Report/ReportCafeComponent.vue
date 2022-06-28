@@ -59,6 +59,7 @@
 // import { searchCafe } from "@/api/naver";
 // import { reportMenu } from "@/api/report";
 import axios from "axios";
+import { getAuthFromCookie } from "@/utils/cookies";
 
 export default {
   created() {
@@ -111,7 +112,7 @@ export default {
         // });
         // console.lot(cafeData);
         await axios.post(
-          "http://34.64.139.239/report/menu",
+          " http://34.64.32.174:8080/report/cafe",
           {
             cafeName: this.cafeInfo.title,
             roadAddress: this.cafeInfo.roadAddress,
@@ -122,7 +123,7 @@ export default {
           },
           {
             headers: {
-              Authorization: `Bearer ${this.$store.state.token}`,
+              Authorization: `Bearer ${getAuthFromCookie()}`,
             },
           }
         );
@@ -143,7 +144,7 @@ export default {
         // const cafeData = await searchCafe(this.cafeData);
         // console.log(cafeData.data);
         await axios.get(
-          `http://34.64.139.239/cafe/search?name=${this.cafeData}`
+          ` http://34.64.32.174:8080/cafe/search?name=${this.cafeData}`
         );
       } catch (error) {
         console.log(error);

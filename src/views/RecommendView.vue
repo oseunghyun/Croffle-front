@@ -48,15 +48,7 @@ export default {
       ic__rate,
       ic__like,
       filter: "liked",
-      cafeData: [
-        {
-          name: "카페명",
-          roadaddr: "도로명 주소",
-          rate: 4.5,
-          review_count: 10,
-          liked_count: 5,
-        },
-      ],
+      cafeData: [],
     };
   },
   created() {
@@ -72,13 +64,17 @@ export default {
         console.log("추천 게시판");
         // const { cafeData } = await recommendCafe(filter);
         const { data } = await axios.get(
-          `http://34.64.139.239/cafe/recommend?filter=${filter}`
+          ` http://34.64.32.174:8080/cafe/recommend?filter=${filter}`
         );
         console.log(data);
         this.cafeData = data.data;
       } catch (error) {
         console.log(error.message);
       }
+    },
+    showDetail() {
+      // console.log(this.cafeData.id);
+      this.$router.push(`/cafe/17`);
     },
   },
 };

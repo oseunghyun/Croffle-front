@@ -16,7 +16,7 @@
           v-model="title"
           maxlength="30"
         />
-        <span class="count">{{ titleLength }}/30</span>
+        <!-- <span class="count">{{ titleLength }}/30</span> -->
       </div>
       <div class="input__box">
         <label>게시글 내용</label>
@@ -25,7 +25,7 @@
           v-model="content"
           maxlength="1500"
         />
-        <span class="count">{{ contentLength }}/1500</span>
+        <!-- <span class="count">{{ contentLength }}/1500</span> -->
       </div>
     </form>
     <button
@@ -48,7 +48,7 @@ export default {
     return {
       title: "",
       content: "",
-      category: "RECIPE",
+      category: "",
     };
   },
   // 수정할 게시글 내용 불러오기
@@ -63,12 +63,12 @@ export default {
         return false;
       }
     },
-    titleLength() {
-      return this.title.length;
-    },
-    contentLength() {
-      return this.content.length;
-    },
+    // titleLength() {
+    //   return this.title.length;
+    // },
+    // contentLength() {
+    //   return this.content.length;
+    // },
   },
   methods: {
     // 커뮤니티 게시글 수정하기
@@ -84,23 +84,30 @@ export default {
       //   // this.$router.push("/community");
       // } catch (error) {
       //   console.log(error.message);
-      await axios.post.put(
-        `http://34.64.139.239/board/${this.$route.params.id}`,
+      await axios.put(
+        ` http://34.64.32.174:8080/board/${this.$route.params.id}`,
+        {
+          title: this.title,
+          content: this.content,
+          boardCategory: this.category,
+        },
         {
           headers: {
             Authorization: `Bearer ${this.$store.state.token}`,
           },
         }
       );
+      this.$router.push("/community");
     },
     async fetchPost() {
       // const { data } = await fetchPost(this.$route.params.id);
       const { data } = await axios.get(
-        `http://34.64.139.239/board/${this.$route.params.id}`
+        ` http://34.64.32.174:8080/board/${this.$route.params.id}`
       );
       console.log("커뮤니티 특정 게시글 조회", data);
-      this.title = data.title;
-      this.content = data.content;
+      this.title = data.data[0].title;
+      this.content = data.data[0].content;
+      this.category = data.data[0].category;
     },
   },
 };

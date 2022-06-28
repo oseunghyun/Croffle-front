@@ -132,7 +132,7 @@ export default {
         //   telephone: this.contact,
         // });
         const { data } = await axios.get(
-          "http://34.64.139.239/owner/find-user",
+          " http://34.64.32.174:8080/owner/find-user",
           {
             telephone: this.contact,
           },

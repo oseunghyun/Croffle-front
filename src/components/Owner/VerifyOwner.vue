@@ -131,7 +131,7 @@ export default {
         //   p_nm: this.p_nm,
         // });
         const { data } = await axios.put(
-          "http://34.64.139.239/owner/verify",
+          " http://34.64.32.174:8080/owner/verify",
           {
             cafeName: this.cafeInfo.title,
             cafeAddr: this.cafeInfo.roadAddress,

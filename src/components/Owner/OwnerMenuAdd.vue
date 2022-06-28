@@ -72,7 +72,7 @@ export default {
         //   menu_price: this.menu_price,
         // });
         await axios.post(
-          "http://34.64.139.239/owner/menu",
+          " http://34.64.32.174:8080/owner/menu",
           {
             menu_name: this.menu_name,
             menu_price: this.menu_price,

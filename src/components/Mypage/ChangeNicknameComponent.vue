@@ -70,7 +70,7 @@ export default {
         //   nickname: this.nickname,
         // });
         const { postData } = await axios.put(
-          `http://34.64.139.239/board/nickname`,
+          ` http://34.64.32.174:8080/board/nickname`,
           {
             nickname: this.nickname,
           },
@@ -95,7 +95,10 @@ export default {
         //   nickname: this.nickname,
         // });
         const { data } = await axios.post(
-          `http://34.64.139.239/board/nickname/verify}`,
+          ` http://34.64.32.174:8080/nickname/verify`,
+          {
+            nickname: this.nickname,
+          },
           {
             headers: {
               Authorization: `Bearer ${this.$store.state.token}`,

@@ -44,7 +44,7 @@ export default {
     async deletePost() {
       // await deletePost(this.$route.params.id);
       await axios.delete(
-        `http://34.64.139.239/board/${this.$route.params.id}`,
+        ` http://34.64.32.174:8080/board/${this.$route.params.id}`,
         {
           headers: {
             Authorization: `Bearer ${this.$store.state.token}`,

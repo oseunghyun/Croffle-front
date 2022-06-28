@@ -118,12 +118,12 @@ export default {
       try {
         console.log("사장님 - 매장 정보 조회");
         // const { data } = await fetchOwnerCafe();
-        const { data } = await axios.get("http://34.64.139.239/owner/cafe", {
+        const { data } = await axios.get(" http://34.64.32.174:8080/owner/cafe", {
           headers: {
             Authorization: `Bearer ${this.$store.state.token}`,
           },
         });
-        this.cafeInfo = data.data;
+        this.cafeInfo = data.data[0];
       } catch (error) {
         console.log(error.message);
       }
@@ -140,7 +140,7 @@ export default {
         //   this.cafeInfo.cafeBenefit
         // );
         await axios.put(
-          `http://34.64.139.239/owner/cafe/${this.cafeInfo.cafeId}`,
+          ` http://34.64.32.174:8080/owner/cafe/${this.cafeInfo.cafeId}`,
           {
             cafeName: this.cafeInfo.cafeName,
             telephone: this.cafeInfo.cafeTelephone,

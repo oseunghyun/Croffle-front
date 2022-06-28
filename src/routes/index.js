@@ -21,7 +21,7 @@ const routes = [
         path: "/cafes/report",
         component: () => import("@/components/Report/ReportCafeComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.isLogin) {
+          if (!store.getters.userToken) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -56,7 +56,7 @@ const routes = [
         path: "/cafe/:id/review",
         component: () => import("@/components/Cafe/ReviewFormComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.isLogin) {
+          if (!store.getters.userToken) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -76,7 +76,7 @@ const routes = [
         path: "/cafe/:id/addreport",
         component: () => import("@/components/Report/ReportAddComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.isLogin) {
+          if (!store.getters.userToken) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -95,7 +95,7 @@ const routes = [
         path: "/cafe/:id/reportinfo",
         component: () => import("@/components/Report/ReportInfoComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.isLogin) {
+          if (!store.getters.userToken) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -135,7 +135,7 @@ const routes = [
         component: () =>
           import("@/components/Community/CommunityFormComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.isLogin) {
+          if (!store.getters.userToken) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -162,7 +162,7 @@ const routes = [
         component: () =>
           import("@/components/Community/CommunityEditComponent.vue"),
         beforeEnter: (to, from, next) => {
-          if (!store.getters.isLogin) {
+          if (!store.getters.userToken) {
             const confirmContent = confirm(
               "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
             );
@@ -430,7 +430,7 @@ const routes = [
     path: "/mypage",
     component: () => import("@/views/MypageView.vue"),
     beforeEnter: (to, from, next) => {
-      if (!store.getters.isLogin) {
+      if (!store.getters.userToken) {
         const confirmContent = confirm(
           "로그인이 필요한 페이지입니다. 로그인 페이지로 이동하시겠습니까?"
         );

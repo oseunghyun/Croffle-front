@@ -40,16 +40,7 @@ export default {
     return {
       board: ic__arrow_left,
       isDelModalActive: false,
-      postData: [
-        {
-          title: "제목",
-          category: "자유",
-          nickname: "씽씽",
-          modifiedDate: "2022-02-01",
-          content:
-            "크로플 맛집이란 크로플 맛집이란 크로플 맛집이란크로플 맛집이란크로플 맛집이란",
-        },
-      ],
+      postData: [],
     };
   },
   // 게시글 내용 조회
@@ -72,7 +63,7 @@ export default {
     async fetchPost() {
       try {
         const { data } = await axios.get(
-          `http://34.64.139.239/board/${this.$route.params.id}`
+          ` http://34.64.32.174:8080/board/${this.$route.params.id}`
         );
         // await fetchPost(this.$route.params.id);
         console.log("게시글 상세 조회", data);

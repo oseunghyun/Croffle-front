@@ -29,11 +29,11 @@ export default {
   data() {
     return {
       scrapList: [
-        {
-          id: 0,
-          name: "밀크북",
-          addr: "서울특별시 성북구 ",
-        },
+        // {
+        //   id: 0,
+        //   name: "밀크북",
+        //   addr: "서울특별시 성북구 ",
+        // },
       ],
     };
   },
@@ -42,7 +42,7 @@ export default {
       try {
         console.log("마이페이지 - 내가 스크랩 한 리스트 조회");
         // const { data } = await fetchLikedList();
-        const { data } = await axios.get("http://34.64.139.239/likes", {
+        const { data } = await axios.get(" http://34.64.32.174:8080/likes", {
           headers: {
             Authorization: `Bearer ${this.$store.state.token}`,
           },

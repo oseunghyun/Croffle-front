@@ -71,7 +71,7 @@ export default {
         // console.log(infoData);
 
         await axios.post(
-          "http://34.64.139.239/report/info",
+          " http://34.64.32.174:8080/report/info",
           {
             cafeId: this.$route.params.id,
             category: this.category,

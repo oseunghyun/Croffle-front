@@ -1,11 +1,11 @@
 import { createStore } from "vuex";
-import { getAuthFromCookie } from "@/utils/cookies";
+// import { getAuthFromCookie } from "@/utils/cookies";
 
 export const store = createStore({
   state: {
     // 메인 크로플 서비스에만 헤더를 보여주기 위함
     headerActive: false,
-    token: getAuthFromCookie() || "",
+    token: localStorage.getItem("userToken") || "",
     owner: false,
   },
   getters: {
@@ -13,7 +13,9 @@ export const store = createStore({
       return state.token;
     },
     isLogin(state) {
-      return !(state.token !== "" || "undefined");
+      // return state.token !== "";
+      // return (state.token !== "" || );
+      return !(state.token == "" || "undefined");
     },
     isOwner(state) {
       return state.owner;

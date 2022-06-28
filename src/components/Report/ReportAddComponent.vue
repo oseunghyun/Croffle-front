@@ -6,11 +6,11 @@
     <form>
       <div class="input__box">
         <label>카페명</label>
-        <span class="info">{{ cafeData[0].name }}</span>
+        <span class="info">{{ cafeData.name }}</span>
       </div>
       <div class="input__box">
         <label>도로명 주소</label>
-        <span class="info">{{ cafeData[0].roadaddr }}</span>
+        <span class="info">{{ cafeData.roadaddr }}</span>
       </div>
       <div class="input__box">
         <label>메뉴명</label>
@@ -52,6 +52,9 @@
 import axios from "axios";
 
 export default {
+  created() {
+    this.fetchCafeInfo();
+  },
   data() {
     return {
       header: "메뉴 추가 제보하기",
@@ -60,12 +63,7 @@ export default {
         name: "",
         price: "",
       },
-      cafeData: [
-        {
-          name: "밀크북",
-          roadaddr: "파주시 회현로",
-        },
-      ],
+      cafeData: [],
     };
   },
   computed: {
@@ -97,11 +95,11 @@ export default {
         // });
         // console.log(menuData);
         await axios.post(
-          "http://34.64.139.239/report/menu",
+          " http://34.64.32.174:8080/report/menu",
           {
-            cafe_name: this.cafeData[0].name,
-            roadAddress: this.cafeData[0].roadaddr,
-            menus: { name: this.menus.name, price: this.menus.price },
+            cafeName: this.cafeData.name,
+            roadAddress: this.cafeData.roadaddr,
+            menuList: { name: this.menus.name, price: this.menus.price },
           },
           {
             headers: {
@@ -114,6 +112,7 @@ export default {
         console.log(error.response.headers);
       } finally {
         this.initForm();
+        alert("메뉴 추가가 완료되었습니다.");
       }
     },
     initForm() {
@@ -125,9 +124,10 @@ export default {
         // const { cafeData } = await fetchCafeInfo(this.$route.params.id);
         // this.cafeData = cafeData;
         const { data } = await axios.get(
-          `http://34.64.139.239/report/menu/${this.$route.params.id}`
+          ` http://34.64.32.174:8080/cafe/${this.$route.params.id}`
         );
         console.log("카페 상세 정보 조회", data);
+        this.cafeData = data.data[0];
       } catch (error) {
         console.log(error);
       }

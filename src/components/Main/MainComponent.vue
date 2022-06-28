@@ -6,6 +6,7 @@
       @fetchResult="fetchResult"
       :service="service"
       :registered="registered"
+      :cafeData="cafeData"
     ></searchbar-component>
     <div v-if="service == false" class="search">
       <not-registered-cafe
@@ -32,7 +33,7 @@
           :latitude="cafe.mapy"
           :longitude="cafe.mapx"
           @onLoad="onLoadMarker($event)"
-          @click="openInfo(index)"
+          @click="openInfo(cafe.id)"
         >
           <img :src="ic__marker" />
           <!-- <button @click="fetchInfo" class="btn--transparent" id="btn-detail"> -->
@@ -151,7 +152,7 @@ export default {
 
     const token = this.$route.query.token;
     console.log("token", token);
-
+    localStorage.setItem("userToken", token);
     // 토큰값 스토어에 저장
     this.$store.commit("setToken", token);
     saveAuthToCookie(token);
@@ -197,7 +198,6 @@ export default {
         //   mapy: 0,
         // },
       ],
-
       isWindowOpen: false,
     };
   },
@@ -222,11 +222,11 @@ export default {
     async fetchCafes() {
       try {
         // console.log("전체 카페 조회(지도 출력)");
-        const { data } = await axios.get("http://34.64.139.239/cafes");
+        const { data } = await axios.get(" http://34.64.32.174:8080/cafes");
         console.log("카페 로그 찍기", data);
 
         // axios
-        //   .get("http://34.64.139.239/cafes")
+        //   .get("http://192.168.0.3:8080/cafes")
         //   .then(function (response) {
         //     // response
         //     console.log(response);
