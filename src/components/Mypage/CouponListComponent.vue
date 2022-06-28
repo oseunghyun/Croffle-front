@@ -56,35 +56,35 @@ export default {
   data() {
     return {
       coupons: {
-        cafeName: "엔드테라스",
-        benefit: "아메리카노(HOT/ICE) 1잔 무료",
-        expiredDate: "2022-04-11 ~ 2022-05-11",
-        couponId: 0,
+        // cafeName: "엔드테라스",
+        // benefit: "아메리카노(HOT/ICE) 1잔 무료",
+        // expiredDate: "2022-04-11 ~ 2022-05-11",
+        // couponId: 0,
       },
       stampData: [
-        {
-          cafeName: "엔드테라스",
-          stampCount: 3,
-        },
-        {
-          cafeName: "엔드테라스",
-          stampCount: 2,
-        },
+        // {
+        //   cafeName: "엔드테라스",
+        //   stampCount: 3,
+        // },
+        // {
+        //   cafeName: "엔드테라스",
+        //   stampCount: 2,
+        // },
       ],
       // 더미 데이터
       couponData: [
-        {
-          cafeId: 1,
-          cafeName: "엔드테라스",
-          benefit: "아메리카노(HOT/ICE) 1잔 무료",
-          expiredDate: "2022-04-11 ~ 2022-05-11",
-        },
-        {
-          cafeId: 2,
-          cafeName: "메가 커피",
-          benefit: "아메리카노(HOT/ICE) 1잔 무료",
-          expiredDate: "2022-04-11 ~ 2022-05-11",
-        },
+        // {
+        //   cafeId: 1,
+        //   cafeName: "엔드테라스",
+        //   benefit: "아메리카노(HOT/ICE) 1잔 무료",
+        //   expiredDate: "2022-04-11 ~ 2022-05-11",
+        // },
+        // {
+        //   cafeId: 2,
+        //   cafeName: "메가 커피",
+        //   benefit: "아메리카노(HOT/ICE) 1잔 무료",
+        //   expiredDate: "2022-04-11 ~ 2022-05-11",
+        // },
       ],
     };
   },
@@ -122,7 +122,12 @@ export default {
       try {
         console.log("쿠폰 조회");
         // const { data } = await fetchCoupons();
-        const { data } = await axios.get(`http://34.64.32.174:8080/coupons`);
+        const { data } = await axios.get(`http://34.64.32.174:8080/coupons`,
+        {
+        headers: {
+              Authorization: `Bearer ${this.$store.state.token}`,
+            }
+      });
         this.couponData = data.data;
         console.log(this.couponData);
       } catch (error) {
